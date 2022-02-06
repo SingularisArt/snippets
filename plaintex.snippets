@@ -122,15 +122,6 @@ snippet conc "Conclusion" bAi
 \end{conclusion}
 endsnippet
 
-snippet fig "Figure environment" bAi
-\begin{figure}[${1:htpb}]
-	\centering:${VISUAL}
-	${2:\includegraphics[width=0.8\textwidth]{$3}}
-	\caption{${4:$3}}
-	\label{fig:${5:${3/\W+/-/g}}}
-\end{figure}
-endsnippet
-
 snippet enum "Enumerate" bAi
 \begin{enumerate}
 	\item $0${VISUAL}
@@ -159,6 +150,32 @@ snippet ali "Align" bAi
 \begin{align}
 	${1:${VISUAL}}
 .\end{align}
+endsnippet
+
+snippet fig "Figure environment" bAi
+\begin{figure}[${1:htpb}]
+	\centering:${VISUAL}
+	${2:\includegraphics[width=0.8\textwidth]{$3}}
+	\caption{${4:$3}}
+	\label{fig:${5:${3/\W+/-/g}}}
+\end{figure}
+endsnippet
+
+snippet plot "Plot" w
+\begin{figure}[$1]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			xmin= ${2:-10}, xmax= ${3:10},
+			ymin= ${4:-10}, ymax = ${5:10},
+			axis lines = middle,
+		]
+			\addplot[domain=$2:$3, samples=${6:100}]{$7};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{$8}
+	\label{${9:$8}}
+\end{figure}
 endsnippet
 
 
@@ -515,23 +532,6 @@ snippet R0+ "R0+" Aw
 \\R_0^+
 endsnippet
 
-snippet plot "Plot" w
-\begin{figure}[$1]
-	\centering
-	\begin{tikzpicture}
-		\begin{axis}[
-			xmin= ${2:-10}, xmax= ${3:10},
-			ymin= ${4:-10}, ymax = ${5:10},
-			axis lines = middle,
-		]
-			\addplot[domain=$2:$3, samples=${6:100}]{$7};
-		\end{axis}
-	\end{tikzpicture}
-	\caption{$8}
-	\label{${9:$8}}
-\end{figure}
-endsnippet
-
 snippet nn "Tikz node" w
 \node[$5] (${1/[^0-9a-zA-Z]//g}${2}) ${3:at (${4:0,0}) }{$${1}$};
 $0
@@ -672,7 +672,7 @@ snippet docls "Document Class" bA
 \documentclass{$1}$0
 endsnippet
 
-snippet tmplt "Template"
+snippet template "Template"
 \documentclass{article}
 
 \usepackage{import}
@@ -713,12 +713,12 @@ Figure~\ref{${1:Fig}:$2:${VISUAL}}$0
 endsnippet
 
 snippet les "Lesson"
-\lesson{${1:LESSON NUMBER}}{`date "+%b %d %Y %a (%H:%M:%S)"`}{${3:LESSON NAME}}{${4:UNIT NUMBER}}
+\lesson{${1:LESSON NUMBER}}{`date "+%b %d %Y %a (%H:%M:%S)"`}{${3:LESSON NAME}}{Unit ${4:UNIT NUMBER}}
 $0
 endsnippet
 
 snippet lec "Lecture"
-\lecture{${1:LECTURE NUMBER}}{`date "+%b %d %Y %a (%H:%M:%S)"`}{${3:LECTURE NAME}}{${4:UNIT NUMBER}}
+\lecture{${1:LECTURE NUMBER}}{`date "+%b %d %Y %a (%H:%M:%S)"`}{${3:LECTURE NAME}}{Unit ${4:UNIT NUMBER}}
 $0
 endsnippet
 
