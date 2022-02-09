@@ -709,7 +709,11 @@ Hashem A. Damrah
 endsnippet
 
 snippet ref "Reference" wi
-Figure~\ref{${1:Fig}:$2:${VISUAL}}$0
+${1:Figure}~\ref{${1:Fig}:$2:${VISUAL}}$0
+endsnippet
+
+snippet link "Hyperlink" wi
+\hyperlink{${1:url}}{${2:text}}$0
 endsnippet
 
 snippet les "Lesson"
@@ -734,6 +738,8 @@ snippet chap "Chapter" wi
 ${3:Some text here}
 
 % chapter $2 (end)
+
+\newpage
 endsnippet
 
 snippet sec "Subsection" wi
@@ -770,6 +776,60 @@ snippet sub* "Subsection" wi
 ${3:Some text here}
 
 % subsection $2 (end)
+endsnippet
+
+snippet subsub "Subsubsection" wi
+\subsubsection{$1${VISUAL}}
+\label{sub_sub_sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:Some text here}
+
+% subsubsection $2 (end)
+endsnippet
+
+snippet subsub* "Subsubsection" wi
+\subsubsection*{$1${VISUAL}}
+\label{sub_sub_sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:Some text here}
+
+% subsubsection $2 (end)
+endsnippet
+
+snippet par "Paragraph" wi
+\paragraph{$1${VISUAL}}
+\label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:Some text here}
+
+% paragraph $2 (end)
+endsnippet
+
+snippet par* "Paragraph" wi
+\paragraph*{$1${VISUAL}}
+\label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:Some text here}
+
+% paragraph $2 (end)
+endsnippet
+
+snippet subpar "Paragraph" wi
+\subparagraph{$1${VISUAL}}
+\label{sub_par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:Some text here}
+
+% subparagraph $2 (end)
+endsnippet
+
+snippet subpar* "Paragraph" wi
+\subparagraph*{$1${VISUAL}}
+\label{sub_par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:Some text here}
+
+% subparagraph $2 (end)
 endsnippet
 
 snippet newp "New Page" A
