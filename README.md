@@ -149,6 +149,11 @@ You can view the snippet [here](./plaintex.snippets)
 
 ### Math
 
+Keep in mind. all of the **math snippets** only work when you're in math mode.
+For example: $$, \\[\\], etc. View
+[here](https://www.overleaf.com/learn/latex/Mathematical_expressions) to see
+all math modes.
+
 #### Inline and Display Math
 
 * `im`:     Opens the **Inline Math** environment. ($$)
