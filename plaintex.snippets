@@ -17,6 +17,19 @@ def math():
 		return first != ignore
 	except StopIteration:
 		return False
+
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def not_math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '0'
+
+def comment(): 
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
 endglobal
 
 
@@ -24,156 +37,182 @@ endglobal
 # ENVIRONMENT #
 ###############
 
+context "not_math()"
 snippet beg "begin{} / end{}" bAi
 \begin{$1}
 	$0${VISUAL}
 \end{$1}
 endsnippet
 
+context "not_math()"
 snippet doc "Document" bAi
 \begin{document}
 	$0${VISUAL}
 \end{document}
 endsnippet
 
+context "not_math()"
 snippet cnt "Center" bAi
 \begin{center}
 	$0${VISUAL}
 \end{center}
 endsnippet
 
+context "not_math()"
 snippet desc "Description" bAi
 \begin{description}
 	$0${VISUAL}
 \end{description}
 endsnippet
 
+context "not_math()"
 snippet lemma "Lemma" bAi
 \begin{lemma}
 	$0${VISUAL}
 \end{lemma}
 endsnippet
 
+context "not_math()"
 snippet prop "Proposition" bAi
 \begin{prop}[$1]
 	$0${VISUAL}
 \end{prop}
 endsnippet
 
+context "not_math()"
 snippet thrm "Theorem" bAi
 \begin{theorem}[$1]
 	$0${VISUAL}
 \end{theorem}
 endsnippet
 
+context "not_math()"
 snippet post "postulate" bAi
 \begin{postulate}[$1]
 	$0${VISUAL}
 \end{postulate}
 endsnippet
 
+context "not_math()"
 snippet prf "Proof" bAi
 \begin{myproof}[$1]
 	$0${VISUAL}
 \end{myproof}
 endsnippet
 
+context "not_math()"
 snippet def "Definition" bAi
 \begin{definition}[$1]
 	$0${VISUAL}
 \end{definition}
 endsnippet
 
+context "not_math()"
 snippet nte "Note" bAi
 \begin{note}[$1]
 	$0${VISUAL}
 \end{note}
 endsnippet
 
+context "not_math()"
 snippet prob "Problem" bAi
 \begin{problem}[$1]
 	$0${VISUAL}
 \end{problem}
 endsnippet
 
+context "not_math()"
 snippet corl "Corollary" bAi
 \begin{corollary}[$1]
 	$0${VISUAL}
 \end{corollary}
 endsnippet
 
+context "not_math()"
 snippet exm "Example" bAi
 \begin{example}[$1]
 	$0${VISUAL}
 \end{example}
 endsnippet
 
+context "not_math()"
 snippet ntn "Notation" bAi
 \begin{notation}[$1]
 	$0${VISUAL}
 \end{notation}
 endsnippet
 
+context "not_math()"
 snippet rep "Repetition" bAi
 \begin{repetition}[$1]
 	$0${VISUAL}
 \end{repetition}
 endsnippet
 
+context "not_math()"
 snippet prop "Property" bAi
 \begin{property}[$1]
 	$0${VISUAL}
 \end{property}
 endsnippet
 
+context "not_math()"
 snippet int "Intuition" bAi
 \begin{intuition}[$1]
 	$0${VISUAL}
 \end{intuition}
 endsnippet
 
+context "not_math()"
 snippet obs "Observation" bAi
 \begin{observation}[$1]
 	$0${VISUAL}
 \end{observation}
 endsnippet
 
+context "not_math()"
 snippet conc "Conclusion" bAi
 \begin{conclusion}[$1]
 	$0${VISUAL}
 \end{conclusion}
 endsnippet
 
+context "not_math()"
 snippet enum "Enumerate" bAi
 \begin{enumerate}
 	\item $0${VISUAL}
 \end{enumerate}
 endsnippet
 
+context "not_math()"
 snippet item "Itemize" bAi
 \begin{itemize}
 	\item $0${VISUAL}
 \end{itemize}
 endsnippet
 
+context "not_math()"
 snippet case "cases" bAi
 \begin{cases}
 	$0${VISUAL}
 \end{cases}
 endsnippet
 
+context "not_math()"
 snippet ali "Align*" bAi
 \begin{align*}
 	${1:${VISUAL}}
 .\end{align*}
 endsnippet
 
+context "not_math()"
 snippet ali "Align" bAi
 \begin{align}
 	${1:${VISUAL}}
 .\end{align}
 endsnippet
 
+context "not_math()"
 snippet eqt "Equation" bAi
 \begin{equation}
 	\begin{split}
@@ -182,6 +221,7 @@ snippet eqt "Equation" bAi
 .\end{equation}
 endsnippet
 
+context "not_math()"
 snippet fig "Figure environment" bAi
 \begin{figure}[${1:htpb}]
 	\centering:${VISUAL}
@@ -191,6 +231,7 @@ snippet fig "Figure environment" bAi
 \end{figure}
 endsnippet
 
+context "not_math()"
 snippet grp "Tikz pgfplot" Ai
 \begin{figure}[${1:htpb}]
 	\centering
@@ -212,6 +253,7 @@ snippet grp "Tikz pgfplot" Ai
 \end{figure}
 endsnippet
 
+context "not_math()"
 snippet tbl "Table Environment" b
 \begin{table}[${1:htpb}]
 	\centering
