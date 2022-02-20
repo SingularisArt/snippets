@@ -152,7 +152,7 @@ You can view the snippet [here](./plaintex.snippets)
 #### Inline and Display Math
 
 * `im`:     Opens the **Inline Math** environment. ($$)
-* `dm`:     Opens the **Display Math** environment. (\[\])
+* `dm`:     Opens the **Display Math** environment. (\\[\\])
 
 #### Fast Math Typing
 
@@ -160,7 +160,7 @@ You can view the snippet [here](./plaintex.snippets)
 * `|->`:    Mapsto.
 * `+-`:     Plus Minus.
 * `-+`:     Minus Plus.
-* `\*`:     Times.
+* `*`:      Times.
 * `-:-`:    Divide.
 * `...`:    Straight dots.
 * `.v`:     Vertical dots.
@@ -202,7 +202,7 @@ You can view the snippet [here](./plaintex.snippets)
 #### Fractions
 
 * `//`:       \frac{}{}.
-* `1/`:       \frac{1}{}.
+* `1/`:       \frac{1}{}. You can replace `1` with anything. (Letter or Number).
 
 #### Over text type
 
