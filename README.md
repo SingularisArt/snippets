@@ -262,12 +262,12 @@ You can view the snippet [here](./plaintex.snippets)
 * `qed`:      Q.E.D.
 * `qea`:      Q.E.A.
 
-#### Lessons
+### Lessons
 
 * `les`:      \lesson{}{}{}{}.
 * `lec`:      \lesson{}{}{}.
 
-#### Sections
+### Sections
 
 * `chap`:     Create a **chapter** with a label.
 * `sec`:      Create a **section** with a label.
@@ -281,7 +281,7 @@ You can view the snippet [here](./plaintex.snippets)
 * `subpar`:   Create a **subparagraph** with a label.
 * `subpar*`:  Create an unnumbered **subparagraph** with a label.
 
-#### Other
+### Other
 
 * `date`:     Example: Feb 20 2022 Sun (13:00:39).
 * `sign`:     Create your signature.
