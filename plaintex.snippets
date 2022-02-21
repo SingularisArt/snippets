@@ -10,6 +10,7 @@ texIgnoreMathZones = ['texMathText']
 texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
 texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
 ignore = texIgnoreMathZoneIds[0]
+
 def math():
 	synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
 	try:
@@ -17,6 +18,51 @@ def math():
 		return first != ignore
 	except StopIteration:
 		return False
+
+def create_table(snip):
+	rows = snip.buffer[snip.line].split('x')[0]
+	cols = snip.buffer[snip.line].split('x')[1]
+
+	int_val = lambda string: int(''.join(s for s in string if s.isdigit()))
+	
+	rows = int_val(rows)
+	cols = int_val(cols)
+
+	offset = cols + 1
+	old_spacing = snip.buffer[snip.line][:snip.buffer[snip.line].rfind('\t') + 1]
+	
+	snip.buffer[snip.line] = ''
+	
+	final_str = old_spacing + "\\begin{tabular}{|" + "|".join(['$' + str(i + 1) for i in range(cols)]) + "|}\n"
+
+	for i in range(rows):
+		final_str += old_spacing + '\t'
+		final_str += " & ".join(['$' + str(i * cols + j + offset) for j in range(cols)])
+
+		final_str += " \\\\\\\n"
+
+	final_str += old_spacing + "\\end{tabular}\n$0"
+
+	snip.expand_anon(final_str)
+
+def add_row(snip):
+	row_len = int(''.join(s for s in snip.buffer[snip.line] if s.isdigit()))
+	old_spacing = snip.buffer[snip.line][:snip.buffer[snip.line].rfind('\t') + 1]
+
+	snip.buffer[snip.line] = ''
+	
+	final_str = old_spacing
+	final_str += " & ".join(['$' + str(j + 1) for j in range(row_len)])
+	final_str += " \\\\\\"
+
+	snip.expand_anon(final_str)
+
+def complete(t, opts):
+	if t:
+		opts = [ m[len(t):] for m in opts if m.startswith(t) ]
+	if len(opts) == 1:
+		return opts[0]
+	return '(' + '|'.join(opts) + ')'
 
 def math():
 	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
@@ -40,229 +86,227 @@ endglobal
 context "not_math()"
 snippet beg "begin{} / end{}" bAi
 \begin{$1}
-	$0${VISUAL}
-\end{$1}
+	$2${VISUAL}
+\end{$1}$0
 endsnippet
 
 context "not_math()"
 snippet doc "Document" bAi
 \begin{document}
-	$0${VISUAL}
-\end{document}
+	$1${VISUAL}
+\end{document}$0
 endsnippet
 
 context "not_math()"
 snippet cnt "Center" bAi
 \begin{center}
-	$0${VISUAL}
-\end{center}
+	$1${VISUAL}
+\end{center}$0
 endsnippet
 
 context "not_math()"
 snippet desc "Description" bAi
 \begin{description}
-	$0${VISUAL}
-\end{description}
+	$1${VISUAL}
+\end{description}$0
 endsnippet
 
 context "not_math()"
 snippet lemma "Lemma" bAi
 \begin{lemma}
-	$0${VISUAL}
-\end{lemma}
+	$1${VISUAL}
+\end{lemma}$0
 endsnippet
 
 context "not_math()"
 snippet prop "Proposition" bAi
 \begin{prop}[$1]
-	$0${VISUAL}
-\end{prop}
+	$2${VISUAL}
+\end{prop}$0
 endsnippet
 
 context "not_math()"
 snippet thrm "Theorem" bAi
 \begin{theorem}[$1]
-	$0${VISUAL}
-\end{theorem}
+	$2${VISUAL}
+\end{theorem}$0
 endsnippet
 
 context "not_math()"
 snippet post "postulate" bAi
 \begin{postulate}[$1]
-	$0${VISUAL}
-\end{postulate}
+	$2${VISUAL}
+\end{postulate}$0
 endsnippet
 
 context "not_math()"
 snippet prf "Proof" bAi
-\begin{myproof}[$1]
-	$0${VISUAL}
-\end{myproof}
+\begin{proof}[$1]
+	$2${VISUAL}
+\end{proof}$0
 endsnippet
 
 context "not_math()"
 snippet def "Definition" bAi
 \begin{definition}[$1]
-	$0${VISUAL}
-\end{definition}
+	$2${VISUAL}
+\end{definition}$0
 endsnippet
 
 context "not_math()"
 snippet nte "Note" bAi
 \begin{note}[$1]
-	$0${VISUAL}
-\end{note}
+	$2${VISUAL}
+\end{note}$0
 endsnippet
 
 context "not_math()"
 snippet prob "Problem" bAi
 \begin{problem}[$1]
-	$0${VISUAL}
-\end{problem}
+	$2${VISUAL}
+\end{problem}$0
 endsnippet
 
 context "not_math()"
 snippet corl "Corollary" bAi
 \begin{corollary}[$1]
-	$0${VISUAL}
-\end{corollary}
+	$2${VISUAL}
+\end{corollary}$0
 endsnippet
 
 context "not_math()"
 snippet exm "Example" bAi
 \begin{example}[$1]
-	$0${VISUAL}
-\end{example}
+	$2${VISUAL}
+\end{example}$0
 endsnippet
 
 context "not_math()"
 snippet ntn "Notation" bAi
 \begin{notation}[$1]
-	$0${VISUAL}
-\end{notation}
+	$2${VISUAL}
+\end{notation}$0
 endsnippet
 
 context "not_math()"
 snippet rep "Repetition" bAi
 \begin{repetition}[$1]
-	$0${VISUAL}
-\end{repetition}
+	$2${VISUAL}
+\end{repetition}$0
 endsnippet
 
 context "not_math()"
 snippet prop "Property" bAi
 \begin{property}[$1]
-	$0${VISUAL}
-\end{property}
+	$2${VISUAL}
+\end{property}$0
 endsnippet
 
 context "not_math()"
 snippet int "Intuition" bAi
 \begin{intuition}[$1]
-	$0${VISUAL}
-\end{intuition}
+	$2${VISUAL}
+\end{intuition}$0
 endsnippet
 
 context "not_math()"
 snippet obs "Observation" bAi
 \begin{observation}[$1]
-	$0${VISUAL}
-\end{observation}
+	$1${VISUAL}
+\end{observation}$0
 endsnippet
 
 context "not_math()"
 snippet conc "Conclusion" bAi
 \begin{conclusion}[$1]
-	$0${VISUAL}
-\end{conclusion}
+	$1${VISUAL}
+\end{conclusion}$0
 endsnippet
 
 context "not_math()"
 snippet enum "Enumerate" bAi
 \begin{enumerate}
-	\item $0${VISUAL}
-\end{enumerate}
+	\item $1${VISUAL}
+\end{enumerate}$0
 endsnippet
 
 context "not_math()"
 snippet item "Itemize" bAi
 \begin{itemize}
-	\item $0${VISUAL}
-\end{itemize}
+	\item $1${VISUAL}
+\end{itemize}$0
 endsnippet
 
 context "not_math()"
 snippet case "cases" bAi
 \begin{cases}
-	$0${VISUAL}
-\end{cases}
+	$1${VISUAL}
+\end{cases}$0
 endsnippet
 
 context "not_math()"
 snippet ali "Align*" bAi
 \begin{align*}
-	${1:${VISUAL}}
-.\end{align*}
+	${VISUAL}${1}
+.\end{align*}$0
 endsnippet
 
 context "not_math()"
 snippet ali "Align" bAi
 \begin{align}
-	${1:${VISUAL}}
-.\end{align}
+	${VISUAL}${1}
+.\end{align}$0
 endsnippet
 
 context "not_math()"
 snippet eqt "Equation" bAi
 \begin{equation}
 	\begin{split}
-		${1:${VISUAL}}
+		${VISUAL}${1}
 	\end{split}
-.\end{equation}
+.\end{equation}$0
 endsnippet
 
 context "not_math()"
 snippet fig "Figure environment" bAi
 \begin{figure}[${1:htpb}]
-	\centering:${VISUAL}
+	\centering
 	${2:\includegraphics[width=0.8\textwidth]{$3}}
 	\caption{${4:$3}}
 	\label{fig:${5:${3/\W+/-/g}}}
-\end{figure}
+\end{figure}$0
 endsnippet
 
 context "not_math()"
-snippet grp "Tikz pgfplot" Ai
-\begin{figure}[${1:htpb}]
-	\centering
-	\begin{tikzpicture}\begin{axis}[
-		axis lines=middle,
-		width=240pt,
-		height=166pt,
-		samples=128,
-		no marks,
-		xlabel=$x$, ylabel=$y$,
-		xtick={0}, xticklabels={\$0\$},
-		ytick={0}, yticklabels={\$0\$},
-		xmin=-3, xmax=3, ymin=-3, ymax=3
-	]
-	\addplot[color=black] {$0};
-	\end{axis}\end{tikzpicture}
-	\caption{$2}
-	\label{plot:$3}
-\end{figure}
+snippet tkz "Tikz pgfplot" bAi
 endsnippet
 
 context "not_math()"
-snippet tbl "Table Environment" b
+snippet tab "tabular / array environment" bAi
+	\begin{${1:t}${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${2:c}}
+		$0${2/(?<=.)(c|l|r)|./(?1: & )/g}
+	\end{$1${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}$0
+endsnippet
+
+context "not_math()"
+snippet tbl "Table environment" bAi
 \begin{table}[${1:htpb}]
 	\centering
-	\begin{tabular}{${5:c}}
-	$0
-	\end{tabular}
 	\caption{${2:caption}}
-	\label{tab:${3:label}}
-\end{table}
+	\label{tab:${3:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	\begin{${4:t}${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${5:c}}
+		$0${5/(?<=.)(c|l|r)|./(?1: & )/g}
+	\end{$4${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
+\end{table}$0
+endsnippet
+
+pre_expand "create_table(snip)"
+snippet "gentbl(\d+)x(\d+)" "Generate table of *width* by *height*" wrAbi
+endsnippet
+
+pre_expand "add_row(snip)"
+snippet "tr(\d+)" "Add table row of dimension ..." wrAbi
 endsnippet
 
 
@@ -270,8 +314,8 @@ endsnippet
 # Inline and Display Math #
 ###########################
 
-snippet im "Inline Math" wA
-$${1}$`!p
+snippet ilm "Inline Math" wA
+$${VISUAL}$1$`!p
 if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
     snip.rv = ' '
 else:
@@ -281,9 +325,8 @@ endsnippet
 
 snippet dm "Display Math" wA
 \[
-	$1
-\].
-$0
+	${VISUAL}$1
+\].$0
 endsnippet
 
 
@@ -293,6 +336,11 @@ endsnippet
 ######################################################
 
 context "math()"
+snippet <> "If and only if" Ai
+\iff
+endsnippet
+
+context "math()"
 snippet => "Implies" Ai
 \implies
 endsnippet
@@ -300,6 +348,11 @@ endsnippet
 context "math()"
 snippet =< "Implied by" Ai
 \impliedby
+endsnippet
+
+context "math()"
+snippet if "If and only if" Ai
+\iff
 endsnippet
 
 context "math()"
@@ -409,7 +462,7 @@ endsnippet
 
 
 #############################################
-# Sub and superscript. Use only in math env #
+# Sub and superscript. use only in math env #
 #############################################
 
 context "math()"
@@ -443,13 +496,13 @@ snippet compl "Complement" iA
 endsnippet
 
 context "math()"
-snippet td "Superscript" iA
-^{$1}$0
+snippet inv "Inverse" iA
+^{-${1:1}}$0
 endsnippet
 
 context "math()"
-snippet inv "Inverse" iA
-^{-${1:1}}$0
+snippet ss "Superscript" iA
+^{$1}$0
 endsnippet
 
 context "math()"
@@ -463,18 +516,38 @@ snippet nr "n Root" iA
 endsnippet
 
 
-################################
-# Fractions using regex and // #
-################################
+#############
+# Fractions #
+#############
 
 context "math()"
-snippet // "Fraction" Ai
-\frac{${VISUAL}}{$2}$0
+snippet // "Fraction" iA
+\\frac{$1}{$2}$0
+endsnippet
+
+context "math()"
+snippet / "Fraction" i
+\\frac{${VISUAL}}{$1}$0
 endsnippet
 
 context "math()"
 snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
 \\frac{`!p snip.rv = match.group(1)`}{$1}$0
+endsnippet
+
+context "math()"
+snippet '^.*\)/' "() Fraction" wrA
+`!p
+stripped = match.string[:-1]
+depth = 0
+i = len(stripped) - 1
+while True:
+	if stripped[i] == ')': depth += 1
+	if stripped[i] == '(': depth -= 1
+	if depth == 0: break;
+	i -= 1
+snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
+`{$1}$0
 endsnippet
 
 
@@ -515,7 +588,7 @@ endsnippet
 
 
 #########################
-# Sums and products etc #
+# Sums and Products etc #
 #########################
 
 context "math()"
@@ -599,6 +672,76 @@ snippet grad "Nabla" wA
 endsnippet
 
 
+#################
+# Real Analysis #
+#################
+
+context "math()"
+snippet ext "Exists" wA
+\exists
+endsnippet
+
+context "math()"
+snippet next "Exists" wA
+\nexists
+endsnippet
+
+context "math()"
+snippet lt "Lnot" wA
+\lnot
+endsnippet
+
+context "math()"
+snippet ld "Land" wA
+\land
+endsnippet
+
+context "math()"
+snippet for "For all" wA
+\forall
+endsnippet
+
+context "math()"
+snippet qd "Quad" wA
+\quad
+endsnippet
+
+context "math()"
+snippet mb "Mathbb" wA
+\mathbb{$1}$0
+endsnippet
+
+context "math()"
+snippet inn "In" wA
+\in
+endsnippet
+
+context "math()"
+snippet RR "Real numbers" wA
+\mathbb{R}
+endsnippet
+
+context "math()"
+snippet ZZ "Integer numbers" wA
+\mathbb{Z}
+endsnippet
+
+context "math()"
+snippet NN "Natural numbers" wA
+\mathbb{N}
+endsnippet
+
+context "math()"
+snippet QQ "Rational numbers" wA
+\mathbb{Q}
+endsnippet
+
+context "math()"
+snippet PP "Irrational numbers" wA
+\mathbb{P}
+endsnippet
+
+
 ########################
 # Matrices and Vectors #
 ########################
@@ -652,7 +795,7 @@ endsnippet
 
 
 #############################################
-# (), [], {}, and their bigger counterparts #
+# (), [], {}, and their bigger Counterparts #
 #############################################
 
 context "math()"
@@ -701,8 +844,111 @@ snippet ] "Right]" i
 endsnippet
 
 
+########
+# Tikz #
+########
+
+context "env('tikzpicture')"
+snippet circ "Draw circle" bAi
+\draw (${1:0,0}) circle ${2:[radius=1]};
+endsnippet
+
+context "env('tikzpicture')"
+snippet elps "Draw ellipse" bAi
+\draw (${1:0,0}) circle [x radius=${2:4},
+										y radius=${3:5}];
+endsnippet
+
+context "env('tikzpicture')"
+snippet arc "Draw arc" bAi
+\draw (${1:0,0}) arc [x radius=${2:4},
+								 y radius=${3:5},
+								 start angle=${4:0},
+								 end angle=${5:90}];
+endsnippet
+
+context "env('tikzpicture')"
+snippet line "Draw line" bAi
+\draw (${1:0,0}) -- (${2:1,1});
+endsnippet
+
+context "env('tikzpicture')"
+snippet multline "Draw multiple lines" bAi
+\draw (${1:0,0})	-- (${2:1,1})
+						-- (${3:2,2})
+						-- cycle;
+endsnippet
+
+context "env('tikzpicture')"
+snippet rect "Draw rectangle" bAi
+\draw (${1:0,0}) rectangle[${2:fill=white}] (${3:1,1});
+endsnippet
+
+context "env('tikzpicture')"
+snippet node "Draw node" bAi
+\draw (${1:0,0}) node[fill=${2:white}, anchor=${3:center}] {${4:text}};
+endsnippet
+
+context "env('tikzpicture')"
+snippet rgb "Draw rgb color" bAi
+rgb,255:red,${1:21}; green,${2:66}; blue:${3:128}
+endsnippet
+
+context "env('tikzpicture')"
+snippet mix "Draw mixed color" bAi
+${1:blue}!${2:0}!${3:white}
+endsnippet
+
+context "env('tikzpicture')"
+snippet colors "All colors" bAi
+$1`!p snip.rv = complete(t[1], ['red', 'yellow', 'green', 'cyan', 'blue',
+'voilet', 'magenta', 'brown', 'lime', 'olive', 'orange', 'pink', 'purple',
+'teal', 'white', 'lightgray', 'gray', 'darkgray', 'black'])`
+endsnippet
+
+context "env('tikzpicture')"
+snippet thickness "Line thickness" bA
+$1`!p snip.rv = complete(t[1], ['ultra thin', 'very thin', 'thin', 'semithick',
+'thick', 'very thick', 'ultra thick', 'line width='])`
+endsnippet
+
+context "env('tikzpicture')"
+snippet styles "Line styles" bA
+$1`!p snip.rv = complete(t[1], ['solid', 'double', 'dotted', 'loosely dotted',
+'densely dotted', 'dashed', 'lossely dashed', 'densely dashed', 'dashdotted',
+'lossely dashdotted', 'densely dashdotted'])`
+endsnippet
+
+context "env('tikzpicture')"
+snippet tips "Arrow tips" bA
+$1`!p snip.rv = complete(t[1], ['<-', '->', '<->', '<<->>', '>-<', '<>-><'])`
+endsnippet
+
+context "env('tikzpicture')"
+snippet join "Joining" bA
+$1`!p snip.rv = complete(t[1], ['mitre', 'bevel', 'round'])`
+endsnippet
+
+context "env('tikzpicture')"
+snippet bend "Bend" bA
+$1`!p snip.rv = complete(t[1], ['left', 'right])`
+endsnippet
+
+context "env('tikzpicture')"
+snippet coordinates "Graph the Coordinates" bA
+\begin{figure}[h]
+	\begin{tikzpicture}
+		\tkzInit[xmax=${1:6},ymax=${2:6},xmin=${3:-6},ymin=${4:-6}]
+		\tkzGrid
+		\tkzAxeXY
+		\tkzText[above](0,6.75){${5:Title of the Coordinate Graph}}
+	\end{tikzpicture}
+\end{figure}
+endsnippet
+
+
 ###########
-# QED QEA #
+# Qed Qea #
 ###########
 
 snippet qed "Q.E.D." wA
@@ -715,7 +961,7 @@ endsnippet
 
 
 ###########
-# LESSONS #
+# Lessons #
 ###########
 
 snippet les "Lesson"
@@ -730,11 +976,11 @@ endsnippet
 
 
 ############
-# SECTIONS #
+# Sections #
 ############
 
 snippet chap "Chapter" wi
-\chapter{$1${VISUAL}}
+\chapter{${VISUAL}$1}
 \label{chap:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${3:Some text here}
@@ -745,7 +991,7 @@ ${3:Some text here}
 endsnippet
 
 snippet sec "Subsection" wi
-\section{$1${VISUAL}}
+\section{${VISUAL}$1}
 \label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${3:Some text here}
@@ -754,7 +1000,7 @@ ${3:Some text here}
 endsnippet
 
 snippet sec* "Subsection" wi
-\section*{$1${VISUAL}}
+\section*{${VISUAL}$1}
 \label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${3:Some text here}
@@ -763,7 +1009,7 @@ ${3:Some text here}
 endsnippet
 
 snippet sub "Subsection" wi
-\subsection{$1${VISUAL}}
+\subsection{${VISUAL}$1}
 \label{sub_sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${3:Some text here}
@@ -772,7 +1018,7 @@ ${3:Some text here}
 endsnippet
 
 snippet sub* "Subsection" wi
-\subsection*{$1${VISUAL}}
+\subsection*{${VISUAL}$1}
 \label{sub_sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${3:Some text here}
@@ -781,7 +1027,7 @@ ${3:Some text here}
 endsnippet
 
 snippet subsub "Subsubsection" wi
-\subsubsection{$1${VISUAL}}
+\subsubsection{${VISUAL}$1}
 \label{sub_sub_sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${3:Some text here}
@@ -790,7 +1036,7 @@ ${3:Some text here}
 endsnippet
 
 snippet subsub* "Subsubsection" wi
-\subsubsection*{$1${VISUAL}}
+\subsubsection*{${VISUAL}$1}
 \label{sub_sub_sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${3:Some text here}
@@ -799,7 +1045,7 @@ ${3:Some text here}
 endsnippet
 
 snippet par "Paragraph" wi
-\paragraph{$1${VISUAL}}
+\paragraph{${VISUAL}$1}
 \label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${3:Some text here}
@@ -808,7 +1054,7 @@ ${3:Some text here}
 endsnippet
 
 snippet par* "Paragraph" wi
-\paragraph*{$1${VISUAL}}
+\paragraph*{${VISUAL}$1}
 \label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${3:Some text here}
@@ -817,7 +1063,7 @@ ${3:Some text here}
 endsnippet
 
 snippet subpar "Paragraph" wi
-\subparagraph{$1${VISUAL}}
+\subparagraph{${VISUAL}$1}
 \label{sub_par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${3:Some text here}
@@ -826,7 +1072,7 @@ ${3:Some text here}
 endsnippet
 
 snippet subpar* "Paragraph" wi
-\subparagraph*{$1${VISUAL}}
+\subparagraph*{${VISUAL}$1}
 \label{sub_par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${3:Some text here}
@@ -835,8 +1081,39 @@ ${3:Some text here}
 endsnippet
 
 
+#############
+# Text Edit #
+#############
+
+snippet bf "Bold"
+\textbf{${VISUAL}$1}$0
+endsnippet
+
+snippet it "Italic"
+\textit{${VISUAL}$1}$0
+endsnippet
+
+snippet un "Underline"
+\underline{${VISUAL}$1}$0
+endsnippet
+
+context "math()"
+snippet rm "Text"
+\textrm{${VISUAL}$1}$0
+endsnippet
+
+
+############
+# Preamble #
+############
+
+snippet pac "Package" b
+\usepackage`!p snip.rv='[' if t[1] else ""`${1:options}`!p snip.rv = ']' if t[1] else ""`{${2:package}}$0
+endsnippet
+
+
 #########
-# OTHER #
+# Other #
 #########
 
 snippet date "Today's date and Current Time"
@@ -846,7 +1123,7 @@ endsnippet
 snippet sign "Signature"
 Yours sincerely,
 
-${1:Name}
+${VISUAL}$1
 endsnippet
 
 snippet ref "Reference" wi
@@ -854,9 +1131,35 @@ ${1:Figure}~\ref{${1:Fig}:$2:${VISUAL}}$0
 endsnippet
 
 snippet link "Hyperlink" wi
-\hyperlink{${1:url}}{${2:text}}$0
+\hyperlink{${VISUAL}$1}{${2:text}}$0
+endsnippet
+
+context "env('enumerate')
+snippet itm "New Item" A
+\item ${VISUAL}$1
+endsnippet
+
+context "env('itemize')
+snippet itm "New Item" A
+\item ${VISUAL}$1
+endsnippet
+
+snippet box "Create box"
+\boxed{${VISUAL}$1}$0
+endsnippet
+
+snippet ac "Acroynm normal" b
+\ac{${1:acronym}}$0
+endsnippet
+
+snippet acl "Acroynm expanded" b
+\acl{${1:acronym}}$0
+endsnippet
+
+snippet ni "Non-indented paragraph" b
+\noindent
 endsnippet
 
 snippet newp "New Page" A
-\newpage
+\newpage$0
 endsnippet
