@@ -152,7 +152,6 @@ endsnippet
 
 snippet em "Emphasize string" i
 `!p
-# dirty but works with CJK character detection
 if has_cjk(vim.current.line):
 	snip.rv ="\ "`*${1:${VISUAL:Em}}*`!p
 if has_cjk(vim.current.line):
@@ -176,8 +175,6 @@ endsnippet
 snippet "li(st)? (?P<num>\d+)" "List" br
 $0
 `!p
-# usage: li 4<tab>
-# which will extand into a unordered list contains 4 items
 snip.rv = make_items(match.groupdict()['num'])
 `
 endsnippet
@@ -185,14 +182,10 @@ endsnippet
 snippet "ol(st)? (?P<num>\d+)" "Order List" br
 $0
 `!p
-# usage: ol 4<tab>
-# which will extand into a ordered list contains 4 items
 snip.rv = make_items(match.groupdict()['num'], 1)
 `
 endsnippet
-###########################################################################
-#						  More Specialized Stuff.						  #
-###########################################################################
+
 snippet cb "Code Block" b
 .. code-block:: ${1:`!p snip.rv = get_popular_code_type()`}
 
@@ -201,8 +194,6 @@ snippet cb "Code Block" b
 $0
 endsnippet
 
-# match snippets :
-# img, inc, fig
 snippet id "Includable Directives" b
 `!p
 real_name=real_filename(os.path.basename(t[2]))
@@ -261,7 +252,6 @@ snippet sa "Specific Admonitions" b
 $0
 endsnippet
 
-# it will be trigger at start of line or after a word
 snippet ro "Text Roles" w
 \ :$1`!p snip.rv=complete(t[1],
 							   TEXT_ROLES+look_up_directives(TEXT_ROLES_REGEX,
@@ -285,7 +275,6 @@ snippet fnt "Footnote or Citation" i
 .. [$1] ${2:Reference}
 endsnippet
 
-# Only for Nikola — Static Site Generator
 snippet chart "Pygal chart for Nikola" b
 .. chart:: $1`!p snip.rv=complete(t[1], CHART_TYPES)`
 	:title: '${2:Browser usage evolution (in %)}'
@@ -297,10 +286,6 @@ snippet chart "Pygal chart for Nikola" b
 	'Others',  [14.2, 15.4, 15.3, 8.9, 9, 10.4]
 $0
 endsnippet
-
-############
-#  Sphinx  #
-############
 
 snippet sid "SideBar" b
 .. sidebar:: ${1:SideBar Title}

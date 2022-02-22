@@ -52,9 +52,11 @@ def create_table(snip):
 	snip.expand_anon(anon_snippet_table)
 endglobal
 
+
 ###########################
 # Sections and Paragraphs #
 ###########################
+
 snippet sec "Section" b
 # ${1:Section Name} #
 $0
@@ -80,6 +82,7 @@ snippet spar "Paragraph" b
 $0
 endsnippet
 
+
 ###################
 # Text formatting #
 ###################
@@ -100,9 +103,11 @@ snippet /* "Comment"
 <!-- ${1:${VISUAL}} -->$0
 endsnippet
 
+
 ################
 # Common stuff #
 ################
+
 snippet link "Link to something"
 [${1:${VISUAL:Text}}](${3:https://${2:www.url.com}})$0
 endsnippet
@@ -136,7 +141,7 @@ endsnippet
 
 snippet detail "Disclosure"
 <details${3: open=""}>
-  ${1:<summary>${2}</summary>}$0
+	${1:<summary>${2}</summary>}$0
 </details>
 endsnippet
 

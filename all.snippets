@@ -1,14 +1,7 @@
-# This file contains snippets that are always defined. I personally
-# have snippets for signatures and often needed texts
-
-# sligthly lower priority than everything else since specialized versions
-# should overwrite. The user needs to adjust her priority in her snippets to
-# ~-55 so that other filetypes will still overwrite.
-priority -60
-
 ##############
 # NICE BOXES #
 ##############
+
 global !p
 from vimsnippets import foldmarker, make_box, get_comment_format
 LOREM = """
@@ -59,26 +52,29 @@ ${2:${VISUAL:Content}}
 `!p snip.rv = get_comment_format()[0]` `!p snip.rv = foldmarker()[1]` $1 `!p snip.rv = get_comment_format()[2]`
 endsnippet
 
+
 ##########################
 # LOREM IPSUM GENERATORS #
 ##########################
+
 snippet "lorem(([1-4])?[0-9])?" "Lorem Ipsum" r
 `!p snip.rv = " ".join(LOREM.split()[:int(match.group(1))]) if match.group(1) else LOREM`
 endsnippet
 
+
 ##########################
 # VIM MODELINE GENERATOR #
 ##########################
-# See advice on `:help 'tabstop'` for why these values are set. Uses second
-# modeline form ('set') to work in languages with comment terminators
-# (/* like C */).
+
 snippet modeline "Vim modeline"
 vim`!v ':set '. (&expandtab ? printf('et sw=%i ts=%i', &sw, &ts) : printf('noet sts=%i sw=%i ts=%i', &sts, &sw, &ts)) . (&tw ? ' tw='. &tw : '') . ':'`
 endsnippet
 
+
 #########
 # DATES #
 #########
+
 snippet date "YYYY-MM-DD" w
 `!v strftime("%Y-%m-%d")`
 endsnippet
@@ -106,6 +102,7 @@ endsnippet
 ##########
 #  Misc  #
 ##########
+
 snippet uuid "Random UUID" w
 `!p if not snip.c: import uuid; snip.rv = str(uuid.uuid4())`
 endsnippet

@@ -400,6 +400,18 @@ snippet :. "Therefore" Ai
 \therefore
 endsnippet
 
+snippet "\<(.*?)\|" "bra" riA
+\bra{`!p snip.rv = match.group(1).replace('q', f'\psi').replace('f', f'\phi')`}
+endsnippet
+
+snippet "\|(.*?)\>" "ket" riA
+\ket{`!p snip.rv = match.group(1).replace('q', f'\psi').replace('f', f'\phi')`}
+endsnippet
+
+snippet "(.*)\\bra{(.*?)}([^\|]*?)\>" "braket" riA
+`!p snip.rv = match.group(1)`\braket{`!p snip.rv = match.group(2)`}{`!p snip.rv = match.group(3).replace('q', f'\psi').replace('f', f'\phi')`}
+endsnippet
+
 
 #####################
 # Equality snippets #
@@ -593,7 +605,7 @@ endsnippet
 
 context "math()"
 snippet sum "Sum" wA
-\sum_{$1}^{$2}$0
+\sum_{${1:n = 1}}^{${2:\infty}}
 endsnippet
 
 context "math()"
@@ -622,8 +634,8 @@ snippet dint "Definite integral" wA
 endsnippet
 
 context "math()"
-snippet lim "Limit"
-\lim_{$1 \to $2} $0
+snippet lim "Limit" wA
+\lim_{${1:n} \to ${2:\infty}}
 endsnippet
 
 context "math()"
@@ -1109,6 +1121,93 @@ endsnippet
 
 snippet pac "Package" b
 \usepackage`!p snip.rv='[' if t[1] else ""`${1:options}`!p snip.rv = ']' if t[1] else ""`{${2:package}}$0
+endsnippet
+
+
+##################################################################################
+# Run code straight from the latex file, such as sympy, maybe eval or matplotlib #
+##################################################################################
+
+# Sympy
+
+snippet sympy "sympy block " w
+sympy $1 sympy$0
+endsnippet
+
+priority 10000
+snippet 'sympy(.*)sympy' "evaluate sympy" wr
+`!p
+from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n, p = symbols('k m n p', integer=True)
+f, g, h, u, v = symbols('f g h u v', cls=Function)
+init_printing()
+snip.rv = eval('latex(' + match.group(1).replace('\\', '') \
+    .replace('^', '**') \
+    .replace('{', '(') \
+    .replace('}', ')') + ')')
+`
+endsnippet
+
+# Mathematica
+
+priority 1000
+snippet math "mathematica block" w
+math $1 math$0
+endsnippet
+
+priority 10000
+snippet 'math(.*)math' "evaluate mathematica" wr
+`!p
+import subprocess
+code = 'ToString[' + match.group(1) + ', TeXForm]'
+snip.rv = subprocess.check_output(['wolframscript', '-code', code])
+`
+endsnippet
+
+
+#############
+# Chemistry #
+#############
+
+snippet react "Reaction" bA
+\reaction{$1}
+endsnippet
+
+snippet *react "Reaction no num" bA
+\reactionstar{$1}
+endsnippet
+
+snippet ce "ce" w
+\ce{$1} $0
+endsnippet
+
+snippet CH2 "C with H on top and bottom" w
+C([2]-H)([6]-H)
+endsnippet
+
+snippet COOH "Carboxyl" w
+C([1]=O)([7]-OH)
+endsnippet
+
+snippet CH=O "Aldehyde" w
+C([1]=O)([7]-H)
+endsnippet
+
+snippet CHO "Carbonyl" w
+C([2]=O)
+endsnippet
+
+snippet CH-OH "Hydroxide" w
+C([2]-OH)([6]-H)
+endsnippet
+
+snippet CONH2 "Carboxyamide" w
+C([1]=O)([7]-N([1]-H)([7]-H))
+endsnippet
+
+snippet COOC "Ester" w
+C([1]=O)[7]-O-C
 endsnippet
 
 

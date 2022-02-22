@@ -4,27 +4,12 @@ priority -50
 #  COMMON  #
 ############
 
-# The smart snippets use a global options called
-# "g:ultisnips_javascript.{option}" which can control the format
-# of trailing semicolon, space before function paren, etc.
-#
-# e.g.
-# let g:ultisnips_javascript = {
-#      \ 'keyword-spacing': 'always',
-#      \ 'semi': 'never',
-#      \ 'space-before-function-paren': 'always',
-#      \ }
-
-
 global !p
 from javascript_snippets import (
 	semi, space_before_function_paren, keyword_spacing
 )
 endglobal
 
-###########################################################################
-#                            TextMate Snippets                            #
-###########################################################################
 snippet get "Get Elements"
 getElement${1/(T)|(C)|.*/(?1:s)(?2:s)/}By${1:T}${1/(T)|(I)|(C).*/(?1:agName)(?2:d)(?3:lassName)/}('$2')
 endsnippet
@@ -68,15 +53,14 @@ ${1:var }${2:function_name} = function $2`!p snip.rv = space_before_function_par
 }`!p snip.rv = semi(snip)`
 endsnippet
 
-# Drop priority so this only triggers when not beginning of line.
 priority -51
 snippet fun "function (anonymous)" w
 function`!p snip.rv = space_before_function_paren(snip)`($1) {
 	${VISUAL}$0
 }$2
 endsnippet
-priority -50
 
+priority -50
 snippet anf "function (anonymous)" i
 function`!p snip.rv = space_before_function_paren(snip)`($1) {
 	${VISUAL}$0
@@ -158,66 +142,82 @@ snippet imp "import"
 import ${2} from ${1}
 endsnippet
 
-# Debugging
 snippet de
 debugger`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet cl "console.log"
 console.log(${0})`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet cd "console.debug"
 console.debug(${0})`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet ce "console.error"
 console.error(${0})`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet cw "console.warn"
 console.warn(${0})`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet ci "console.info"
 console.info(${0})`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet ct "console.trace"
 console.trace(${0:label})`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet ctime "console.time ... console.timeEnd"
 console.time("${1:label}")`!p snip.rv = semi(snip)`
 ${0:${VISUAL}}
 console.timeEnd("$1")`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet ctimestamp "console.timeStamp"
 console.timeStamp("${1:label}")`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet ca "console.assert"
 console.assert(${1:expression}, ${0:obj})`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet cclear "console.clear"
 console.clear()`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet cdir "console.dir"
 console.dir(${0:obj})`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet cdirx "console.dirxml"
 console.dirxml(${1:object})`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet cgroup "console.group"
 console.group("${1:label}")`!p snip.rv = semi(snip)`
 ${0:${VISUAL}}
 console.groupEnd()`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet cgroupc "console.groupCollapsed"
 console.groupCollapsed("${1:label}")`!p snip.rv = semi(snip)`
 ${0:${VISUAL}}
 console.groupEnd()`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet cprof "console.profile"
 console.profile("${1:label}")`!p snip.rv = semi(snip)`
 ${0:${VISUAL}}
 console.profileEnd()`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet ctable "console.table"
 console.table(${1:"${2:value}"})`!p snip.rv = semi(snip)`
 endsnippet
+
 snippet clstr "console.log stringified"
 console.log(JSON.stringify(${0}, null, 2))`!p snip.rv = semi(snip)`
 endsnippet

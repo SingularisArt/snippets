@@ -2,7 +2,6 @@ priority -50
 
 extends html
 
-# Generic Tags
 snippet % "" bi
 {% $1 %}$2
 endsnippet
@@ -16,8 +15,6 @@ endsnippet
 snippet { "" bi
 {{ $1 }}$2
 endsnippet
-
-# Template Tags
 
 snippet autoescape "" bi
 {% autoescape ${1:off} %}
@@ -192,21 +189,13 @@ endsnippet
 
 snippet blocktrans "" bi
 {% blocktrans %}
-    ${VISUAL}
+	${VISUAL}
 {% endblocktrans %}
 endsnippet
 
 snippet lorem "" bi
 {% lorem $1 %}
 endsnippet
-
-# Template Filters
-
-# Note: Since SnipMate can't determine which template filter you are
-# expanding without the "|" character, these do not add the "|"
-# character.  These save a few keystrokes still.
-
-# Note: Template tags that take no arguments are not implemented.
 
 snippet add "" bi
 add:"$1"

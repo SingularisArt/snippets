@@ -54,6 +54,7 @@ endglobal
 ########################################
 #		 SQL Snippets				   #
 ########################################
+
 snippet doc "Document comment"
 	/*
 	 *	${0: comment ...}
@@ -191,10 +192,6 @@ CREATE INDEX $1.${4:$2_${5}}
 ON ${1:schema}.${2:table}(${3}) ${6:TABLESPACE ${0} };
 endsnippet
 
-########################################
-#		 Table Operation			   #
-########################################
-
 snippet drtab "Drop Table"
 DROP TABLE ${1:schema}.${2:name} CASCADE CONSTRAINTS ${3:PURGE};
 
@@ -228,11 +225,6 @@ snippet at "Alter Table"
 	ALTER TABLE ${1:table} ${0}
 endsnippet
 
-
-#########################################
-#	Declare Types and local variable	#
-#########################################
-  
 snippet tr "Type record"
 	TYPE t_${1:rec} IS RECORD (${0:/* columns */} );
 endsnippet
@@ -289,9 +281,6 @@ snippet lrec
 	l_rec_${1}		${0};
 endsnippet
 
-#########################################
-#		   Condition, Loops				#
-#########################################
 snippet if "If Condition"
 	IF(${1}) THEN
 		${0};
@@ -365,9 +354,6 @@ snippet forc "For Cursor Loop"
 	END LOOP; -- End $1
 endsnippet
 
-#########################################
-#		  Cursor Operations				#
-#########################################
 snippet dcur "Cursor declaration"
 	CURSOR ${1:cur} IS
 	SELECT ${0}
@@ -400,9 +386,6 @@ snippet copenbc "Open Cursor Bulk collect"
 	END IF;
 endsnippet
 
-#########################################
-#		BEGIN/DECLARE Blocks			#
-#########################################
 snippet decl "Declare Begin block"
 DECLARE
 	${1}
@@ -439,9 +422,6 @@ snippet rae "Raise Application Error"
 RAISE_APPLICATION_ERROR(${1:-20000},${0:''});
 endsnippet
 
-#########################################
-#	   Procedure/Function calling		#
-#########################################
 snippet crjob "Submit DBMS Job"
 -- Submit the job to get the output
 BEGIN
@@ -485,9 +465,6 @@ END;
 endsnippet
 
   
-#########################################
-#		Function creation scripts		#
-#########################################
 snippet crprintlog "Create Printlog Procedure"
 	------------------------------------------------------------------------------------------------
 	-- PROCEDURE	: PRINTLOG
@@ -728,6 +705,4 @@ EXCEPTION -- Exception block of Procedure
 	  l_errmsg									  := 'Exception in procedure. '||SQLERRM;
 	  DEBUG_LOG_PKG.WRITE_LOG(g_proc_name,g_proc_name ,l_errmsg );
 END $2;
-
 endsnippet
-

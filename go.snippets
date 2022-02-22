@@ -1,10 +1,5 @@
-# Snippets for Go
-
 priority -50
 
-# when to abbriviate and when not?
-# b doesn't work here, because it ignores whitespace
-# optional local name?
 snippet /^import/ "Import declaration" r
 import (
 	"${1:package}"
@@ -16,7 +11,6 @@ snippet /^package/ "Package declaration" r
 package ${1:main}
 endsnippet
 
-# Mostly converted from: https://github.com/AlanQuatermain/go-tmbundle
 snippet /^cons/ "Constants declaration" r
 const (
 	${1:constant}${2/(.+)/ /}${2:type} = ${0:value}
@@ -57,7 +51,6 @@ case$0
 }
 endsnippet
 
-# functions
 snippet /^main/ "Main function" r
 func main() {
 	${0:${VISUAL}}
@@ -82,7 +75,6 @@ func ${1:handler}(${2:w} http.ResponseWriter, ${3:r} *http.Request) {
 }
 endsnippet
 
-# types and variables
 snippet map "Map type" b
 map[${1:keytype}]${2:valtype}
 endsnippet
@@ -105,11 +97,10 @@ snippet json "JSON field"
 \`json:"${1:displayName}"\`
 endsnippet
 
-# vim:ft=snippets:
-
-# error handling
 snippet err "Basic error handling" b
 if err != nil {
 	log.${1:Fatal}(err)
 }
 endsnippet
+
+# vim:ft=snippets:

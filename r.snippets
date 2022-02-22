@@ -178,14 +178,6 @@ snippet kvt "KV test"
 kv.test(${1:x}, ${0:y})
 endsnippet
 
-#################################
-#  easily create string vector  #
-#################################
-# Given individual words separated by spaces
-# Select words (e.g. shift-v for whole line (such as the line above)
-# then press <Tab> then type "vec", press <Tab> again to get this:
-# var <- c("#","Given","individual","words","separated","by","spaces")
-# var <- c("#","type","out","individual","words","separated","by","spaces")
 snippet vec
 ${1:var} <- c("${0:${VISUAL:/ /","/g}}")
 endsnippet

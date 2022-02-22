@@ -40,11 +40,6 @@ def get_module_namespace_and_basename():
 	return "name"
 endglobal
 
-###############################################################################
-#  Puppet Language Constructs                                                 #
-#    See http://docs.puppetlabs.com/puppet/latest/reference/lang_summary.html #
-###############################################################################
-
 snippet class "Class declaration" b
 class ${1:`!p snip.rv = get_module_namespace_and_basename()`} {
 	${0:# body}
@@ -66,11 +61,6 @@ $${1:varname}.${2:each} |${3:Type} $${4:param}| {
 	$0
 }
 endsnippet
-
-#################################################################
-#  Puppet Types                                                 #
-#    See http://docs.puppetlabs.com/references/latest/type.html #
-#################################################################
 
 snippet cron "Cron resource type" b
 cron { '${1:name}':
@@ -143,11 +133,6 @@ service { '${1:name}':
 	ensure    => running,
 }
 endsnippet
-
-########################################################################
-#  Puppet Functions                                                    #
-#    See http://docs.puppetlabs.com/references/latest/function.html    #
-########################################################################
 
 snippet alert "Alert Function" b
 alert("${1:message}")$0

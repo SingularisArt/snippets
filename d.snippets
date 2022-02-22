@@ -1,5 +1,3 @@
-# Simple shortcuts
-
 priority -50
 
 snippet imp "import (imp)" b
@@ -82,8 +80,6 @@ snippet sup "super (sup)" b
 super(${1:/*args*/});
 endsnippet
 
-# Phobos
-
 snippet tup "tuple (tup)"
 tuple(${1:/*args*/})
 endsnippet
@@ -100,8 +96,6 @@ snippet enf "enforce (enf)" b
 enforce(${1:/*condition*/},
 	new $2Exception(${3:/*args*/}));
 endsnippet
-
-# Branches
 
 snippet if "if .. (if)"
 if(${1:/*condition*/})
@@ -173,8 +167,6 @@ snippet ?: "ternary operator (?:)"
 ${1:/*condition*/} ? ${2:/*then*/} : ${3:/*else*/}$4
 endsnippet
 
-# Loops
-
 snippet do "do while (do)" b
 do
 {
@@ -217,7 +209,6 @@ foreach(${1:/*elem*/}; ${2:/*range*/}) if(${3:/*condition*/})
 }
 endsnippet
 
-# Contracts
 snippet in "in contract (in)" b
 in
 {
@@ -243,8 +234,6 @@ invariant()
 	$3
 }
 endsnippet
-
-# Functions (generic)
 
 snippet fun "function definition (fun)"
 ${1:void} ${2:/*function name*/}(${3:/*args*/}) ${4:@safe pure nothrow}
@@ -275,8 +264,6 @@ snippet set "setter property (set)"
 @property void ${1:/*member_name*/}(${2:/*type*/} rhs) pure nothrow {${3:$1_} = rhs;}
 endsnippet
 
-# Functions (concrete)
-
 snippet main "Main" b
 void main(string[] args)
 {
@@ -284,13 +271,9 @@ void main(string[] args)
 }
 endsnippet
 
-# Mixins
-
 snippet signal "signal (signal)" b
 mixin Signal!(${1:/*args*/}) ${2:/*name*/};
 endsnippet
-
-# Scope
 
 snippet scope "scope (scope)" b
 scope(${1:exit})
@@ -299,16 +282,12 @@ scope(${1:exit})
 }
 endsnippet
 
-# With
-
 snippet with "with (with)"
 with($1)
 {
 	${VISUAL}$2
 }
 endsnippet
-
-# Exception handling
 
 snippet try "try/catch (try)" b
 try
@@ -348,8 +327,6 @@ throw new $1Exception("$2");
 endsnippet
 
 
-# Type declarations
-
 snippet struct "struct (struct)"
 struct ${1:`!p snip.rv = (snip.basename or "name")`}
 {
@@ -385,9 +362,6 @@ enum ${1:`!p snip.rv = (snip.basename or "name")`}
 }
 endsnippet
 
-
-# Exception declarations
-
 snippet exc "exception declaration (exc)" b
 /// ${3:/*documentation*/}
 class $1Exception : $2Exception
@@ -398,9 +372,6 @@ class $1Exception : $2Exception
 	}
 }
 endsnippet
-
-
-# Conditional compilation
 
 snippet version "version (version)" b
 version(${1:/*version name*/})
@@ -416,9 +387,6 @@ debug
 }
 endsnippet
 
-
-# Templates
-
 snippet temp "template (temp)" b
 template ${2:/*name*/}(${1:/*args*/})
 {
@@ -426,16 +394,10 @@ template ${2:/*name*/}(${1:/*args*/})
 }
 endsnippet
 
-
-# Asserts
-
 snippet ass "assert (ass)" b
 assert(${1:false}, "${2:TODO}");
 
 endsnippet
-
-
-# Unittests
 
 snippet unittest "unittest (unittest)" b
 unittest
@@ -443,9 +405,6 @@ unittest
 	$1
 }
 endsnippet
-
-
-# Common member functions
 
 snippet opDis "opDispatch (opDis)" b
 ${1:/*return type*/} opDispatch(string s)()
@@ -488,16 +447,9 @@ string toString() @safe const pure nothrow
 }
 endsnippet
 
-
-# Comments
-
-
 snippet todo "TODO (todo)"
 // TODO: $1
 endsnippet
-
-
-# DDoc
 
 snippet doc "generic ddoc block (doc)" b
 /// ${1:description}
@@ -536,9 +488,6 @@ Examples:
 /// --------------------
 endsnippet
 
-
-# License blocks
-
 snippet gpl "GPL (gpl)" b
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -567,9 +516,6 @@ snippet boost "Boost (boost)" b
 
 $2
 endsnippet
-
-
-# New module
 
 snippet module "New module (module)" b
 //          Copyright ${1:Author} `!v strftime("%Y")`.

@@ -22,9 +22,6 @@ def getShell():
 	return "sh"
 endglobal
 
-###########################################################################
-#                            TextMate Snippets                            #
-###########################################################################
 snippet #! "#!/usr/bin/env (!env)" b
 `!p snip.rv = '#!/usr/bin/env ' + getShell() + "\n" `
 endsnippet
