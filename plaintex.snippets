@@ -86,184 +86,248 @@ endglobal
 context "not_math()"
 snippet beg "begin{} / end{}" bAi
 \begin{$1}
-	$2${VISUAL}
+	${VISUAL}$2
 \end{$1}$0
 endsnippet
 
 context "not_math()"
 snippet doc "Document" bAi
 \begin{document}
-	$1${VISUAL}
+	${VISUAL}$1
 \end{document}$0
 endsnippet
 
 context "not_math()"
 snippet cnt "Center" bAi
 \begin{center}
-	$1${VISUAL}
+	${VISUAL}$1
 \end{center}$0
 endsnippet
 
 context "not_math()"
 snippet desc "Description" bAi
 \begin{description}
-	$1${VISUAL}
+	${1:\label{desc:$2}}
+
+	${VISUAL}$3
 \end{description}$0
 endsnippet
 
 context "not_math()"
 snippet lemma "Lemma" bAi
 \begin{lemma}
-	$1${VISUAL}
+	${1:\label{lemma:$2}}
+
+	${VISUAL}$3
 \end{lemma}$0
 endsnippet
 
 context "not_math()"
 snippet prop "Proposition" bAi
-\begin{prop}[$1]
-	$2${VISUAL}
-\end{prop}$0
+\begin{proposition}[$1]
+	\label{prop:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
+\end{proposition}$0
 endsnippet
 
 context "not_math()"
 snippet thrm "Theorem" bAi
 \begin{theorem}[$1]
-	$2${VISUAL}
+	\label{thrm:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
 \end{theorem}$0
 endsnippet
 
 context "not_math()"
 snippet post "postulate" bAi
 \begin{postulate}[$1]
-	$2${VISUAL}
-\end{postulate}$0
-endsnippet
+	\label{post:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
-context "not_math()"
-snippet prf "Proof" bAi
-\begin{proof}[$1]
-	$2${VISUAL}
-\end{proof}$0
+	${VISUAL}$3
+\end{postulate}$0
 endsnippet
 
 context "not_math()"
 snippet def "Definition" bAi
 \begin{definition}[$1]
-	$2${VISUAL}
+	\label{def:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
 \end{definition}$0
+endsnippet
+
+context "not_math()"
+snippet rev "Definition" bAi
+\begin{review}[$1]
+	\label{rev:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
+\end{review}$0
 endsnippet
 
 context "not_math()"
 snippet nte "Note" bAi
 \begin{note}[$1]
-	$2${VISUAL}
+	\label{nte:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
 \end{note}$0
 endsnippet
 
 context "not_math()"
 snippet prob "Problem" bAi
 \begin{problem}[$1]
-	$2${VISUAL}
+	\label{prob:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
 \end{problem}$0
 endsnippet
 
 context "not_math()"
 snippet corl "Corollary" bAi
 \begin{corollary}[$1]
-	$2${VISUAL}
+	\label{corl:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
 \end{corollary}$0
 endsnippet
 
 context "not_math()"
 snippet exm "Example" bAi
-\begin{example}[$1]
-	$2${VISUAL}
+\begin{example}
+	${1:\label{exm:$2}}
+
+	${VISUAL}$3
 \end{example}$0
+endsnippet
+
+context "not_math()"
+snippet not "Note" bAi
+\begin{property}[$1]
+	\label{not:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
+\end{note}$0
+endsnippet
+
+context "not_math()"
+snippet rmk "Note" bAi
+\begin{remark}[$1]
+	\label{rmk:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
+\end{remark}$0
 endsnippet
 
 context "not_math()"
 snippet ntn "Notation" bAi
 \begin{notation}[$1]
-	$2${VISUAL}
+	${1:\label{ntn:$2}}
+
+	${VISUAL}$3
 \end{notation}$0
 endsnippet
 
 context "not_math()"
 snippet rep "Repetition" bAi
 \begin{repetition}[$1]
-	$2${VISUAL}
+	\label{rep:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
 \end{repetition}$0
 endsnippet
 
 context "not_math()"
 snippet prop "Property" bAi
 \begin{property}[$1]
-	$2${VISUAL}
+	\label{prop:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
 \end{property}$0
 endsnippet
 
 context "not_math()"
-snippet int "Intuition" bAi
-\begin{intuition}[$1]
-	$2${VISUAL}
-\end{intuition}$0
-endsnippet
-
-context "not_math()"
-snippet obs "Observation" bAi
-\begin{observation}[$1]
-	$1${VISUAL}
-\end{observation}$0
-endsnippet
-
-context "not_math()"
 snippet conc "Conclusion" bAi
-\begin{conclusion}[$1]
-	$1${VISUAL}
+\begin{conclusion}
+	${1:\label{conc:$2}}
+
+	${VISUAL}$3
 \end{conclusion}$0
+endsnippet
+
+context "not_math()"
+snippet prf "Proof" bAi
+\begin{proof}
+	${1:\label{lemma:$2}}
+
+	${VISUAL}$3
+\end{proof}$0
 endsnippet
 
 context "not_math()"
 snippet enum "Enumerate" bAi
 \begin{enumerate}
-	\item $1${VISUAL}
+	${1:\label{enum:$2}}
+
+	\item ${VISUAL}$3
 \end{enumerate}$0
 endsnippet
 
 context "not_math()"
 snippet item "Itemize" bAi
 \begin{itemize}
-	\item $1${VISUAL}
+	${1:\label{item:$2}}
+
+	\item ${VISUAL}$3
 \end{itemize}$0
 endsnippet
 
 context "not_math()"
 snippet case "cases" bAi
 \begin{cases}
-	$1${VISUAL}
+	${1:\label{case:$2}}
+
+	${VISUAL}$3
 \end{cases}$0
 endsnippet
 
 context "not_math()"
 snippet ali "Align*" bAi
 \begin{align*}
-	${VISUAL}${1}
+	${1:\label{ali:$2}}
+
+	${VISUAL}$3
 .\end{align*}$0
 endsnippet
 
 context "not_math()"
 snippet ali "Align" bAi
 \begin{align}
-	${VISUAL}${1}
+	${1:\label{ali:$2}}
+
+	${VISUAL}$3
 .\end{align}$0
 endsnippet
 
 context "not_math()"
-snippet eqt "Equation" bAi
+snippet eqt "Equation Split" bAi
 \begin{equation}
+	${1:\label{eqt:$2}}
 	\begin{split}
-		${VISUAL}${1}
+		${VISUAL}$3
 	\end{split}
+.\end{equation}$0
+endsnippet
+
+context "not_math()"
+snippet edt "Equation Dat" bAi
+\begin{equation}
+	${1:\label{eqt:$2}}
+	\begin{alignedat}
+		${VISUAL}$3
+	\end{alignedat}
 .\end{equation}$0
 endsnippet
 
@@ -494,12 +558,12 @@ endsnippet
 
 context "math()"
 snippet sq "Square" iA
-^2
+^{2}
 endsnippet
 
 context "math()"
 snippet cb "Cube" iA
-^3
+^{3}
 endsnippet
 
 context "math()"
@@ -534,12 +598,7 @@ endsnippet
 
 context "math()"
 snippet // "Fraction" iA
-\\frac{$1}{$2}$0
-endsnippet
-
-context "math()"
-snippet / "Fraction" i
-\\frac{${VISUAL}}{$1}$0
+\\frac{${VISUAL}$1}{$2}$0
 endsnippet
 
 context "math()"
@@ -1222,7 +1281,7 @@ endsnippet
 snippet sign "Signature"
 Yours sincerely,
 
-${VISUAL}$1
+Hashem A. Damrah
 endsnippet
 
 snippet ref "Reference" wi
