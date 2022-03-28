@@ -168,6 +168,15 @@ snippet rev "Definition" bAi
 endsnippet
 
 context "not_math()"
+snippet frm "Formula" bAi
+\begin{formula}[$1]
+	\label{frm:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
+\end{formula}$0
+endsnippet
+
+context "not_math()"
 snippet nte "Note" bAi
 \begin{note}[$1]
 	\label{nte:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
@@ -251,72 +260,72 @@ endsnippet
 context "not_math()"
 snippet conc "Conclusion" bAi
 \begin{conclusion}
-	${1:\label{conc:$2}}
+	\label{conc:$1}
 
-	${VISUAL}$3
+	${VISUAL}$2
 \end{conclusion}$0
 endsnippet
 
 context "not_math()"
 snippet prf "Proof" bAi
 \begin{proof}
-	${1:\label{lemma:$2}}
+	\label{lemma:$1}
 
-	${VISUAL}$3
+	${VISUAL}$2
 \end{proof}$0
 endsnippet
 
 context "not_math()"
 snippet enum "Enumerate" bAi
 \begin{enumerate}
-	${1:\label{enum:$2}}
+	\label{enum:$1}
 
-	\item ${VISUAL}$3
+	\item ${VISUAL}$2
 \end{enumerate}$0
 endsnippet
 
 context "not_math()"
 snippet item "Itemize" bAi
 \begin{itemize}
-	${1:\label{item:$2}}
+	\label{item:$1}
 
-	\item ${VISUAL}$3
+	\item ${VISUAL}$2
 \end{itemize}$0
 endsnippet
 
 context "not_math()"
 snippet case "cases" bAi
 \begin{cases}
-	${1:\label{case:$2}}
+	\label{case:$1}
 
-	${VISUAL}$3
+	${VISUAL}$2
 \end{cases}$0
 endsnippet
 
 context "not_math()"
 snippet ali "Align*" bAi
 \begin{align*}
-	${1:\label{ali:$2}}
+	\label{ali:$1}
 
-	${VISUAL}$3
+	${VISUAL}$2
 .\end{align*}$0
 endsnippet
 
 context "not_math()"
 snippet ali "Align" bAi
 \begin{align}
-	${1:\label{ali:$2}}
+	\label{ali:$1}
 
-	${VISUAL}$3
+	${VISUAL}$2
 .\end{align}$0
 endsnippet
 
 context "not_math()"
 snippet eqt "Equation Split" bAi
 \begin{equation}
-	${1:\label{eqt:$2}}
+	\label{eqt:$1}
 	\begin{split}
-		${VISUAL}$3
+		${VISUAL}$2
 	\end{split}
 .\end{equation}$0
 endsnippet
@@ -324,8 +333,8 @@ endsnippet
 context "not_math()"
 snippet edt "Equation Dat" bAi
 \begin{equation}
-	${1:\label{eqt:$2}}
-	\begin{alignedat}
+	\label{edt:$1}
+	\begin{alignedat}{$2}
 		${VISUAL}$3
 	\end{alignedat}
 .\end{equation}$0
@@ -335,14 +344,10 @@ context "not_math()"
 snippet fig "Figure environment" bAi
 \begin{figure}[${1:htpb}]
 	\centering
-	${2:\includegraphics[width=0.8\textwidth]{$3}}
-	\caption{${4:$3}}
-	\label{fig:${5:${3/\W+/-/g}}}
+	\includegraphics[width=0.8\textwidth]{$2}
+	\caption{${3}}
+	\label{fig:${4:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 \end{figure}$0
-endsnippet
-
-context "not_math()"
-snippet tkz "Tikz pgfplot" bAi
 endsnippet
 
 context "not_math()"
@@ -774,7 +779,7 @@ endsnippet
 
 context "math()"
 snippet qd "Quad" wA
-\quad
+\qquad
 endsnippet
 
 context "math()"
@@ -921,13 +926,12 @@ endsnippet
 
 context "env('tikzpicture')"
 snippet circ "Draw circle" bAi
-\draw (${1:0,0}) circle ${2:[radius=1]};
+\draw [${1:red},fill=${2:red},radius=${3:0.1}] (${4:0,0}) circle;
 endsnippet
 
 context "env('tikzpicture')"
 snippet elps "Draw ellipse" bAi
-\draw (${1:0,0}) circle [x radius=${2:4},
-										y radius=${3:5}];
+\draw [x radius=${1:4}, y radius=${2:5}] (${3:0,0}) circle;
 endsnippet
 
 context "env('tikzpicture')"
@@ -1049,6 +1053,17 @@ endsnippet
 ############
 # Sections #
 ############
+
+snippet part "Part" wi
+\part{${VISUAL}$1}
+\label{part:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:Some text here}
+
+% part $2 (end)
+
+\newpage
+endsnippet
 
 snippet chap "Chapter" wi
 \chapter{${VISUAL}$1}
