@@ -341,6 +341,16 @@ snippet edt "Equation Dat" bAi
 endsnippet
 
 context "not_math()"
+snippet cse "Equation Case" bAi
+\begin{equation}
+	\label{cse:$1}
+	\begin{cases}
+		${VISUAL}$2
+	\end{cases}
+.\end{equation}$0
+endsnippet
+
+context "not_math()"
 snippet fig "Figure environment" bAi
 \begin{figure}[${1:htpb}]
 	\centering
