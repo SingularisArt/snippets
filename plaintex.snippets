@@ -85,198 +85,29 @@ endglobal
 
 context "not_math()"
 snippet beg "begin{} / end{}" bAi
-\begin{$1}
-	${VISUAL}$2
+\begin{$1}[$2]
+	\label{$3}
+
+	${VISUAL}$4
 \end{$1}$0
 endsnippet
 
 context "not_math()"
-snippet doc "Document" bAi
+snippet doc "Document Environment" bAi
 \begin{document}
 	${VISUAL}$1
 \end{document}$0
 endsnippet
 
 context "not_math()"
-snippet cnt "Center" bAi
+snippet cnt "Center Environment" bAi
 \begin{center}
 	${VISUAL}$1
 \end{center}$0
 endsnippet
 
 context "not_math()"
-snippet desc "Description" bAi
-\begin{description}
-	${1:\label{desc:$2}}
-
-	${VISUAL}$3
-\end{description}$0
-endsnippet
-
-context "not_math()"
-snippet lemma "Lemma" bAi
-\begin{lemma}
-	${1:\label{lemma:$2}}
-
-	${VISUAL}$3
-\end{lemma}$0
-endsnippet
-
-context "not_math()"
-snippet prop "Proposition" bAi
-\begin{proposition}[$1]
-	\label{prop:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{proposition}$0
-endsnippet
-
-context "not_math()"
-snippet thrm "Theorem" bAi
-\begin{theorem}[$1]
-	\label{thrm:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{theorem}$0
-endsnippet
-
-context "not_math()"
-snippet post "postulate" bAi
-\begin{postulate}[$1]
-	\label{post:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{postulate}$0
-endsnippet
-
-context "not_math()"
-snippet def "Definition" bAi
-\begin{definition}[$1]
-	\label{def:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{definition}$0
-endsnippet
-
-context "not_math()"
-snippet rev "Definition" bAi
-\begin{review}[$1]
-	\label{rev:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{review}$0
-endsnippet
-
-context "not_math()"
-snippet frm "Formula" bAi
-\begin{formula}[$1]
-	\label{frm:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{formula}$0
-endsnippet
-
-context "not_math()"
-snippet nte "Note" bAi
-\begin{note}[$1]
-	\label{nte:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{note}$0
-endsnippet
-
-context "not_math()"
-snippet prob "Problem" bAi
-\begin{problem}[$1]
-	\label{prob:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{problem}$0
-endsnippet
-
-context "not_math()"
-snippet corl "Corollary" bAi
-\begin{corollary}[$1]
-	\label{corl:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{corollary}$0
-endsnippet
-
-context "not_math()"
-snippet exm "Example" bAi
-\begin{example}
-	${1:\label{exm:$2}}
-
-	${VISUAL}$3
-\end{example}$0
-endsnippet
-
-context "not_math()"
-snippet not "Note" bAi
-\begin{property}[$1]
-	\label{not:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{note}$0
-endsnippet
-
-context "not_math()"
-snippet rmk "Note" bAi
-\begin{remark}[$1]
-	\label{rmk:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{remark}$0
-endsnippet
-
-context "not_math()"
-snippet ntn "Notation" bAi
-\begin{notation}[$1]
-	${1:\label{ntn:$2}}
-
-	${VISUAL}$3
-\end{notation}$0
-endsnippet
-
-context "not_math()"
-snippet rep "Repetition" bAi
-\begin{repetition}[$1]
-	\label{rep:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{repetition}$0
-endsnippet
-
-context "not_math()"
-snippet prop "Property" bAi
-\begin{property}[$1]
-	\label{prop:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
-	${VISUAL}$3
-\end{property}$0
-endsnippet
-
-context "not_math()"
-snippet conc "Conclusion" bAi
-\begin{conclusion}
-	\label{conc:$1}
-
-	${VISUAL}$2
-\end{conclusion}$0
-endsnippet
-
-context "not_math()"
-snippet prf "Proof" bAi
-\begin{proof}
-	\label{lemma:$1}
-
-	${VISUAL}$2
-\end{proof}$0
-endsnippet
-
-context "not_math()"
-snippet enum "Enumerate" bAi
+snippet enum "Enumerate Environment" bAi
 \begin{enumerate}
 	\label{enum:$1}
 
@@ -285,7 +116,7 @@ snippet enum "Enumerate" bAi
 endsnippet
 
 context "not_math()"
-snippet item "Itemize" bAi
+snippet item "Itemize Environment" bAi
 \begin{itemize}
 	\label{item:$1}
 
@@ -294,7 +125,7 @@ snippet item "Itemize" bAi
 endsnippet
 
 context "not_math()"
-snippet case "cases" bAi
+snippet case "Cases Environment" bAi
 \begin{cases}
 	\label{case:$1}
 
@@ -302,8 +133,16 @@ snippet case "cases" bAi
 \end{cases}$0
 endsnippet
 
+snippet prf "Proof Environment" bAi
+\begin{proof}
+	\label{prf:$1}
+
+	${VISUAL}$2
+\end{proof}
+endsnippet
+
 context "not_math()"
-snippet ali "Align*" bAi
+snippet ali "Align* Environment" bAi
 \begin{align*}
 	\label{ali:$1}
 
@@ -312,7 +151,7 @@ snippet ali "Align*" bAi
 endsnippet
 
 context "not_math()"
-snippet ali "Align" bAi
+snippet ali "Align Environment" bAi
 \begin{align}
 	\label{ali:$1}
 
@@ -321,33 +160,66 @@ snippet ali "Align" bAi
 endsnippet
 
 context "not_math()"
-snippet eqt "Equation Split" bAi
+snippet eqt "Equation Environment" bAi
 \begin{equation}
 	\label{eqt:$1}
+
+	${VISUAL}$2
+.\end{equation}$0
+endsnippet
+
+context "not_math()"
+snippet spt "Equation Split Environment" bAi
+\begin{equation}
+	\label{spt:$1}
+
 	\begin{split}
 		${VISUAL}$2
 	\end{split}
 .\end{equation}$0
 endsnippet
 
+context "env('equation')"
+snippet spt "Equation Split Environment" bAi
+\begin{split}
+	${VISUAL}$1
+\end{split}$0
+endsnippet
+
 context "not_math()"
-snippet edt "Equation Dat" bAi
+snippet edt "Equation Dat Environment" bAi
 \begin{equation}
 	\label{edt:$1}
+
 	\begin{alignedat}{$2}
 		${VISUAL}$3
 	\end{alignedat}
 .\end{equation}$0
 endsnippet
 
+context "env('equation')"
+snippet edt "Equation Dat Environment" bAi
+\begin{alignedat}{$1}
+	${VISUAL}$2
+\end{alignedat}$0
+endsnippet
+
 context "not_math()"
-snippet cse "Equation Case" bAi
+snippet cse "Equation Case Environment" bAi
 \begin{equation}
 	\label{cse:$1}
+
 	\begin{cases}
 		${VISUAL}$2
 	\end{cases}
 .\end{equation}$0
+endsnippet
+
+context "env('equation')"
+snippet cse "Equation Case Environment" bAi
+\begin{cases}
+	${VISUAL}$1
+\end{cases}$0
 endsnippet
 
 context "not_math()"
@@ -361,14 +233,14 @@ snippet fig "Figure environment" bAi
 endsnippet
 
 context "not_math()"
-snippet tab "tabular / array environment" bAi
+snippet tab "Tabular / Array Environment" bAi
 	\begin{${1:t}${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${2:c}}
 		$0${2/(?<=.)(c|l|r)|./(?1: & )/g}
 	\end{$1${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}$0
 endsnippet
 
 context "not_math()"
-snippet tbl "Table environment" bAi
+snippet tbl "Table Environment" bAi
 \begin{table}[${1:htpb}]
 	\centering
 	\caption{${2:caption}}
@@ -386,6 +258,129 @@ endsnippet
 
 pre_expand "add_row(snip)"
 snippet "tr(\d+)" "Add table row of dimension ..." wrAbi
+endsnippet
+
+# Custom made environments
+
+context "not_math()"
+snippet thrm "Theorem Envrionment" bAi
+\begin{theorem}[$1]
+	\label{thrm:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
+\end{theorem}
+endsnippet
+
+context "not_math()"
+snippet post "Postulate Envrionment" bAi
+\begin{postulate}[$1]
+	\label{post:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
+\end{postulate}
+endsnippet
+
+context "not_math()"
+snippet conj "Conjecture Envrionment" bAi
+\begin{conjecture}[$1]
+	\label{conj:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
+\end{conjecture}
+endsnippet
+
+context "not_math()"
+snippet corl "Corollary Envrionment" bAi
+\begin{corollary}[$1]
+	\label{corl:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
+\end{corollary}
+endsnippet
+
+context "not_math()"
+snippet lem "Lemma Envrionment" bAi
+\begin{lemma}[$1]
+	\label{lem:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
+\end{lemma}
+endsnippet
+
+context "not_math()"
+snippet conc "Conclusion Envrionment" bAi
+\begin{conclusion}[$1]
+	\label{conc:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
+\end{conclusion}
+endsnippet
+
+
+snippet def "Definition Environment" bAi
+\begin{definition}[$1]
+	\label{def:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$3
+\end{definition}
+endsnippet
+
+snippet rev "Review Environment" bAi
+\begin{review}[$1]
+	\label{rev:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}${3}
+\end{review}
+endsnippet
+
+
+snippet exm "Example Environment" bAi
+\begin{example}
+	\label{exm:$1}
+
+	${VISUAL}$2
+\end{example}
+endsnippet
+
+snippet rmk "Remark Environment" bAi
+\begin{remark}
+	\label{rmk:$1}
+
+	${VISUAL}$2
+\end{remark}
+endsnippet
+
+snippet nte "Note Environment" bAi
+\begin{note}
+	\label{nte:$1}
+
+	${VISUAL}$2
+\end{note}
+endsnippet
+
+snippet nat "Notation Environment" bAi
+\begin{notation}
+	\label{nat:$1}
+
+	${VISUAL}$2
+\end{notation}
+endsnippet
+
+
+snippet prop "Property Environment" bAi
+\begin{property}
+	\label{prop:$1}
+
+	${VISUAL}$2
+\end{property}
+endsnippet
+
+snippet prop "Proposition Environment" bAi
+\begin{proposition}
+	\label{prop:$1}
+
+	${VISUAL}$2
+\end{proposition}
 endsnippet
 
 
@@ -450,13 +445,8 @@ snippet -+ "Minus plus" Ai
 endsnippet
 
 context "math()"
-snippet * "Times" iA
+snippet xx "Times" iA
 \times
-endsnippet
-
-context "math()"
-snippet -:- "Divide" iA
-\div
 endsnippet
 
 snippet ... "Straight dots" Ai
@@ -477,6 +467,76 @@ endsnippet
 
 snippet :. "Therefore" Ai
 \therefore
+endsnippet
+
+context "math()"
+snippet oo "Infinity" Ai
+\infty
+endsnippet
+
+context "math()"
+snippet oc "Proportional" Ai
+\propto
+endsnippet
+
+context "math()"
+snippet set "set" wA
+\\{ $1 \\}$0
+endsnippet
+
+context "math()"
+snippet || "mid" iA
+\mid
+endsnippet
+
+context "math()"
+snippet cc "subset" Ai
+\subset
+endsnippet
+
+context "math()"
+snippet notin "not in " iA
+\not\in
+endsnippet
+
+context "math()"
+snippet Nn "cap" iA
+\cap
+endsnippet
+
+context "math()"
+snippet UU "cup" iA
+\cup
+endsnippet
+
+context "math()"
+snippet uuu "bigcup" iA
+\bigcup_{${1:i \in ${2: I}}} $0
+endsnippet
+
+context "math()"
+snippet nnn "bigcap" iA
+\bigcap_{${1:i \in ${2: I}}} $0
+endsnippet
+
+context "math()"
+snippet OO "emptyset" iA
+\emptyset
+endsnippet
+
+context "math()"
+snippet <! "normal" iA
+\triangleleft
+endsnippet
+
+context "math()"
+snippet <> "hokje" iA
+\diamond
+endsnippet
+
+context "math()"
+snippet ~~ "~" iA
+\sim 
 endsnippet
 
 snippet "\<(.*?)\|" "bra" riA
@@ -532,25 +592,9 @@ snippet === "Equivalent" Ai
 endsnippet
 
 context "math()"
-snippet def= "Defeq" Ai
+snippet dfq "Defeq" Ai
 \overset{\underset{\mathrm{def}}{}}{=}
 endsnippet
-
-
-######################
-# Other math symbols #
-######################
-
-context "math()"
-snippet oo "Infinity" Ai
-\infty
-endsnippet
-
-context "math()"
-snippet oc "Proportional" Ai
-\propto
-endsnippet
-
 
 #############################################
 # Sub and superscript. use only in math env #
@@ -588,7 +632,7 @@ endsnippet
 
 context "math()"
 snippet inv "Inverse" iA
-^{-${1:1}}$0
+^{-$1}$0
 endsnippet
 
 context "math()"
@@ -713,7 +757,7 @@ snippet lim "Limit" wA
 endsnippet
 
 context "math()"
-snippet odx "d/dx" wA
+snippet odx "d/dx" w
 \od{$1}{x} $0
 endsnippet
 
@@ -723,22 +767,22 @@ snippet ody "d/dx" wA
 endsnippet
 
 context "math()"
-snippet odt "d/dx" wA
+snippet odt "d/dx" w
 \od{$1}{t} $0
 endsnippet
 
 context "math()"
-snippet od "d/dx" wA
+snippet od "d/dx" w
 \od[$1]{$2}{$3} $0
 endsnippet
 
 context "math()"
-snippet pd "d/dx" wA
+snippet pd "d/dx" w
 \pd[$1]{$2}{$3} $0
 endsnippet
 
 context "math()"
-snippet md "d/dx" wA
+snippet md "d/dx" w
 \md{$1}{$2}$0
 endsnippet
 
@@ -795,6 +839,11 @@ endsnippet
 context "math()"
 snippet mb "Mathbb" wA
 \mathbb{$1}$0
+endsnippet
+
+context "math()"
+snippet mc "Mathbb" wA
+\mathcal{$1}$0
 endsnippet
 
 context "math()"
@@ -875,7 +924,7 @@ $0
 endsnippet
 
 context "math()"
-snippet choose "n choose p"
+snippet chse "n choose p"
 {${1:n} \choose ${2:p}} $0
 endsnippet
 
@@ -920,7 +969,7 @@ snippet } "Right}" i
 endsnippet
 
 context "math()"
-snippet [ "Left[" i
+snippet [ "Left["
 \left[
 endsnippet
 
@@ -1033,7 +1082,7 @@ endsnippet
 
 
 ###########
-# Qed Qea #
+# QED QEA #
 ###########
 
 snippet qed "Q.E.D." wA
@@ -1051,11 +1100,13 @@ endsnippet
 
 snippet les "Lesson"
 \lesson{${1:LESSON NUMBER}}{`date "+%b %d %Y %a (%H:%M:%S)"`}{${3:LESSON NAME}}{Unit ${4:UNIT NUMBER}}
+\label{les_$1_unit_$4:${5:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 $0
 endsnippet
 
 snippet lec "Lecture"
 \lecture{${1:LECTURE NUMBER}}{`date "+%b %d %Y %a (%H:%M:%S)"`}{${3:LECTURE NAME}}
+\label{lec_$1_unit_$4:${5:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 $0
 endsnippet
 
