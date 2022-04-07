@@ -223,12 +223,22 @@ snippet cse "Equation Case Environment" bAi
 endsnippet
 
 context "not_math()"
-snippet fig "Figure environment" bAi
+snippet fig "Figure Environment (Image)" bAi
 \begin{figure}[${1:htpb}]
 	\centering
 	\includegraphics[width=0.8\textwidth]{$2}
 	\caption{${3}}
 	\label{fig:${4:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\end{figure}$0
+endsnippet
+
+context "not_math()"
+snippet fig "Figure Environment (PDF)" bAi
+\begin{figure}[${1:htpb}]
+	\centering
+	\incfig{$2}
+	\caption{${3}}
+	\label{fig:${4:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 \end{figure}$0
 endsnippet
 
@@ -638,6 +648,11 @@ endsnippet
 context "math()"
 snippet ss "Superscript" iA
 ^{$1}$0
+endsnippet
+
+context "math()"
+snippet deg "Degree Symbol" iA
+^{\circ}$0
 endsnippet
 
 context "math()"
@@ -1396,4 +1411,8 @@ endsnippet
 
 snippet newp "New Page" A
 \newpage$0
+endsnippet
+
+snippet letw "let omega" iA
+Let $\Omega \subset \mathbb{C}$ be open.
 endsnippet
