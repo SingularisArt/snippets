@@ -86,9 +86,9 @@ endglobal
 context "not_math()"
 snippet beg "begin{} / end{}" bAi
 \begin{$1}[$2]
-	\label{$3}
+	\label{$3:${4:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
-	${VISUAL}$4
+	${VISUAL}$5
 \end{$1}$0
 endsnippet
 
@@ -144,18 +144,14 @@ endsnippet
 context "not_math()"
 snippet ali "Align* Environment" bAi
 \begin{align*}
-	\label{ali:$1}
-
-	${VISUAL}$2
+	${VISUAL}$1
 .\end{align*}$0
 endsnippet
 
 context "not_math()"
 snippet ali "Align Environment" bAi
 \begin{align}
-	\label{ali:$1}
-
-	${VISUAL}$2
+	${VISUAL}$1
 .\end{align}$0
 endsnippet
 
@@ -409,7 +405,7 @@ endsnippet
 
 snippet dm "Display Math" wA
 \[
-	${VISUAL}$1
+${VISUAL}$1
 \].$0
 endsnippet
 
@@ -418,6 +414,21 @@ endsnippet
 # Snippets for fast math typing, from castel.dev		 #
 # ASCII math like snippets => =< <= :. ... ** xx |-> #
 ######################################################
+
+context "math()"
+snippet '(?<!\\)(sin|cos|tan|cot|sec|csc)' "Trig Functions" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+context "math()"
+snippet '(?<!\\)(log|ln)' "Log Functions" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+context "math()"
+snippet 'fof([a-zA-Z])' "Create Function" rwA
+f(`!p snip.rv = match.group(1)`) = `!p snip.rv = match.group(1)`
+endsnippet
 
 context "math()"
 snippet <> "If and only if" Ai
@@ -485,6 +496,11 @@ snippet oo "Infinity" Ai
 endsnippet
 
 context "math()"
+snippet the "Theta" Ai
+\theta
+endsnippet
+
+context "math()"
 snippet oc "Proportional" Ai
 \propto
 endsnippet
@@ -500,7 +516,7 @@ snippet || "mid" iA
 endsnippet
 
 context "math()"
-snippet cc "subset" Ai
+snippet cc "subset" Aib
 \subset
 endsnippet
 
@@ -852,43 +868,28 @@ snippet qd "Quad" wA
 endsnippet
 
 context "math()"
-snippet mb "Mathbb" wA
-\mathbb{$1}$0
-endsnippet
-
-context "math()"
-snippet mc "Mathbb" wA
-\mathcal{$1}$0
-endsnippet
-
-context "math()"
 snippet inn "In" wA
 \in
 endsnippet
 
 context "math()"
-snippet RR "Real numbers" wA
-\mathbb{R}
+snippet mb "Mathbb" wA
+\mathbb{$1}$0
 endsnippet
 
 context "math()"
-snippet ZZ "Integer numbers" wA
-\mathbb{Z}
+snippet '([A-Z])[A-Z]' "Mathbb" wrA
+\mathbb{`!p snip.rv = match.group(1)`}
 endsnippet
 
 context "math()"
-snippet NN "Natural numbers" wA
-\mathbb{N}
+snippet mf "Mathbf" wA
+\mathbf{$1}$0
 endsnippet
 
 context "math()"
-snippet QQ "Rational numbers" wA
-\mathbb{Q}
-endsnippet
-
-context "math()"
-snippet PP "Irrational numbers" wA
-\mathbb{P}
+snippet '([A-Z])[a-z]' "Mathbf" wrA
+\mathbf{`!p snip.rv = match.group(1)`}
 endsnippet
 
 
@@ -1114,14 +1115,8 @@ endsnippet
 ###########
 
 snippet les "Lesson"
-\lesson{${1:LESSON NUMBER}}{`date "+%b %d %Y %a (%H:%M:%S)"`}{${3:LESSON NAME}}{Unit ${4:UNIT NUMBER}}
-\label{les_$1_unit_$4:${5:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-$0
-endsnippet
-
-snippet lec "Lecture"
-\lecture{${1:LECTURE NUMBER}}{`date "+%b %d %Y %a (%H:%M:%S)"`}{${3:LECTURE NAME}}
-\label{lec_$1_unit_$4:${5:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\lesson{${1:LESSON NUMBER}}{`date "+%b %d %Y %a (%H:%M:%S)"`}{${3:LESSON NAME}}
+\label{les_$1:${4:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 $0
 endsnippet
 
@@ -1264,6 +1259,10 @@ snippet rm "Text"
 \textrm{${VISUAL}$1}$0
 endsnippet
 
+snippet sc "Smallcaps"
+\textsc{${VISUAL}$1}$0
+endsnippet
+
 
 ############
 # Preamble #
@@ -1274,9 +1273,9 @@ snippet pac "Package" b
 endsnippet
 
 
-##################################################################################
-# Run code straight from the latex file, such as sympy, maybe eval or matplotlib #
-##################################################################################
+#########################################
+# Run code straight from the latex file #
+#########################################
 
 # Sympy
 
@@ -1365,6 +1364,13 @@ endsnippet
 # Other #
 #########
 
+snippet bit "Bibliography Item" wi
+\bibitem{${1:label}}
+  ${2:Author},
+  \emph{${3:Title}}, 
+  ${4:Date}.
+endsnippet
+
 snippet date "Today's date and Current Time"
 `date "+%b %d %Y %a (%H:%M:%S)"`
 endsnippet
@@ -1376,11 +1382,11 @@ Hashem A. Damrah
 endsnippet
 
 snippet ref "Reference" wi
-${1:Figure}~\ref{${1:Fig}:$2:${VISUAL}}$0
+\ref{$1}$0
 endsnippet
 
 snippet link "Hyperlink" wi
-\hyperlink{${VISUAL}$1}{${2:text}}$0
+\hyperlink{https://${VISUAL}$1}{${2:text}}$0
 endsnippet
 
 context "env('enumerate')
@@ -1411,6 +1417,10 @@ endsnippet
 
 snippet newp "New Page" A
 \newpage$0
+endsnippet
+
+snippet acr "Acronym" A
+\gls{$1}$0
 endsnippet
 
 snippet letw "let omega" iA
