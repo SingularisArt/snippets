@@ -155,6 +155,11 @@ snippet ali "Align Environment" bAi
 .\end{align}$0
 endsnippet
 
+context "env('align*')"
+snippet = "Equal" Ai
+&=
+endsnippet
+
 context "not_math()"
 snippet eqt "Equation Environment" bAi
 \begin{equation}
@@ -427,18 +432,6 @@ snippet '(\S|\(.*?\))--' "Bar" riA
 \overline{`!p snip.rv=match.group(1).replace('(', '').replace(')', '')`}
 endsnippet
 
-# ,. -> \hat{}
-context "math()"
-snippet ,. "Hat" i
-\hat{$1}$0
-endsnippet
-
-# x,. -> \hat{x}
-context "math()"
-snippet '(\S)\,\.' "Hat" riA
-\hat{`!p snip.rv=match.group(1)`}
-endsnippet
-
 # .. -> \dot{}
 context "math()"
 snippet .. "Dot" i
@@ -463,34 +456,58 @@ snippet '(\S),,' "Vec" riA
 \vec{`!p snip.rv=match.group(1)`}
 endsnippet
 
+# ,. -> \hat{}
+context "math()"
+snippet ,. "Hat" i
+\hat{$1}$0
+endsnippet
+
+# x,. -> \hat{x}
+context "math()"
+snippet '(\S)\,\.' "Hat" riA
+\hat{`!p snip.rv=match.group(1)`}
+endsnippet
+
 # <| = \bra{}
+context "math()"
 snippet '\<\|' "Bra" riA
 \bra{$1}$0
 endsnippet
 
 # <xxx| = \bra{xxx}
+context "math()"
 snippet "\<(.*?)\|" "Bra" riA
 \bra{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
 # \bra{xxx}xxx> -> \bracket{xxx}{xxx}
+context "math()"
 snippet "(.*)\\bra{(.*?)}([^\|]*?)\>" "Braket" riA
 `!p snip.rv = match.group(1)`\braket{`!p snip.rv = match.group(2)`}{`!p snip.rv = match.group(3)`}
 endsnippet
 
 # |> = \ket{}
+context "math()"
 snippet '\|\>' "Ket" riA
 \ket{$1}$0
 endsnippet
 
 # |xxx> = \ket{xxx}
+context "math()"
 snippet "\|(.*?)\>" "Ket" riA
 \ket{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
 # \ket{xxx}xxx> -> \bracket{xxx}{xxx}
+context "math()"
 snippet "(.*)\\ket{(.*?)}([^\|]*?)\>" "Braket" riA
 `!p snip.rv = match.group(1)`\braket{`!p snip.rv = match.group(2)`}{`!p snip.rv = match.group(3)`}
+endsnippet
+
+# pi -> \pi
+context "math()"
+snippet '(pi|exp|zeta)' "Some Functions" rwA
+\\`!p snip.rv = match.group(1)`
 endsnippet
 
 # sin -> \sin
@@ -517,6 +534,12 @@ snippet 'fof([a-zA-Z])' "Create Function" rwA
 f(`!p snip.rv = match.group(1)`) = `!p snip.rv = match.group(1)`
 endsnippet
 
+# fun -> f \:  \mathbb{R} \to \mathbb{R} \:
+context "math()"
+snippet fun "F something Subset of R" iA
+f : $1 \subset \mathbf{R} \to \mathbf{R} : $2
+endsnippet
+
 # <> -> \iff
 context "math()"
 snippet <> "If and only if" Ai
@@ -535,9 +558,9 @@ snippet <= "Implied by" Ai
 \impliedby
 endsnippet
 
-# |-> -> \mapsto
+# !> -> \mapsto
 context "math()"
-snippet |-> "Mapsto" Ai
+snippet !> "Mapsto" Ai
 \mapsto
 endsnippet
 
@@ -559,8 +582,8 @@ snippet xx "Times" iA
 \times
 endsnippet
 
-# ... -> \ldots
-snippet ... "Straight dots" Ai
+# .s -> \ldots
+snippet .s "Straight dots" Ai
 \ldots
 endsnippet
 
@@ -628,19 +651,29 @@ endsnippet
 
 # ap -> \cap
 context "math()"
-snippet ap "cap" iA
+snippet	Nn "cap" iA
 \cap
 endsnippet
 
 # up -> \cup
 context "math()"
-snippet up "cup" iA
+snippet UU "cup" iA
 \cup
 endsnippet
 
-# es -> \emptyset
 context "math()"
-snippet es "emptyset" iA
+snippet uuu "bigcup" iA
+\bigcup_{${1:i \in ${2: I}}} $0
+endsnippet
+
+context "math()"
+snippet nnn "bigcap" iA
+\bigcap_{${1:i \in ${2: I}}} $0
+endsnippet
+
+# OO -> \emptyset
+context "math()"
+snippet OO "emptyset" iA
 \emptyset
 endsnippet
 
@@ -843,20 +876,63 @@ snippet taylor "Taylor series" wA
 endsnippet
 
 
+#################
+# GREEK LETTERS #
+#################
+
+context "math()"
+snippet rho "Rho" iwA
+\rho
+endsnippet
+
+context "math()"
+snippet det "Delta" iwA
+\delta
+endsnippet
+
+context "math()"
+snippet Det "Delta" iwA
+\Delta
+endsnippet
+
+context "math()"
+snippet prt "Delta" iwA
+\partial $0
+endsnippet
+
+
 ############
 # CALCULUS #
 ############
 
-# int -> \int  dx
 context "math()"
-snippet int "Indefinite integral" wA
-\int $0 d${1:x}
+snippet int "Integral" iw
+\int
 endsnippet
 
-# dint -> int_{}^{}  dx
 context "math()"
-snippet dint "Definite integral" wA
-\int_{$1}^{$2} $0 d${3:x}
+snippet iint "Integral" iw
+\iint
+endsnippet
+
+context "math()"
+snippet iiint "Integral" iw
+\iiint
+endsnippet
+
+context "math()"
+snippet iiiint "Integral" iw
+\iiiint
+endsnippet
+
+context "math()"
+snippet into "Integral" iw
+\oint
+endsnippet
+
+context "math()"
+snippet intx "Integral" iw
+\intx
 endsnippet
 
 # lim -> \lim_{n \to \infty}
@@ -967,24 +1043,41 @@ snippet mb "Mathbb" wA
 \mathbb{$1}$0
 endsnippet
 
-# XX -> \mathbb{X}
-context "math()"
-snippet '([A-Z])[A-Z]' "Mathbb" wrA
-\mathbb{`!p snip.rv = match.group(1)`}
-endsnippet
-
 # mf -> \mathbf{}
 context "math()"
 snippet mf "Mathbf" wA
 \mathbf{$1}$0
 endsnippet
 
-# Xx -> \mathbf{X}
+# RR -> \mathbb{R}
 context "math()"
-snippet '([A-Z])[a-z]' "Mathbf" wrA
-\mathbf{`!p snip.rv = match.group(1)`}
+snippet RR "Set of Real Numbers" wA
+\mathbb{R}
 endsnippet
 
+# ZZ -> \mathbb{Z}
+context "math()"
+snippet ZZ "Set of Integers" wA
+\mathbb{Z}
+endsnippet
+
+# QQ -> \mathbb{Q}
+context "math()"
+snippet QQ "Set of Rational Numbers" wA
+\mathbb{Q}
+endsnippet
+
+# NN -> \mathbb{N}
+context "math()"
+snippet NN "Set of Natural Numbers" wA
+\mathbb{N}
+endsnippet
+
+# CC -> \mathbb{C}
+context "math()"
+snippet CC "Set of Complex Numbers" wA
+\mathbb{C}
+endsnippet
 
 ########################
 # MATRICES AND VECTORS #
