@@ -415,166 +415,252 @@ endsnippet
 # ASCII math like snippets => =< <= :. ... ** xx |-> #
 ######################################################
 
+# -- -> \overline{}
+context "math()"
+snippet -- "Bar" i
+\overline{$1}$0
+endsnippet
+
+# x-- -> \overline{x}
+# (xx)-- -> \overline{xxx}
+context "math()"
+snippet '(\S|\(.*?\))--' "Bar" riA
+\overline{`!p snip.rv=match.group(1).replace('(', '').replace(')', '')`}
+endsnippet
+
+# ,. -> \hat{}
+context "math()"
+snippet ,. "Hat" i
+\hat{$1}$0
+endsnippet
+
+# x,. -> \hat{x}
+context "math()"
+snippet '(\S)\,\.' "Hat" riA
+\hat{`!p snip.rv=match.group(1)`}
+endsnippet
+
+# .. -> \dot{}
+context "math()"
+snippet .. "Dot" i
+\dot{$1}$0
+endsnippet
+
+# x.. -> \dot{x}
+context "math()"
+snippet '(\S)\.\.' "Dot" riA
+\dot{`!p snip.rv=match.group(1)`}
+endsnippet
+
+# ,, -> \vec{}
+context "math()"
+snippet ,, "Vec" i
+\vec{$1}$0
+endsnippet
+
+# x,, -> \vec{x}
+context "math()"
+snippet '(\S),,' "Vec" riA
+\vec{`!p snip.rv=match.group(1)`}
+endsnippet
+
+# <| = \bra{}
+snippet '\<\|' "Bra" riA
+\bra{$1}$0
+endsnippet
+
+# <xxx| = \bra{xxx}
+snippet "\<(.*?)\|" "Bra" riA
+\bra{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+# \bra{xxx}xxx> -> \bracket{xxx}{xxx}
+snippet "(.*)\\bra{(.*?)}([^\|]*?)\>" "Braket" riA
+`!p snip.rv = match.group(1)`\braket{`!p snip.rv = match.group(2)`}{`!p snip.rv = match.group(3)`}
+endsnippet
+
+# |> = \ket{}
+snippet '\|\>' "Ket" riA
+\ket{$1}$0
+endsnippet
+
+# |xxx> = \ket{xxx}
+snippet "\|(.*?)\>" "Ket" riA
+\ket{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+# \ket{xxx}xxx> -> \bracket{xxx}{xxx}
+snippet "(.*)\\ket{(.*?)}([^\|]*?)\>" "Braket" riA
+`!p snip.rv = match.group(1)`\braket{`!p snip.rv = match.group(2)`}{`!p snip.rv = match.group(3)`}
+endsnippet
+
+# sin -> \sin
+# cos -> \cos
+# tan -> \tan
+# cot -> \cot
+# sec -> \sec
+# csc -> \csc
 context "math()"
 snippet '(?<!\\)(sin|cos|tan|cot|sec|csc)' "Trig Functions" rwA
 \\`!p snip.rv = match.group(1)`
 endsnippet
 
+# log -> \log
+# ln -> \ln
 context "math()"
 snippet '(?<!\\)(log|ln)' "Log Functions" rwA
 \\`!p snip.rv = match.group(1)`
 endsnippet
 
+# fofx -> f(x) = x
 context "math()"
 snippet 'fof([a-zA-Z])' "Create Function" rwA
 f(`!p snip.rv = match.group(1)`) = `!p snip.rv = match.group(1)`
 endsnippet
 
+# <> -> \iff
 context "math()"
 snippet <> "If and only if" Ai
 \iff
 endsnippet
 
+# => -> \implies
 context "math()"
 snippet => "Implies" Ai
 \implies
 endsnippet
 
+# <= -> \impliedby
 context "math()"
-snippet =< "Implied by" Ai
+snippet <= "Implied by" Ai
 \impliedby
 endsnippet
 
-context "math()"
-snippet if "If and only if" Ai
-\iff
-endsnippet
-
+# |-> -> \mapsto
 context "math()"
 snippet |-> "Mapsto" Ai
 \mapsto
 endsnippet
 
+# +- -> \pm
 context "math()"
 snippet +- "Plus minus" Ai
 \pm
 endsnippet
 
+# -+ -> \mp
 context "math()"
 snippet -+ "Minus plus" Ai
 \mp
 endsnippet
 
+# xx -> \times
 context "math()"
 snippet xx "Times" iA
 \times
 endsnippet
 
+# ... -> \ldots
 snippet ... "Straight dots" Ai
 \ldots
 endsnippet
 
+# .v -> \vdots
 snippet .v "Vertical dots" Ai
 \vdots
 endsnippet
 
-snippet .a "Dots above line" Ai
+# .c -> \cdots
+snippet .c "Dots above line" Ai
 \cdots
 endsnippet
 
+# .d -> \ddots
 snippet .d "Diagonal dots" Ai
 \ddots
 endsnippet
 
+# :. -> \therefore
 snippet :. "Therefore" Ai
 \therefore
 endsnippet
 
+# oo -> \infty
 context "math()"
 snippet oo "Infinity" Ai
 \infty
 endsnippet
 
+# the -> \theta
 context "math()"
 snippet the "Theta" Ai
 \theta
 endsnippet
 
+# oc -> \propto
 context "math()"
 snippet oc "Proportional" Ai
 \propto
 endsnippet
 
+# set -> \{  \}
 context "math()"
 snippet set "set" wA
 \\{ $1 \\}$0
 endsnippet
 
+# || -> \mid
 context "math()"
 snippet || "mid" iA
 \mid
 endsnippet
 
+# cc -> \subset
 context "math()"
 snippet cc "subset" Aib
 \subset
 endsnippet
 
+# notin -> \not\in
 context "math()"
 snippet notin "not in " iA
 \not\in
 endsnippet
 
+# ap -> \cap
 context "math()"
-snippet Nn "cap" iA
+snippet ap "cap" iA
 \cap
 endsnippet
 
+# up -> \cup
 context "math()"
-snippet UU "cup" iA
+snippet up "cup" iA
 \cup
 endsnippet
 
+# es -> \emptyset
 context "math()"
-snippet uuu "bigcup" iA
-\bigcup_{${1:i \in ${2: I}}} $0
-endsnippet
-
-context "math()"
-snippet nnn "bigcap" iA
-\bigcap_{${1:i \in ${2: I}}} $0
-endsnippet
-
-context "math()"
-snippet OO "emptyset" iA
+snippet es "emptyset" iA
 \emptyset
 endsnippet
 
+# <! -> \triangleleft
 context "math()"
 snippet <! "normal" iA
 \triangleleft
 endsnippet
 
+# <-> -> \diamond
 context "math()"
-snippet <> "hokje" iA
+snippet <-> "hokje" iA
 \diamond
 endsnippet
 
+# ~~ -> \sim
 context "math()"
 snippet ~~ "~" iA
 \sim 
-endsnippet
-
-snippet "\<(.*?)\|" "bra" riA
-\bra{`!p snip.rv = match.group(1).replace('q', f'\psi').replace('f', f'\phi')`}
-endsnippet
-
-snippet "\|(.*?)\>" "ket" riA
-\ket{`!p snip.rv = match.group(1).replace('q', f'\psi').replace('f', f'\phi')`}
-endsnippet
-
-snippet "(.*)\\bra{(.*?)}([^\|]*?)\>" "braket" riA
-`!p snip.rv = match.group(1)`\braket{`!p snip.rv = match.group(2)`}{`!p snip.rv = match.group(3).replace('q', f'\psi').replace('f', f'\phi')`}
 endsnippet
 
 
@@ -582,100 +668,120 @@ endsnippet
 # Equality snippets #
 #####################
 
+# << -> \ll
 context "math()"
 snippet << "Less than" Ai
 \ll
 endsnippet
 
+# >> -> \gg
 context "math()"
 snippet >> "Greater than" Ai
 \gg
 endsnippet
 
+# <= -> \le
 context "math()"
 snippet <= "Less than or equal to" Ai
 \le
 endsnippet
 
+# >= -> \ge
 context "math()"
 snippet >= "Greater than or equal to" Ai
 \ge
 endsnippet
 
+# != -> \ne
 context "math()"
 snippet != "Not equal to" Ai
 \ne
 endsnippet
 
+# ~= -> \approx
 context "math()"
 snippet ~= "Approximately" Ai
 \approx
 endsnippet
 
+# === -> \equiv
 context "math()"
 snippet === "Equivalent" Ai
 \equiv
 endsnippet
 
+# dfq -> \overset{\underset{\mathrm{def}}{}}{=}
 context "math()"
 snippet dfq "Defeq" Ai
 \overset{\underset{\mathrm{def}}{}}{=}
 endsnippet
 
-#############################################
-# Sub and superscript. use only in math env #
-#############################################
 
+########################
+# SUB AND SUPERSCRIPT. #
+########################
+
+# x3 -> x_3
 context "math()"
 snippet '([A-Za-z])(\d)' "Auto subscript 1" wrA
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
 
+# x_33 -> x_{33}
 context "math()"
 snippet '([A-Za-z])_(\d\d)' "Auto subscript 2" wrA
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
 endsnippet
 
+# x_{333}3 -> x_{3333}
 context "math()"
 snippet '([A-Za-z])_\{(\d+)\}(\d)' "Auto subscript 3+" wrA
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2) + match.group(3)`}
 endsnippet
 
+# sq -> ^{2}
 context "math()"
 snippet sq "Square" iA
 ^{2}
 endsnippet
 
+# cb -> ^{3}
 context "math()"
 snippet cb "Cube" iA
 ^{3}
 endsnippet
 
+# comp -> ^{c}
 context "math()"
 snippet compl "Complement" iA
 ^{c}
 endsnippet
 
+# inv -> ^{-}
 context "math()"
 snippet inv "Inverse" iA
 ^{-$1}$0
 endsnippet
 
+# ss -> ^{}
 context "math()"
 snippet ss "Superscript" iA
 ^{$1}$0
 endsnippet
 
+# deg -> ^{\circ}
 context "math()"
 snippet deg "Degree Symbol" iA
 ^{\circ}$0
 endsnippet
 
+# sr -> \sqrt{}
 context "math()"
 snippet sr "Square root" iA
 \sqrt{$1}$0
 endsnippet
 
+# nr -> \sqrt[]{}
 context "math()"
 snippet nr "n Root" iA
 \sqrt[$1]{$2}$0
@@ -683,19 +789,22 @@ endsnippet
 
 
 #############
-# Fractions #
+# FRACTIONS #
 #############
 
+# // -> \frac{}{}
 context "math()"
 snippet // "Fraction" iA
 \\frac{${VISUAL}$1}{$2}$0
 endsnippet
 
+# 4\pi/ -> \frac{4\pi}{}
 context "math()"
 snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
 \\frac{`!p snip.rv = match.group(1)`}{$1}$0
 endsnippet
 
+# (4\pi \times 1)/ -> \frac{4\pi \times 1}{}
 context "math()"
 snippet '^.*\)/' "() Fraction" wrA
 `!p
@@ -712,56 +821,23 @@ snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
 endsnippet
 
 
-###########################################################################
-# Over text type snippets, i.e. v., => \vec{v}, xdot => \dot{x}, vddot => #
-# \ddot{v}																																#
-###########################################################################
-
-context "math()"
-snippet "bar" "Bar" ri
-\overline{$1}$0
-endsnippet
-
-context "math()"
-snippet "([a-zA-Z])bar" "Bar" riA
-\overline{`!p snip.rv=match.group(1)`}
-endsnippet
-
-context "math()"
-snippet "hat" "hat" ri
-\hat{$1}$0
-endsnippet
-
-context "math()"
-snippet "([a-zA-Z])hat" "Hat" riA
-\hat{`!p snip.rv=match.group(1)`}
-endsnippet
-
-context "math()"
-snippet "([a-ce-zA-Z])dot" "Dot" riA
-\dot{`!p snip.rv=match.group(1)`}
-endsnippet
-
-context "math()"
-snippet "(\\?\w+)(,\.|\.,)" "Vector postfix" riA
-\vec{`!p snip.rv=match.group(1)`}
-endsnippet
-
-
 #########################
-# Sums and Products etc #
+# SUMS AND PRODUCTS ETC #
 #########################
 
+# sum -> \sum_{n = 1}^{\infty}
 context "math()"
 snippet sum "Sum" wA
 \sum_{${1:n = 1}}^{${2:\infty}}
 endsnippet
 
+# prod -> \prod_{}^{}
 context "math()"
 snippet prod "Product" wA
 \prod_{$1}^{$2}$0
 endsnippet
 
+# taylor -> \sum_{n=0}^{\infty} \frac{f^{(n)}(0) \cdot x^n}{n!}
 context "math()"
 snippet taylor "Taylor series" wA
 \sum_{n=0}^{\infty} \frac{${1:f^{(n)}(0)} \cdot ${2:x^n}}{${3:n!}}$0
@@ -769,124 +845,142 @@ endsnippet
 
 
 ############
-# Calculus #
+# CALCULUS #
 ############
 
+# int -> \int  dx
 context "math()"
 snippet int "Indefinite integral" wA
 \int $0 d${1:x}
 endsnippet
 
+# dint -> int_{}^{}  dx
 context "math()"
 snippet dint "Definite integral" wA
 \int_{$1}^{$2} $0 d${3:x}
 endsnippet
 
+# lim -> \lim_{n \to \infty}
 context "math()"
 snippet lim "Limit" wA
 \lim_{${1:n} \to ${2:\infty}}
 endsnippet
 
+# odx -> \od{}{x}
 context "math()"
 snippet odx "d/dx" w
-\od{$1}{x} $0
+\od{$1}{x}$0
 endsnippet
 
+# ody -> \od{}{y}
 context "math()"
 snippet ody "d/dx" wA
-\od{$1}{y} $0
+\od{$1}{y}$0
 endsnippet
 
+# odt -> \od{}{t}
 context "math()"
 snippet odt "d/dx" w
 \od{$1}{t} $0
 endsnippet
 
+# od -> \od[]{}{}
 context "math()"
 snippet od "d/dx" w
 \od[$1]{$2}{$3} $0
 endsnippet
 
+# pd -> \pd[]{}{}
 context "math()"
 snippet pd "d/dx" w
 \pd[$1]{$2}{$3} $0
 endsnippet
 
+# md -> \md{}{}
 context "math()"
 snippet md "d/dx" w
 \md{$1}{$2}$0
 endsnippet
 
+# eval -> \eval{}_{}^{}
 context "math()"
 snippet eval "Eval int" wA
 \eval{$3}_{$1}^{$2}
 endsnippet
 
+# nab -> \nabla
+# grad -> \nabla
 context "math()"
-snippet nab "Nabla" wA
-\nabla
-endsnippet
-
-context "math()"
-snippet grad "Nabla" wA
+snippet '(nab|grad)' "Nabla" wrA
 \nabla
 endsnippet
 
 
 #################
-# Real Analysis #
+# REAL ANALYSIS #
 #################
 
+# ext -> \exists
 context "math()"
 snippet ext "Exists" wA
 \exists
 endsnippet
 
+# next -> \nexists
 context "math()"
 snippet next "Exists" wA
 \nexists
 endsnippet
 
+# lt -> \lnot
 context "math()"
 snippet lt "Lnot" wA
 \lnot
 endsnippet
 
+# ld -> \land
 context "math()"
 snippet ld "Land" wA
 \land
 endsnippet
 
+# for -> \forall
 context "math()"
 snippet for "For all" wA
 \forall
 endsnippet
 
+# qd -> \qquad
 context "math()"
 snippet qd "Quad" wA
 \qquad
 endsnippet
 
+# inn -> \in
 context "math()"
 snippet inn "In" wA
 \in
 endsnippet
 
+# mb -> \mathbb{}
 context "math()"
 snippet mb "Mathbb" wA
 \mathbb{$1}$0
 endsnippet
 
+# XX -> \mathbb{X}
 context "math()"
 snippet '([A-Z])[A-Z]' "Mathbb" wrA
 \mathbb{`!p snip.rv = match.group(1)`}
 endsnippet
 
+# mf -> \mathbf{}
 context "math()"
 snippet mf "Mathbf" wA
 \mathbf{$1}$0
 endsnippet
 
+# Xx -> \mathbf{X}
 context "math()"
 snippet '([A-Z])[a-z]' "Mathbf" wrA
 \mathbf{`!p snip.rv = match.group(1)`}
@@ -894,7 +988,7 @@ endsnippet
 
 
 ########################
-# Matrices and Vectors #
+# MATRICES AND VECTORS #
 ########################
 
 context "math()"
@@ -946,49 +1040,58 @@ endsnippet
 
 
 #############################################
-# (), [], {}, and their bigger Counterparts #
+# (), [], {}, AND THEIR BIGGER COUNTERPARTS #
 #############################################
 
+# () -> \left(\right)
 context "math()"
 snippet () "Parenthesis" i
 \left($1\right)$0
 endsnippet
 
+# {} -> \left{\right}
 context "math()"
 snippet {} "Parenthesis" i
 \left\{$1\right\}$0
 endsnippet
 
+# [] -> \left[\right]
 context "math()"
 snippet [] "Parenthesis" i
 \left\[$1\right\]$0
 endsnippet
 
+# ( -> \left(
 context "math()"
 snippet ( "Left(" i
 \left(
 endsnippet
 
+# ) -> \right)
 context "math()"
 snippet ) "Right)" i
 \right)
 endsnippet
 
+# { -> \left{
 context "math()"
 snippet { "Left{" i
 \left{
 endsnippet
 
+# } -> \right}
 context "math()"
 snippet } "Right}" i
 \right}
 endsnippet
 
+# [ -> \left[
 context "math()"
 snippet [ "Left["
 \left[
 endsnippet
 
+# ] -> \right]
 context "math()"
 snippet ] "Right]" i
 \right]
@@ -996,19 +1099,25 @@ endsnippet
 
 
 ########
-# Tikz #
+# TIKZ #
 ########
 
+# circ -> \draw [red,fill=red,radius=0.1] (0,0) circle;
 context "env('tikzpicture')"
 snippet circ "Draw circle" bAi
 \draw [${1:red},fill=${2:red},radius=${3:0.1}] (${4:0,0}) circle;
 endsnippet
 
+# elps -> \draw [x radius=4, y radius=5] (0,0) circle;
 context "env('tikzpicture')"
 snippet elps "Draw ellipse" bAi
 \draw [x radius=${1:4}, y radius=${2:5}] (${3:0,0}) circle;
 endsnippet
 
+# arc -> \draw (0,0) arc [x radius=4,
+#                         y radius=5,
+#                         start angle=0,
+#                         end angle=90];
 context "env('tikzpicture')"
 snippet arc "Draw arc" bAi
 \draw (${1:0,0}) arc [x radius=${2:4},
@@ -1017,11 +1126,15 @@ snippet arc "Draw arc" bAi
 								 end angle=${5:90}];
 endsnippet
 
+# line -> \draw (0,0) -- (1,1)
 context "env('tikzpicture')"
 snippet line "Draw line" bAi
 \draw (${1:0,0}) -- (${2:1,1});
 endsnippet
 
+# mult -> \draw (0,0)	-- (1,1)
+#											-- (2,2)
+#											-- cycle;
 context "env('tikzpicture')"
 snippet multline "Draw multiple lines" bAi
 \draw (${1:0,0})	-- (${2:1,1})
@@ -1029,26 +1142,33 @@ snippet multline "Draw multiple lines" bAi
 						-- cycle;
 endsnippet
 
+# rect -> \draw (0,0) rectangle[fill=white] (1,1);
 context "env('tikzpicture')"
 snippet rect "Draw rectangle" bAi
 \draw (${1:0,0}) rectangle[${2:fill=white}] (${3:1,1});
 endsnippet
 
+# node -> \draw (0,0) node[fill=white, anchor=center] {text};
 context "env('tikzpicture')"
 snippet node "Draw node" bAi
 \draw (${1:0,0}) node[fill=${2:white}, anchor=${3:center}] {${4:text}};
 endsnippet
 
+# rgb -> rgb,255:red,21; green,66; blue:128
 context "env('tikzpicture')"
 snippet rgb "Draw rgb color" bAi
 rgb,255:red,${1:21}; green,${2:66}; blue:${3:128}
 endsnippet
 
+# mix -> blue!0!white
 context "env('tikzpicture')"
 snippet mix "Draw mixed color" bAi
 ${1:blue}!${2:0}!${3:white}
 endsnippet
 
+# colors -> (red|yellow|green|cyan|blue|voilet|magenta|
+#						 brown|lime|olive|orange|pink|purple|teal|
+#						 white|lightgray|gray|darkgray|black)
 context "env('tikzpicture')"
 snippet colors "All colors" bAi
 $1`!p snip.rv = complete(t[1], ['red', 'yellow', 'green', 'cyan', 'blue',
@@ -1056,12 +1176,17 @@ $1`!p snip.rv = complete(t[1], ['red', 'yellow', 'green', 'cyan', 'blue',
 'teal', 'white', 'lightgray', 'gray', 'darkgray', 'black'])`
 endsnippet
 
+# thickness -> (ultra thin|very thin|thin|semithick|thick|very thick|ultra
+#								thick|line width=)
 context "env('tikzpicture')"
 snippet thickness "Line thickness" bA
 $1`!p snip.rv = complete(t[1], ['ultra thin', 'very thin', 'thin', 'semithick',
 'thick', 'very thick', 'ultra thick', 'line width='])`
 endsnippet
 
+# styles -> (solid|double|dotted|loosely dotted|densely dotted|dashed|lossely
+#						 dashed|densely dashed|dashdotted|lossely dashdotted|densely
+#						 dashdotted)
 context "env('tikzpicture')"
 snippet styles "Line styles" bA
 $1`!p snip.rv = complete(t[1], ['solid', 'double', 'dotted', 'loosely dotted',
@@ -1069,21 +1194,32 @@ $1`!p snip.rv = complete(t[1], ['solid', 'double', 'dotted', 'loosely dotted',
 'lossely dashdotted', 'densely dashdotted'])`
 endsnippet
 
+# tips -> (<-|->|<->|<<->>|>-<|<>-><)
 context "env('tikzpicture')"
 snippet tips "Arrow tips" bA
 $1`!p snip.rv = complete(t[1], ['<-', '->', '<->', '<<->>', '>-<', '<>-><'])`
 endsnippet
 
+# join -> (mitre|bevel|round)
 context "env('tikzpicture')"
 snippet join "Joining" bA
 $1`!p snip.rv = complete(t[1], ['mitre', 'bevel', 'round'])`
 endsnippet
 
+# bend -> (left|right)
 context "env('tikzpicture')"
 snippet bend "Bend" bA
-$1`!p snip.rv = complete(t[1], ['left', 'right])`
+$1`!p snip.rv = complete(t[1], ['left', 'right'])`
 endsnippet
 
+# coordinates -> \begin{figure}[h]
+#										\begin{tikzpicture}
+#											\tkzInit[xmax=6,ymax=6,xmin=-6,ymin=-6]
+#											\tkzGrid
+#											\tkzAxeXY
+#											\tkzText[above](0,6.75){Title of the Coordinate Graph}
+#										\end{tikzpicture}
+#									\end{figure}
 context "env('tikzpicture')"
 snippet coordinates "Graph the Coordinates" bA
 \begin{figure}[h]
@@ -1101,19 +1237,23 @@ endsnippet
 # QED QEA #
 ###########
 
+# qed -> Q.E.D.
 snippet qed "Q.E.D." wA
 Q.E.D.
 endsnippet
 
+# qea -> Q.E.A.
 snippet qea "Q.E.A." wA
 Q.E.A.
 endsnippet
 
 
 ###########
-# Lessons #
+# LESSONS #
 ###########
 
+# les -> \lesson{LESSON NUMBER}{Apr 12 2022 Tue (22:40:16)}{LESSON NAME}
+#				 \label{les_LESSON NUMBER:lesson_name}
 snippet les "Lesson"
 \lesson{${1:LESSON NUMBER}}{`date "+%b %d %Y %a (%H:%M:%S)"`}{${3:LESSON NAME}}
 \label{les_$1:${4:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
@@ -1122,7 +1262,7 @@ endsnippet
 
 
 ############
-# Sections #
+# SECTIONS #
 ############
 
 snippet part "Part" wi
@@ -1239,7 +1379,7 @@ endsnippet
 
 
 #############
-# Text Edit #
+# TEXT EDIT #
 #############
 
 snippet bf "Bold"
@@ -1264,59 +1404,8 @@ snippet sc "Smallcaps"
 endsnippet
 
 
-############
-# Preamble #
-############
-
-snippet pac "Package" b
-\usepackage`!p snip.rv='[' if t[1] else ""`${1:options}`!p snip.rv = ']' if t[1] else ""`{${2:package}}$0
-endsnippet
-
-
-#########################################
-# Run code straight from the latex file #
-#########################################
-
-# Sympy
-
-snippet sympy "sympy block " w
-sympy $1 sympy$0
-endsnippet
-
-priority 10000
-snippet 'sympy(.*)sympy' "evaluate sympy" wr
-`!p
-from sympy import *
-x, y, z, t = symbols('x y z t')
-k, m, n, p = symbols('k m n p', integer=True)
-f, g, h, u, v = symbols('f g h u v', cls=Function)
-init_printing()
-snip.rv = eval('latex(' + match.group(1).replace('\\', '') \
-    .replace('^', '**') \
-    .replace('{', '(') \
-    .replace('}', ')') + ')')
-`
-endsnippet
-
-# Mathematica
-
-priority 1000
-snippet math "mathematica block" w
-math $1 math$0
-endsnippet
-
-priority 10000
-snippet 'math(.*)math' "evaluate mathematica" wr
-`!p
-import subprocess
-code = 'ToString[' + match.group(1) + ', TeXForm]'
-snip.rv = subprocess.check_output(['wolframscript', '-code', code])
-`
-endsnippet
-
-
 #############
-# Chemistry #
+# CHEMISTRY #
 #############
 
 snippet react "Reaction" bA
@@ -1361,7 +1450,7 @@ endsnippet
 
 
 #########
-# Other #
+# OTHER #
 #########
 
 snippet bit "Bibliography Item" wi
@@ -1371,58 +1460,72 @@ snippet bit "Bibliography Item" wi
   ${4:Date}.
 endsnippet
 
+# date -> Apr 12 2022 Tue (22:42:35)
 snippet date "Today's date and Current Time"
 `date "+%b %d %Y %a (%H:%M:%S)"`
 endsnippet
 
+# sign -> Yours sincerely,
+#					Hashem A. Damrah
 snippet sign "Signature"
 Yours sincerely,
 
 Hashem A. Damrah
 endsnippet
 
+# ref -> \ref{}
 snippet ref "Reference" wi
 \ref{$1}$0
 endsnippet
 
+# link -> \hyperlink{https://}{text}
 snippet link "Hyperlink" wi
 \hyperlink{https://${VISUAL}$1}{${2:text}}$0
 endsnippet
 
+# itm -> \item
 context "env('enumerate')
 snippet itm "New Item" A
 \item ${VISUAL}$1
 endsnippet
 
+# itm -> \item
 context "env('itemize')
 snippet itm "New Item" A
 \item ${VISUAL}$1
 endsnippet
 
+# box -> \boxed{}
 snippet box "Create box"
 \boxed{${VISUAL}$1}$0
 endsnippet
 
+# ac -> \ac{acronym}
 snippet ac "Acroynm normal" b
 \ac{${1:acronym}}$0
 endsnippet
 
+# acl -> \acl{acronym}
 snippet acl "Acroynm expanded" b
 \acl{${1:acronym}}$0
 endsnippet
 
+# ni -> \noindent
 snippet ni "Non-indented paragraph" b
 \noindent
 endsnippet
 
+# newp -> \newpage
 snippet newp "New Page" A
 \newpage$0
 endsnippet
 
+# acr -> \gls{}
 snippet acr "Acronym" A
 \gls{$1}$0
 endsnippet
 
+# letw -> Let $\Omega \subset \mathbb{C}$ be open.
 snippet letw "let omega" iA
 Let $\Omega \subset \mathbb{C}$ be open.
 endsnippet
