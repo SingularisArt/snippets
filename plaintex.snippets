@@ -155,8 +155,8 @@ snippet ali "Align Environment" bAi
 .\end{align}$0
 endsnippet
 
-context "env('align*')"
-snippet = "Equal" Ai
+context "math()"
+snippet = "Equal" i
 &=
 endsnippet
 
@@ -468,45 +468,28 @@ snippet '(\S)\,\.' "Hat" riA
 \hat{`!p snip.rv=match.group(1)`}
 endsnippet
 
+# <a| = \bra{a}
 # <| = \bra{}
-context "math()"
-snippet '\<\|' "Bra" riA
-\bra{$1}$0
+snippet '\<(.*?)\|' "Bra" riA
+\bra{`!p snip.rv = match.group(1).replace('q', f'\psi').replace('f', f'\phi')`}
 endsnippet
 
-# <xxx| = \bra{xxx}
-context "math()"
-snippet "\<(.*?)\|" "Bra" riA
-\bra{`!p snip.rv = match.group(1)`}$0
-endsnippet
-
-# \bra{xxx}xxx> -> \bracket{xxx}{xxx}
-context "math()"
-snippet "(.*)\\bra{(.*?)}([^\|]*?)\>" "Braket" riA
-`!p snip.rv = match.group(1)`\braket{`!p snip.rv = match.group(2)`}{`!p snip.rv = match.group(3)`}
-endsnippet
-
+# |a> = \ket{a}
 # |> = \ket{}
-context "math()"
-snippet '\|\>' "Ket" riA
-\ket{$1}$0
+snippet '\|(.*?)\>' "Ket" riA
+\ket{`!p snip.rv = match.group(1).replace('q', f'\psi').replace('f', f'\phi')`}
 endsnippet
 
-# |xxx> = \ket{xxx}
-context "math()"
-snippet "\|(.*?)\>" "Ket" riA
-\ket{`!p snip.rv = match.group(1)`}$0
-endsnippet
-
-# \ket{xxx}xxx> -> \bracket{xxx}{xxx}
-context "math()"
-snippet "(.*)\\ket{(.*?)}([^\|]*?)\>" "Braket" riA
-`!p snip.rv = match.group(1)`\braket{`!p snip.rv = match.group(2)`}{`!p snip.rv = match.group(3)`}
+# \bra{a}a> = \braket{a|a}
+# \ket{a}a> = \braket{a|a}
+snippet '\\(bra|ket){(.*?)}([^\|]*?)\>' "Braket" riA
+\braket{`!p snip.rv = match.group(2)`|`!p snip.rv = match.group(3).replace('q', f'\psi').replace('f', f'\phi')`}
 endsnippet
 
 # pi -> \pi
+# exp -> \exp
 context "math()"
-snippet '(pi|exp|zeta)' "Some Functions" rwA
+snippet '(pi|exp)' "Some Functions" rwA
 \\`!p snip.rv = match.group(1)`
 endsnippet
 
@@ -528,10 +511,22 @@ snippet '(?<!\\)(log|ln)' "Log Functions" rwA
 \\`!p snip.rv = match.group(1)`
 endsnippet
 
+# ffnc -> f(${1:x})
+context "math()"
+snippet '([a-zA-Z])fnc' "Create Function" rwA
+`!p snip.rv = match.group(1)`(${1:x})
+endsnippet
+
 # fofx -> f(x) = x
 context "math()"
-snippet 'fof([a-zA-Z])' "Create Function" rwA
-f(`!p snip.rv = match.group(1)`) = `!p snip.rv = match.group(1)`
+snippet '([a-zA-Z])of([a-zA-Z])' "Create Function" rwA
+`!p snip.rv = match.group(1)`(`!p snip.rv = match.group(2)`) = ${1:`!p snip.rv = match.group(2)`}
+endsnippet
+
+# fof<x,y,z> -> f(x,y,z) = x,y,z
+context "math()"
+snippet '(.)of\<(.*?)\>' "Create Function" rwA
+`!p snip.rv = match.group(1)`(`!p snip.rv = match.group(2)`) = ${1:`!p snip.rv = match.group(2)`}
 endsnippet
 
 # fun -> f \:  \mathbb{R} \to \mathbb{R} \:
