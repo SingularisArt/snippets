@@ -409,9 +409,7 @@ else:
 endsnippet
 
 snippet dm "Display Math" wA
-\[
-${VISUAL}$1
-\].$0
+\[ ${VISUAL}$1 \].$0
 endsnippet
 
 
@@ -612,6 +610,12 @@ endsnippet
 context "math()"
 snippet the "Theta" Ai
 \theta
+endsnippet
+
+# alp -> \alpha
+context "math()"
+snippet alp "Alpha" Ai
+\alpha
 endsnippet
 
 # oc -> \propto
@@ -1605,6 +1609,11 @@ endsnippet
 # newp -> \newpage
 snippet newp "New Page" A
 \newpage$0
+endsnippet
+
+# clr -> {\color{}}
+snippet clr "Color"
+{\color{$1}$2}$3
 endsnippet
 
 # acr -> \gls{}
