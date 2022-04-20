@@ -490,12 +490,6 @@ snippet oc "Proportional" Ai
 \propto
 endsnippet
 
-# set -> \{  \}
-context "math()"
-snippet set "set" wA
-\\{ $1 \\}$0
-endsnippet
-
 # || -> \mid
 context "math()"
 snippet || "mid" iA
@@ -504,8 +498,26 @@ endsnippet
 
 # cc -> \subset
 context "math()"
-snippet cc "subset" Aib
+snippet cc "subset" Ai
 \subset
+endsnippet
+
+# Cc -> \subseteq
+context "math()"
+snippet Cc "Sub Set Equal" wA
+\\subseteq
+endsnippet
+
+# OO -> \emptyset
+context "math()"
+snippet OO "emptyset" iA
+\emptyset
+endsnippet
+
+# set -> \{  \}
+context "math()"
+snippet set "set" wA
+\\{ $1 \\}$0
 endsnippet
 
 # notin -> \not\in
@@ -534,12 +546,6 @@ endsnippet
 context "math()"
 snippet nnn "bigcap" iA
 \bigcap_{${1:i \in ${2: I}}} $0
-endsnippet
-
-# OO -> \emptyset
-context "math()"
-snippet OO "emptyset" iA
-\emptyset
 endsnippet
 
 # <! -> \triangleleft
