@@ -10,6 +10,10 @@ from javascript_snippets import (
 )
 endglobal
 
+snippet imp "Import"
+import { $1 } from '$2';
+endsnippet
+
 snippet get "Get Elements"
 getElement${1/(T)|(C)|.*/(?1:s)(?2:s)/}By${1:T}${1/(T)|(I)|(C).*/(?1:agName)(?2:d)(?3:lassName)/}('$2')
 endsnippet

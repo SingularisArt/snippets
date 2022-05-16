@@ -1,62 +1,66 @@
-global !p
-def capitalize_first(word):
-	if(word):
-		word = word[0].upper() + word[1:]
-	return word
-endglobal
+snippet rce "React class exported" b
+import { Component } from 'react'
 
-snippet rfc "react functional component" b
-import React, {useState} from "react"
+export default class ${1:`!v expand('%:t:r')`} extends Component {
+	constructor(props) {
+		super(props)
 
-function ${1:`!p snip.rv = snip.basename`}(${2}){
-	return(
-		<div>
-			${3:<p>Body</p>}
-		</div>
-		)
+		this.state = {}
+	}
+
+	render() {
+		return null$0
+	}
+}
+endsnippet
+
+snippet rcc "React class component" b
+class $1 extends Component {
+	render() {
+		return null$0
+	}
+}
+endsnippet
+
+snippet rcon "React class constructor" b
+constructor(props) {
+	super(props)
+
+	this.state = ${1:{}}$0
+}
+endsnippet
+
+snippet fce "function component exported" b
+const ${1:`!v expand('%:t:r')`} = props => {
+	return null$0
 }
 
-export default $4`!p snip.rv = snip.basename`
+export default $1
 endsnippet
 
-snippet useS "useState Hook" b
-const [${1}, set`!p snip.rv=capitalize_first(t[1])`] = useState(${3:"${4}"})
+snippet sfce "simple function component export (no props)" b
+const ${1:`!v expand('%:t:r')`} = () => {
+	return null$0
+}
+
+export default $1
 endsnippet
 
-snippet useE "useEffect Hook" b
-useEffect(() => {
-	${1:${0}}
-		}${2})
+snippet ffce "forwarded function component export" b
+import { forwardRef } from 'react'
+
+const $1 = forwardRef(function ${1:`!v expand('%:t:r')`}(props, ref) {
+	return (
+		<div ref={ref}>$0
+		</div>
+	)
+})
+
+export default $1
 endsnippet
 
-snippet useC "useContext Hook" b
-const ${1:context} = useContext(${2})
-endsnippet
-
-snippet useRe "useReducer Hook" b
-const [${3:state}, ${4:dispatch}] = useReducer(${5:reducer}, ${2:initial_value})
-endsnippet
-
-snippet useCB "useCallback(fn, inputs)" b
-const ${1:callback} = useCallback((${2})) => ${3:{
-	${4}
-}}, [${5}])
-endsnippet
-
-snippet useM "useMemo(fn, inputs)" b
-const ${1:memorized} = useMemo(() => ${2:{
-	${3}
-}}, [${4}])
-endsnippet
-
-snippet useR "useRef(defaultValue)" b
-const ${1:ref} = useRef(${2:null})
-endsnippet
-
-snippet ir "import React"
-import React from "react"
-endsnippet
-
-snippet irc "import React and Component"
-import React, { Component } from "react"
+snippet rcf "react class function" b
+$1 = (${2:e}) => {
+	$3
+}
 endsnippet
