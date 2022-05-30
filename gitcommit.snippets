@@ -7,66 +7,20 @@ def complete(t, opts):
 	return '(' + '|'.join(opts) + ')'
 endglobal
 
+snippet cab "Co-Authored By"
+Co-Authored By: 
+`!p
+import os
+
+if os.path.abspath('~/.github-handles.json'):
+	snip.rv = "$1"
+else:
+	snip.rv = "Co-Authored By: ${1:Name} <${2:user}@${3:github}.${4:com}"
+`
+endsnippet
+
 snippet status "Status" bA
-status $1`!p snip.rv = complete(t[1], ['build', 'ci', 'test', 'refactor', 'perf', 'improvement', 'docs', 'chore', 'feat', 'fix'])`
-endsnippet
-
-snippet fix "fix conventional commit"
-fix(${1:scope}): ${2:title}
-
-${0:${VISUAL}}
-endsnippet
-
-snippet feat "feat conventional commit"
-feat(${1:scope}): ${2:title}
-
-${0:${VISUAL}}
-endsnippet
-
-snippet chore "chore conventional commit"
-chore(${1:scope}): ${2:title}
-
-${0:${VISUAL}}
-endsnippet
-
-snippet docs "docs conventional commit"
-docs(${1:scope}): ${2:title}
-
-${0:${VISUAL}}
-endsnippet
-
-snippet improvement "improvement conventional commit"
-improvement(${1:scope}): ${2:title}
-
-${0:${VISUAL}}
-endsnippet
-
-snippet perf "perf conventional commit"
-perf(${1:scope}): ${2:title}
-
-${0:${VISUAL}}
-endsnippet
-
-snippet refactor "refactor conventional commit"
-refactor(${1:scope}): ${2:title}
-
-${0:${VISUAL}}
-endsnippet
-
-snippet test "test conventional commit"
-test(${1:scope}): ${2:title}
-
-${0:${VISUAL}}
-endsnippet
-
-snippet ci "ci conventional commit"
-ci(${1:scope}): ${2:title}
-
-${0:${VISUAL}}
-endsnippet
-
-snippet build "build conventional commit"
-build(${1:scope}): ${2:title}
+$1`!p snip.rv = complete(t[1], ['fix', 'feat', 'chore', 'docs', 'improvement', 'perf', 'refactor', 'test', 'ci', 'build'])`
 
 ${0:${VISUAL}}
 endsnippet
