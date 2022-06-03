@@ -1,0 +1,71 @@
+global !p
+
+from markdown_scopes import math, display_math
+
+endglobal
+
+################################################################
+#                                                              #
+#                            Styles                            #
+#                                                              #
+################################################################
+
+context "math()"
+snippet color "颜色 Color" Aw
+\textcolor{${1:red}}{${2:${VISUAL}}}$0
+endsnippet
+
+context "display_math()"
+snippet cbox "定理盒子 Theorem Box" w
+\fcolorbox{#ff69b4}{trasparent}{$$1$}$0
+endsnippet
+
+context "math()"
+snippet "(\w*)rm" "直立罗马体 Upright Roman Font" r
+\mathrm{${1:`!p snip.rv = match.group(1)`}}$0
+endsnippet
+
+context "math()"
+snippet "(\w*)bb" "缕空粗体 Blank Bold Font" r
+\mathbb{${1:`!p snip.rv = match.group(1)`}}$0
+endsnippet
+
+context "math()"
+snippet "(\w*)bf" "直立粗体 Upright Bold Font" r
+\mathbf{${1:`!p snip.rv = match.group(1)`}}$0
+endsnippet
+
+context "math()"
+snippet "(\w*)cal" "手写体 Calligraphic Font" r
+\mathcal{${1:`!p snip.rv = match.group(1)`}}$0
+endsnippet
+
+context "math()"
+snippet "(\w*)it" "意大利斜体 Italic Font" r
+\mathit{${1:`!p snip.rv = match.group(1)`}}$0
+endsnippet
+
+context "math()"
+snippet "(\w*)sf" "直立无衬线字体 Upright Sans Serif Font" r
+\mathsf{${1:`!p snip.rv = match.group(1)`}}$0
+endsnippet
+
+context "math()"
+snippet "(\w*)frak" "哥特字体 Fraktur Font" r
+\mathfrak{${1:`!p snip.rv = match.group(1)`}}$0
+endsnippet
+
+context "math()"
+snippet dis "展示样式 Display Style" w
+\displaystyle 
+endsnippet
+
+context "math()"
+snippet tes "文本样式 Text Style" w
+\textstyle 
+endsnippet
+
+context "math()"
+snippet "\Blmt" "Limits" r
+\limits_{$1}$0
+endsnippet

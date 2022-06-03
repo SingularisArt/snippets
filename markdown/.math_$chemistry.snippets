@@ -1,0 +1,65 @@
+global !p
+
+from builtin import choose_next
+from markdown_scopes import math, text, chem
+
+obitals = {"s": 1, "p": 3, "d": 5, "f": 7, "g": 9}
+eletrons = ['o', 'p', 's']
+nornots = ['', 'n']
+nornnornots = ['', 'n', 'nn']
+
+def orbital(snip, elecs = ['\\oe', True]):
+	result = ''
+	level = int(snip.buffer[snip.line][snip.snippet_start[1] - 2])
+	shell = snip.buffer[snip.line][snip.snippet_start[1] - 1]
+	before_text = snip.buffer[snip.line][:snip.snippet_start[1] - 2]
+	after_text = snip.buffer[snip.line][snip.snippet_end[1]:]
+	snip.buffer[snip.line] = ''
+	overinfo = '\\normalsize ' + str(level) + '\\ce{' + shell + '}'
+
+	for elec_num in range(obitals[shell]):
+		result += elecs[0] + ('$' + str(elec_num + 1) if elecs[1] else '')
+	snip.expand_anon(before_text + '\\overset{' + overinfo + '}{' + result + '}$0' + after_text)
+
+endglobal
+
+################################################################
+#                                                              #
+#                         $ Chemistry                          #
+#                                                              #
+################################################################
+
+context "math()"
+snippet "\\([ops])e" "电子 Electron" r
+\\`!p snip.rv = choose_next(match.group(1), eletrons, 3)`e
+endsnippet
+
+context "math()"
+snippet "\\(n{0,2})pe/" "电子对 Electron Pair" Ar
+\\`!p snip.rv = choose_next(match.group(1), nornnornots, 3)`pe
+endsnippet
+
+context "math()"
+snippet "\\(n?)se/" "单电子 Single Electron" Ar
+\\`!p snip.rv = choose_next(match.group(1), nornots, 2)`se
+endsnippet
+
+context "math()"
+post_jump "orbital(snip, ['\\pe', False])"
+snippet "(?<=\b[\dn][spdfg])ee" "轨道表示式 Orbital Expression" r
+endsnippet
+
+context "math()"
+post_jump "orbital(snip)"
+snippet "(?<=\b[\dn][spdfg])eo" "轨道表示式 Orbital Expression" r
+endsnippet
+
+context "chem()"
+snippet bond "键 Bond" w
+\bond{${1:...}}$0
+endsnippet
+
+context "text()"
+snippet vsepr "价层电子对互斥理论 VSEPR" w
+\$\mathrm{VSEPR}\$ 
+endsnippet

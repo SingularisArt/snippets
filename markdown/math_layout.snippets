@@ -1,0 +1,77 @@
+global !p
+
+from markdown_scopes import math, inline_math, display_math, pure_math
+
+endglobal
+
+################################################################
+#                                                              #
+#                            Layout                            #
+#                                                              #
+################################################################
+
+context "inline_math()"
+snippet \\ "换行 Line Break" Ai
+\\\\ 
+endsnippet
+
+context "display_math()"
+snippet \\ "换行 Line Break" Ai
+\\\\
+
+endsnippet
+
+context "math()"
+snippet , "下标 Subscript" i
+_{${1:${VISUAL}}}$0
+endsnippet
+
+context "pure_math()"
+snippet "([a-zA-Z])(\d)" "自动数字下标 Auto Number Subscript" Ar
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+context "math()"
+snippet "([a-zA-Z])_(\d\d)" "自动数字下标 Auto Number Subscript" Ar
+`!p snip.rv = match.group(1)`_`!p snip.rv = "{" + match.group(2) + "}"`
+endsnippet
+
+context "math()"
+snippet "([a-zA-Z])_\{(\d+)\}(\d)" "自动数字下标 Auto Number Subscript" Ar
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2) + match.group(3)`}
+endsnippet
+
+context "math()"
+snippet "([a-zA-Z]),(i|k|p|q|m|n)" "自动变量下标 Auto Variable Subscript" Ar
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+context "math()"
+snippet ' "上标 Superscript" i
+^{${1:${VISUAL}}}$0
+endsnippet
+
+context "math()"
+snippet "([a-zA-Z\d])'([a-zA-Z\d-])" "数字上标 Number Superscript" Ar
+`!p snip.rv = match.group(1)`^`!p snip.rv = match.group(2)`
+endsnippet
+
+context "math()"
+snippet "([a-zA-Z\d])\^((?:\d|-)\d)" "自动数字上标 Auto Number Superscript" Ar
+`!p snip.rv = match.group(1)`^`!p snip.rv = "{" + match.group(2) + "}"`
+endsnippet
+
+context "math()"
+snippet "([a-zA-Z\d])\^\{(-?\d+)\}(\d)" "自动数字上标 Auto Number Superscript" Ar
+`!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2) + match.group(3)`}
+endsnippet
+
+context "math()"
+snippet subst "Substack" w
+_{\substack{${1:${VISUAL}}}}$0
+endsnippet
+
+context "math()"
+snippet smash "Smash" w
+\smash[${1|t,b, |}]{${2:${VISUAL}}}$0
+endsnippet

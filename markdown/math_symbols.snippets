@@ -1,0 +1,88 @@
+global !p
+
+from builtin import choose_next
+from markdown_scopes import math
+
+dots = ['', 'c', 'v', 'd']
+infties = ['', '-', '+']
+nornots = ['', 'n']
+
+endglobal
+
+################################################################
+#                                                              #
+#                           Symbols                            #
+#                                                              #
+################################################################
+
+context "math()"
+snippet ... "省略号 Ellipsis" Ai
+\dots
+endsnippet
+
+context "math()"
+snippet -. "中心点 Center Dot" Ai
+\cdot 
+endsnippet
+
+context "math()"
+snippet "\\((?:c|v|d)?)dots(\s?)" "省略号转换 Ellipsis Transformation" r
+\\`!p
+snip.rv = choose_next(match.group(1), dots, 4) + 'dots' + match.group(2)
+`
+endsnippet
+
+context "math()"
+snippet ooo "无穷大 Infinity" Aw
+\infty 
+endsnippet
+
+context "math()"
+snippet nabla "算子 Nabla" Aw
+\nabla 
+endsnippet
+
+context "math()"
+snippet "((?:\+|-)?)\\infty(\s?)" "无穷大转换 Infinity Transformation" r
+`!p
+snip.rv = choose_next(match.group(1), infties, 3) + '\\infty' + match.group(2)
+`
+endsnippet
+
+context "math()"
+snippet angle "角 Angle" Aw
+\angle 
+endsnippet
+
+context "math()"
+snippet tria "三角形 Triangle" Aw
+\triangle 
+endsnippet
+
+context "math()"
+snippet deg "度 Degree" Aw
+\degree 
+endsnippet
+
+context "math()"
+snippet par "平行 Parallel" Aw
+\par 
+endsnippet
+
+context "math()"
+snippet perp "垂直 Perpendicular" Aw
+\perp 
+endsnippet
+
+context "math()"
+snippet "\b(ssd|hsd)" "摄氏度/华氏度 Celsius/Fahrenheit" Ar
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+priority 1
+context "math()"
+snippet "\\(n?)(par\s?)" "平行转换 Parallel Transformation" r
+\\`!p
+snip.rv = choose_next(match.group(1), nornots, 2) + match.group(2)
+`
+endsnippet

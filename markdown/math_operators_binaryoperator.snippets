@@ -1,0 +1,66 @@
+global !p
+
+from markdown_scopes import math
+from builtin import choose_next
+
+plus_minus = ['\\pm', '\\mp']
+dot_products = ['\\cdot', '\\boldsymbol{\\cdot}']
+cross_products = ['\\times', '\\boldsymbol{\\times}']
+
+endglobal
+
+################################################################
+#                                                              #
+#                 Operators - Binary Operator                  #
+#                                                              #
+################################################################
+
+context "math()"
+snippet mod "模 Mod" Aw
+\bmod
+endsnippet
+
+context "math()"
+snippet tim "乘 Multiply" Aw
+\times
+endsnippet
+
+context "math()"
+snippet xx "乘 Multiply" Aw
+\times
+endsnippet
+context "math()"
+snippet div "除以 Devide" Aw
+\div
+endsnippet
+
+context "math()"
+snippet +- "正负" Ai
+\pm
+endsnippet
+
+context "math()"
+snippet -+ "负正" Ai
+\mp
+endsnippet
+
+context "math()"
+snippet "(\\(pm|mp))" "正负转换 Plus & Minus Transformation" ir
+`!p
+snip.rv = choose_next(match.group(1), plus_minus, 2)
+`
+endsnippet
+
+context "math()"
+snippet "(\\(cdot|boldsymbol\{\\cdot\}))" "点乘 Dot Product" ir
+`!p
+snip.rv = choose_next(match.group(1), dot_products, 2)
+`
+endsnippet
+
+context "math()"
+snippet "(\\(times|boldsymbol\{\\times\}))" "叉乘 Cross Product" ir
+`!p
+snip.rv = choose_next(match.group(1), cross_products, 2)
+`
+endsnippet

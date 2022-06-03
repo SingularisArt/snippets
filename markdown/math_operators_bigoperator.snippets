@@ -1,0 +1,72 @@
+global !p
+
+from markdown_scopes import math
+
+endglobal
+
+################################################################
+#                                                              #
+#                   Operators - Big Operator                   #
+#                                                              #
+################################################################
+
+context "math()"
+snippet "\bd([a-zA-Z])" "导数 Derivative" r
+\dfrac{\d ${1:${VISUAL}}}{\d `!p snip.rv = match.group(1)`}$0
+endsnippet
+
+context "math()"
+snippet "\bpd([a-zA-Z])" "偏导数 Partial Derivative" r
+\dfrac{\pd ${1:${VISUAL}}}{\pd `!p snip.rv = match.group(1)`}$0
+endsnippet
+
+context "math()"
+snippet "\\?\bsum([a-zA-Z]?)" "求和 Sum" r
+\sum_{${1:`!p snip.rv = match.group(1) or 'i'`}=${2:1}}^{${3:\infty}}$0
+endsnippet
+
+context "math()"
+snippet "\\?\bprod([a-zA-Z]?)" "求积 Product" r
+\prod_{${1:`!p snip.rv = match.group(1) or 'i'`}=${2:1}}^{${3:\infty}}$0
+endsnippet
+
+context "math()"
+snippet "\\?\b(o?i{1,3})nt([a-zA-Z]?)" "定积分 Definite Integral" r
+\\`!p snip.rv = match.group(1)`nt_{${1:0}}^{${2:\infty}}${3:${VISUAL}}\d `!p snip.rv = match.group(2) or 'x'`$0
+endsnippet
+
+context "math()"
+snippet "\\?\bn(o?i{1,3})nt([a-zA-Z]?)" "不定积分 Indefinite Integral" r
+\\`!p snip.rv = match.group(2)`nt ${1:${VISUAL}}\d `!p snip.rv = match.group(3) or 'x'`$0
+endsnippet
+
+context "math()"
+snippet "\\?\b([1-3])(o?)int([a-zA-Z]?)" "定积分 Definite Integral" r
+\\`!p snip.rv = match.group(2) + 'i' * int(match.group(1))`nt_{${1:0}}^{${2:\infty}}${3:${VISUAL}}\d `!p snip.rv = match.group(3) or 'x'`$0
+endsnippet
+
+context "math()"
+snippet "\\?\b([1-3])n(o?)int([a-zA-Z]?)" "不定积分 Indefinite Integral" r
+\\`!p snip.rv = match.group(2) + 'i' * int(match.group(1))`nt ${1:${VISUAL}}\d `!p snip.rv = match.group(3) or 'x'`$0
+endsnippet
+
+context "math()"
+snippet "\\?\blim([a-zA-Z]?)" "极限 Limit" r
+\lim\limits_{${1:`!p snip.rv = match.group(1) or 'x'`} \to ${2:\infty}}$0
+endsnippet
+
+priority 1
+context "math()"
+snippet dd "导数 Derivative" w
+\dfrac{\d ${1:${VISUAL}}}{\d $2}$0
+endsnippet
+
+context "math()"
+snippet pd "偏导数 Partial Derivative" w
+\dfrac{\pd ${1:${VISUAL}}}{\pd $2}$0
+endsnippet
+
+context "math()"
+snippet '' "导数 Derivative" i
+^{($1)}$0
+endsnippet

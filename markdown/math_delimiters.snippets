@@ -1,0 +1,27 @@
+global !p
+
+from markdown_scopes import math
+
+endglobal
+
+################################################################
+#                                                              #
+#                          Delimiters                          #
+#                                                              #
+################################################################
+
+context "math()"
+snippet \} "大括号 Curly Braces" Ai
+\lbrace $1\rbrace$0
+endsnippet
+
+context "math()"
+snippet \| "竖括号 Verticals" Ai
+\lVert $1\rVert$0
+endsnippet
+
+context "math()"
+snippet "<([^>])+>" "Description" r
+\lang `!p snip.rv = match.group(1)`\rang
+endsnippet
+

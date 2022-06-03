@@ -1,0 +1,45 @@
+global !p
+
+from builtin import choose_next
+from markdown_scopes import math
+from markdown_cmdsub import command_swap
+
+spaces = ['\\!', '\\,', '\\:', '\\;', '\\quad', '\\qquad']
+
+endglobal
+
+################################################################
+#                                                              #
+#                       Layout - Spacing                       #
+#                                                              #
+################################################################
+
+context "math()"
+snippet '  !' "空格 Space" Ai
+\quad
+endsnippet
+
+context "math()"
+snippet "(\\!|\\,|\\:|\\;|\\quad|\\qquad)" "空格转换 Space Transformation" r
+`!p
+snip.rv = choose_next(match.group(1), spaces, 6)
+`
+endsnippet
+
+context "math()"
+snippet pha "幻影 Phantom" Aw
+\phantom{${1:${VISUAL}}}$0
+endsnippet
+
+context "math()"
+snippet hpha "幻影 Phantom" Aw
+\hphantom{${1:${VISUAL}}}$0
+endsnippet
+
+priority -1
+context "math()"
+snippet "((\\phantom|\\hphantom)\{.*\})" "幻影转换 Phantom Transformation" r
+`!p
+snip.rv = command_swap(match.group(1), '\\phantom', '\\hphantom')
+`
+endsnippet

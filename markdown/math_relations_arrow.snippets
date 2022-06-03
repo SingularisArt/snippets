@@ -1,0 +1,75 @@
+﻿global !p
+
+from builtin import choose_next
+from markdown_scopes import math
+
+left_arrows = ['\\leftarrow', '\\gets', '\\longleftarrow', '\\Leftarrow', '\\Longleftarrow', '\\impliedby']
+right_arrows = ['\\rightarrow', '\\to', '\\longrightarrow', '\\Rightarrow', '\\Longrightarrow', '\\implies']
+leftright_arrows = ['\\leftrightarrow', '\\longleftrightarrow', '\\Leftrightarrow', '\\Longleftrightarrow', '\\iff']
+nornots = ['', 'n']
+
+endglobal
+
+################################################################
+#                                                              #
+#                      Relations - Arrow                       #
+#                                                              #
+################################################################
+
+context "math()"
+snippet => "推出 Imply" Ai
+\Rightarrow 
+endsnippet
+
+context "math()"
+snippet "<>?-" "左箭头 Left Arrow" Ar
+\leftarrow 
+endsnippet
+
+context "math()"
+snippet -> "右箭头 Right Arrow" Ai
+\rightarrow 
+endsnippet
+
+context "math()"
+snippet "_<>?" "左箭头 Left Arrow" Ar
+\xleftarrow{${1:${VISUAL}}}$0
+endsnippet
+
+context "math()"
+snippet _> "右箭头 Right Arrow" Ai
+\xrightarrow[${1:${VISUAL}}]{$2}$0
+endsnippet
+
+context "math()"
+snippet == "等价 Iff" Ai
+\Leftrightarrow 
+endsnippet
+
+context "math()"
+snippet "(\\leftarrow|\\gets|\\longleftarrow|\\Leftarrow|\\Longleftarrow|\\impliedby)" "左箭头转换 LeftArrow Transformation" r
+`!p
+snip.rv = choose_next(match.group(1), left_arrows, 6)
+`
+endsnippet
+
+context "math()"
+snippet "(\\rightarrow|\\to|\\longrightarrow|\\Rightarrow|\\Longrightarrow|\\implies)" "右箭头转换 RightArrow Transformation" r
+`!p
+snip.rv = choose_next(match.group(1), right_arrows, 6)
+`
+endsnippet
+
+context "math()"
+snippet "(\\leftrightarrow|\\longleftrightarrow|\\Leftrightarrow|\\Longleftrightarrow|\\iff)" "左右箭头转换 LeftRightArrow Transformation" r
+`!p
+snip.rv = choose_next(match.group(1), leftright_arrows, 5)
+`
+endsnippet
+
+context "math()"
+snippet "\\(n?)([Rr]ightarrow|[Ll]eft(?:right)?arrow)(\s?)/" "正反箭头转换 Positive & Negative Arrow Transformation" Ar
+\\`!p
+snip.rv = choose_next(match.group(1), nornots, 2) + match.group(2) + match.group(3)
+`
+endsnippet

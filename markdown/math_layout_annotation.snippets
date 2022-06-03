@@ -1,0 +1,42 @@
+global !p
+
+from markdown_scopes import math
+from markdown_cmdsub import command_cycle
+
+cancels = ['\\cancel', '\\bcancel', '\\xcancel', '\\sout']
+
+endglobal
+
+################################################################
+#                                                              #
+#                     Layout - Annotation                      #
+#                                                              #
+################################################################
+
+context "math()"
+snippet "([\w\d^\\]*)%\^" "上括号 Overbrace" Ar
+\overbrace{${1:${VISUAL}}}^{${2:`!p snip.rv = (match.group(1) or '')`}}
+endsnippet
+
+context "math()"
+snippet "([\w\d^\\]*)%_" "下括号 Underbrace" Ar
+\underbrace{${1:${VISUAL}}}_{${2:`!p snip.rv = (match.group(1) or '')`}}
+endsnippet
+
+context "math()"
+snippet boxed "盒子 Box" w
+\boxed{${1:${VISUAL}}}$0
+endsnippet
+
+context "math()"
+snippet cancel "删除 Cancel" Aw
+\cancel{${1:${VISUAL}}}$0
+endsnippet
+
+priority -1
+context "math()"
+snippet "((\\cancel|\\bcancel|\\xcancel|\\sout)\{.*\})" "删除 Cancel" r
+`!p
+snip.rv = command_cycle(match.group(1), cancels)
+`
+endsnippet

@@ -1,0 +1,43 @@
+global !p
+
+from builtin import choose_next
+from markdown_scopes import math
+
+operatornames = ['', '*']
+
+endglobal
+
+################################################################
+#                                                              #
+#                     Operators - Function                     #
+#                                                              #
+################################################################
+
+context "math()"
+snippet "\\?\b(sin|cos|tan|ln|lg|log|max|min|arg|det|exp|csc|sec|arcsin|arccos|arctan|sinh|cosh|tanh|cot|coth|gcd)" "常用函数 Common Function" Ar
+`!p
+snip.rv = '\\' + match.group(1)
+`
+endsnippet
+
+context "math()"
+snippet opfunc "自定义函数 Custom Function" w
+\operatorname{${1:${VISUAL}}}$0
+endsnippet
+
+context "math()"
+snippet "(\\operatorname)(\*?)(\{\w+\})" "自定义函数转换 Custom Function Transformation" wr
+`!p
+snip.rv = match.group(1) + choose_next(match.group(2), operatornames, 2) + match.group(3)
+`
+endsnippet
+
+context "math()"
+snippet sqrt "方根 Root" Aw
+\sqrt[${1:3}]{${2:${VISUAL}}}$0
+endsnippet
+
+context "math()"
+snippet gen "平方根 Square Root" Aw
+\sqrt{${1:${VISUAL}}}$0
+endsnippet

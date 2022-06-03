@@ -1,0 +1,95 @@
+global !p
+
+from builtin import choose_next
+from markdown_scopes import math, chem
+
+colons = [':', '\\colon']
+nornot = ['', 'n']
+
+endglobal
+
+################################################################
+#                                                              #
+#                          Relations                           #
+#                                                              #
+################################################################
+
+context "math()"
+snippet "(:|\\colon)" "冒号 Colon" r
+`!p snip.rv = choose_next(match.group(1), colons, 2)`
+endsnippet
+
+context "math()"
+snippet := "定义 Definition" w
+\coloneqq
+endsnippet
+
+context "math()"
+snippet >> "远大于 Much Larger Than" Ai
+\gg 
+endsnippet
+
+context "math()"
+snippet << "远小于 Much Smaller Than" Ai
+\ll 
+endsnippet
+
+context "math()"
+snippet <= "小于等于 Smaller or Equal" Ai
+\le 
+endsnippet
+
+context "math()"
+snippet >= "大于等于 Larger or Equal" Ai
+\ge 
+endsnippet
+
+snippet != "不等于 Not Equal" Ai
+\ne 
+endsnippet
+
+context "math()"
+snippet ~~ "约等于 Approximation" Ai
+\approx 
+endsnippet
+
+context "math()"
+snippet oc "正比于 Proportional" Aw
+\propto 
+endsnippet
+
+context "math()"
+snippet =~ "相似 Similar" Ai
+\sim 
+endsnippet
+
+context "math()"
+snippet ~= "全等 Congruent" Ai
+\cong 
+endsnippet
+
+context "chem()"
+snippet = "化学等号 Chemical Equal" i
+ \xlongequal[$1]{\enspace $2\enspace} $0
+endsnippet
+
+context "math()"
+snippet "\\(n?)sim(\s?)" "相似转换 Similar Transformation" r
+\\`!p
+snip.rv = choose_next(match.group(1), nornot, 2) + 'sim' + match.group(2)
+`
+endsnippet
+
+context "math()"
+snippet "\\(n?)cong(\s?)" "全等转换 Congruent Transformation" Ar
+\\`!p
+snip.rv = choose_next(match.group(1), nornot, 2) + 'cong' + match.group(2)
+`
+endsnippet
+
+context "math()"
+snippet "\\(n?)(ge|le)(\s?)/" "不大于&小于 Not Larger & Smaller" Ar
+\\`!p
+snip.rv = choose_next(match.group(1), nornot, 2) + match.group(2) + match.group(3)
+`
+endsnippet

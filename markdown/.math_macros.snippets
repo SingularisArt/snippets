@@ -1,0 +1,26 @@
+global !p
+
+from markdown_scopes import math
+
+endglobal
+
+################################################################
+#                                                              #
+#                            Macros                            #
+#                                                              #
+################################################################
+
+context "math()"
+snippet def "定义 Define" w
+\def$1{$2}$0
+endsnippet
+
+context "math()"
+snippet cmd "新命令 New Command" w
+\newcommand$1[$2]{$3}$0
+endsnippet
+
+context "math()"
+snippet rcmd "重定义命令 Redefine Command" w
+\renewcommand$1[$2]{$3}$0
+endsnippet
