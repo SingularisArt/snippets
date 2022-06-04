@@ -3,7 +3,6 @@ global !p
 from builtin import choose_next
 from markdown_scopes import math, chem
 
-colons = [':', '\\colon']
 nornot = ['', 'n']
 
 endglobal
@@ -14,82 +13,85 @@ endglobal
 #                                                              #
 ################################################################
 
+# := -> \coloneq
 context "math()"
-snippet "(:|\\colon)" "冒号 Colon" r
-`!p snip.rv = choose_next(match.group(1), colons, 2)`
-endsnippet
-
-context "math()"
-snippet := "定义 Definition" w
+snippet := "Definition" w
 \coloneqq
 endsnippet
 
+# >> -> \gg
 context "math()"
-snippet >> "远大于 Much Larger Than" Ai
+snippet >> "Much Larger Than" Ai
 \gg 
 endsnippet
 
+# << -> \ll
 context "math()"
-snippet << "远小于 Much Smaller Than" Ai
+snippet << "Much Smaller Than" Ai
 \ll 
 endsnippet
 
+# <= -> \le
 context "math()"
-snippet <= "小于等于 Smaller or Equal" Ai
+snippet <= "Smaller or Equal" Ai
 \le 
 endsnippet
 
+# >= -> \ge
 context "math()"
-snippet >= "大于等于 Larger or Equal" Ai
+snippet >= "Larger or Equal" Ai
 \ge 
 endsnippet
 
-snippet != "不等于 Not Equal" Ai
+# != -> \ne
+snippet != "Not Equal" Ai
 \ne 
 endsnippet
 
+# !! -> \approx
 context "math()"
-snippet ~~ "约等于 Approximation" Ai
+snippet ~~ "Approximation" Ai
 \approx 
 endsnippet
 
+# oc -> \propto
 context "math()"
-snippet oc "正比于 Proportional" Aw
+snippet oc "Proportional" Aw
 \propto 
 endsnippet
 
+# =~ -> \sim
 context "math()"
-snippet =~ "相似 Similar" Ai
+snippet =~ "Similar" Ai
 \sim 
 endsnippet
 
+# ~= -> \cong
 context "math()"
-snippet ~= "全等 Congruent" Ai
+snippet ~= "Congruent" Ai
 \cong 
 endsnippet
 
+# = -> \xlongequal[]{\enspace \enspace}
 context "chem()"
-snippet = "化学等号 Chemical Equal" i
- \xlongequal[$1]{\enspace $2\enspace} $0
+snippet = "Chemical Equal" i
+	\xlongequal[$1]{\enspace $2\enspace} $0
 endsnippet
 
+# \nsim -> \sim
+# \sim 	-> \nsim
 context "math()"
-snippet "\\(n?)sim(\s?)" "相似转换 Similar Transformation" r
+snippet "\\(n?)sim(\s?)" "Similar Transformation" r
 \\`!p
 snip.rv = choose_next(match.group(1), nornot, 2) + 'sim' + match.group(2)
 `
 endsnippet
 
+# \ncong -> \cong
+# \cong 	-> \ncong
 context "math()"
-snippet "\\(n?)cong(\s?)" "全等转换 Congruent Transformation" Ar
+snippet "\\(n?)cong(\s?)" "Congruent Transformation" Ar
 \\`!p
 snip.rv = choose_next(match.group(1), nornot, 2) + 'cong' + match.group(2)
-`
-endsnippet
-
-context "math()"
-snippet "\\(n?)(ge|le)(\s?)/" "不大于&小于 Not Larger & Smaller" Ar
-\\`!p
-snip.rv = choose_next(match.group(1), nornot, 2) + match.group(2) + match.group(3)
 `
 endsnippet

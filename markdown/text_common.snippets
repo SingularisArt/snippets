@@ -11,111 +11,123 @@ endglobal
 #                                                              #
 ################################################################
 
-# 支持自动添加空格（意外删除时可能出现 BUG）
-# Support automatically add space (may have BUG if you delete it accidenly)
+# ilm -> $ $
 context "text()"
-snippet '\b(\W?)lm' "行内公式 Inline Formula" Ar
-`!p snip.rv = match.group(1) + ('' if match.group(1) in before_puncs else ' ')`$$1$`!p snip.rv = '' if t[2][:1] in after_puncs else ' '`$2
+snippet ilm "Inline Formula" Ab
+$ $1 $
 endsnippet
 
+# dm -> $$ $$
 context "text()"
-snippet dm "行间公式 Display Formula" Ab
+snippet dm "Display Formula" Ab
 $$
 $1
 $$
-$0
 endsnippet
 
+# tb53 -> a table with 3 three columns and 5 rows
 context "text()"
 pre_expand "create_table(snip)"
-snippet "\btb([1-9]{2})" "普通表格 Table" br
+snippet "\btb([1-9]{2})" "Table" br
 endsnippet
 
+# tbl53 -> a table with 3 three columns and 5 rows
 context "text()"
 pre_expand "create_table(snip, 1)"
-snippet "\btbl([1-9]{2})" "靠左表格 Left Table" br
+snippet "\btbl([1-9]{2})" "Left Table" br
 endsnippet
 
+# tbr53 -> a table with 3 three columns and 5 rows
 context "text()"
 pre_expand "create_table(snip, 2)"
-snippet "\btbr([1-9]{2})" "靠右表格 Right Table" br
+snippet "\btbr([1-9]{2})" "Right Table" br
 endsnippet
 
+# tbm53 -> a table with 3 three columns and 5 rows
 context "text()"
 pre_expand "create_table(snip, 3)"
-snippet "\btbm([1-9]{2})" "居中表格 Center Table" br
+snippet "\btbm([1-9]{2})" "Center Table" br
 endsnippet
 
+# link -> [](https://)
 context "text()"
-snippet link "链接 Link" w
+snippet link "Link" w
 [${1:${VISUAL}}](${2:https://${3:}})$0
 endsnippet
 
+# img -> ![](images/)
 context "text()"
-snippet img "图像 Image" w
+snippet img "Image" w
 ![](${2:images/${3:${VISUAL}}})$0
 endsnippet
 
+# code -> ``` ```
 context "text()"
-snippet ` "行内代码 Inline Code" i
-\`${1:${VISUAL}}\`$0
-endsnippet
-
-context "text()"
-snippet code "代码 Code Block" b
+snippet code "Code Block" b
 \`\`\`$1
 ${2:${VISUAL}}
 \`\`\`
-$0
 endsnippet
 
+# fnt -> [^]
 context "text()"
-snippet fnt "脚注 FootNote" w
+snippet fnt "FootNote" w
 [^${1:${VISUAL}}]$0
 endsnippet
 
+# detail -> <details>
+#						<summary></summary>
+#
+#						</details>
 context "text()"
-snippet detail "详情 Disclosure" w
+snippet detail "Disclosure" w
 <details>
 ${1:<summary>${2}</summary>}
-
 $3
-
 </details>
-$0
 endsnippet
 
+# it -> **
 context "text()"
-snippet * "斜体 Italics" i
+snippet it "Italics" i
 *${1:${VISUAL}}*$0
 endsnippet
 
+# bf -> ****
 context "text()"
-snippet ** "粗体 Bold" i
+snippet bf "Bold" i
 **${1:${VISUAL}}**$0
 endsnippet
 
+# bt -> ******
 context "text()"
-snippet *** "粗斜体 Bold Italics" i
+snippet bt "Bold Italics" i
 ***${1:${VISUAL}}***$0
 endsnippet
 
+# /. -> <!--  -->
 context "text()"
-snippet /. "注释 Comment" i
+snippet /. "Comment" i
 <!-- ${1:${VISUAL}} -->$0
 endsnippet
 
+# #1 -> #
+# #2 -> ##
+# #3 -> ###
+# #4 -> ####
+# #5 -> #####
+# #6 -> ######
 context "text()"
-snippet "^#([3-6])" "段落 Paragraph" Ar
+snippet "^#([3-6])" "Paragraph" Ar
 `!p snip.rv = '#' * int(match.group(1))` 
 endsnippet
 
+# hr -> <hr class="section">
 context "text()"
-snippet hr "分节行 Section Line" w
+snippet hr "Section Line" w
 
 
 <hr class="section">
 
 
 endsnippet
-

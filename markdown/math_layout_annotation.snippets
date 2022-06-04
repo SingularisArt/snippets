@@ -13,29 +13,36 @@ endglobal
 #                                                              #
 ################################################################
 
+# x10x%^ -> \overbrace{}^{x10x}
 context "math()"
-snippet "([\w\d^\\]*)%\^" "上括号 Overbrace" Ar
+snippet "([\w\d^\\]*)%\^" "Overbrace" Ar
 \overbrace{${1:${VISUAL}}}^{${2:`!p snip.rv = (match.group(1) or '')`}}
 endsnippet
 
+# x10x%_ -> \underbrace{}^{x10x}
 context "math()"
-snippet "([\w\d^\\]*)%_" "下括号 Underbrace" Ar
+snippet "([\w\d^\\]*)%_" "Underbrace" Ar
 \underbrace{${1:${VISUAL}}}_{${2:`!p snip.rv = (match.group(1) or '')`}}
 endsnippet
 
+# boxed -> \boxed{}
 context "math()"
-snippet boxed "盒子 Box" w
+snippet boxed "Box" w
 \boxed{${1:${VISUAL}}}$0
 endsnippet
 
+# cancel -> \cancel{}
 context "math()"
-snippet cancel "删除 Cancel" Aw
+snippet cancel "Cancel" Aw
 \cancel{${1:${VISUAL}}}$0
 endsnippet
 
+# \cancel{} 	-> \bcancel{}
+# \bcancel{} 	-> \xcancel{}
+# \xcancel{} 	-> \sout{}
 priority -1
 context "math()"
-snippet "((\\cancel|\\bcancel|\\xcancel|\\sout)\{.*\})" "删除 Cancel" r
+snippet "((\\cancel|\bcancel|\\xcancel|\\sout)\{.*\})" "Cancel" r
 `!p
 snip.rv = command_cycle(match.group(1), cancels)
 `

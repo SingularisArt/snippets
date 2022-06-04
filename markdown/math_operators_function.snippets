@@ -3,8 +3,6 @@ global !p
 from builtin import choose_next
 from markdown_scopes import math
 
-operatornames = ['', '*']
-
 endglobal
 
 ################################################################
@@ -13,31 +11,61 @@ endglobal
 #                                                              #
 ################################################################
 
+# sin		 -> \sin
+# cos    -> \cos
+# tan    -> \tan
+# ln     -> \ln
+# lg     -> \lg
+# log    -> \log
+# max    -> \max
+# min    -> \min
+# arg    -> \arg
+# det    -> \det
+# exp    -> \exp
+# csc    -> \csc
+# sec    -> \sec
+# arcsin -> \arcsin
+# arccos -> \arccos
+# arctan -> \arctan
+# sinh   -> \sinh
+# cosh   -> \cosh
+# tanh   -> \tanh
+# cot    -> \cot
+# coth   -> \coth
+# gcd    -> \gcd
 context "math()"
-snippet "\\?\b(sin|cos|tan|ln|lg|log|max|min|arg|det|exp|csc|sec|arcsin|arccos|arctan|sinh|cosh|tanh|cot|coth|gcd)" "常用函数 Common Function" Ar
+snippet "\\?\b(sin|cos|tan|ln|lg|log|max|min|arg|det|exp|csc|sec|arcsin|arccos|arctan|sinh|cosh|tanh|cot|coth|gcd)" "Common Function" Ar
 `!p
 snip.rv = '\\' + match.group(1)
 `
 endsnippet
 
+# fofx -> f(x) = x
 context "math()"
-snippet opfunc "自定义函数 Custom Function" w
-\operatorname{${1:${VISUAL}}}$0
+snippet '([a-zA-Z])of([a-zA-Z])' "Create Function" rwA
+`!p snip.rv = match.group(1)`(`!p snip.rv = match.group(2)`) = ${1:`!p snip.rv = match.group(2)`}
 endsnippet
 
+# fof<x,y,z> -> f(x,y,z) = x,y,z
 context "math()"
-snippet "(\\operatorname)(\*?)(\{\w+\})" "自定义函数转换 Custom Function Transformation" wr
-`!p
-snip.rv = match.group(1) + choose_next(match.group(2), operatornames, 2) + match.group(3)
-`
+snippet '(.)of\<(.*?)\>' "Create Function" rwA
+`!p snip.rv = match.group(1)`(`!p snip.rv = match.group(2)`) = ${1:`!p snip.rv = match.group(2)`}
 endsnippet
 
+# fun -> f \:  \mathbb{R} \to \mathbb{R} \:
 context "math()"
-snippet sqrt "方根 Root" Aw
+snippet fun "F something Subset of R" iA
+f : $1 \subset \mathbf{R} \to \mathbf{R} : $2
+endsnippet
+
+# sqrt -> \sqrt[3]{}
+context "math()"
+snippet sqrt "Root" Aw
 \sqrt[${1:3}]{${2:${VISUAL}}}$0
 endsnippet
 
+# gen -> \sqrt{}
 context "math()"
-snippet gen "平方根 Square Root" Aw
+snippet gen "Square Root" Aw
 \sqrt{${1:${VISUAL}}}$0
 endsnippet

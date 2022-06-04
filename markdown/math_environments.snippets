@@ -26,60 +26,60 @@ endglobal
 
 context "inline_math()"
 post_jump "inline_environment(snip)"
-snippet env "环境 Environment" w
+snippet env "Environment" w
 endsnippet
 
 context "display_math()"
 post_jump "display_environment(snip)"
-snippet env "环境 Environment" w
+snippet env "Environment" w
 endsnippet
 
 context "inline_math()"
 post_jump "inline_environment(snip, option = 'option')"
-snippet envo "环境（选项） Environment(option)" w
+snippet envo "Environment(option)" w
 endsnippet
 
 context "display_math()"
 post_jump "display_environment(snip, option = 'option')"
-snippet envo "环境（选项） Environment(option)" w
+snippet envo "Environment(option)" w
 endsnippet
 
 context "inline_math()"
 post_jump "inline_environment(snip, 'cases')"
-snippet case "Cases 环境 Cases Environment" w
+snippet case "Cases Environment" w
 endsnippet
 
 context "display_math()"
 post_jump "display_environment(snip, 'cases')"
-snippet case "Cases 环境 Cases Environment" w
+snippet case "Cases Environment" w
 endsnippet
 
 context "inline_math()"
 post_jump "inline_environment(snip, 'aligned')"
-snippet align "Aligned 环境 Aligned Environment" w
+snippet align "Aligned Environment" w
 endsnippet
 
 context "display_math()"
 post_jump "display_environment(snip, 'aligned')"
-snippet align "Aligned 环境 Aligned Environment" w
+snippet align "Aligned Environment" w
 endsnippet
 
 context "math()"
-snippet "\\?\btext" "文本环境 Text Environment" r
+snippet btext "Text Environment" w
 \text{$1}$0
 endsnippet
 
 context "math() and not_chem()"
-snippet "\\?\bce" "化学环境 Chemistry Environment" r
+snippet bce "Chemistry Environment" w
 \ce{$1}$0
 endsnippet
 
 context "math() and not_unit()"
-snippet "\\?\bpu" "单位环境 Unit Environment" r
+snippet bpu "Unit Environment" w
 \pu{$1}$0
 endsnippet
 
 context "math()"
-snippet "\\?\btag" "标记 Tag" r
+snippet btag "Tag" w
 \tag{$1}$0
 endsnippet

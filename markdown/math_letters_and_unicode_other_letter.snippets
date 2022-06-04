@@ -1,21 +1,26 @@
 global !p
 
-from builtin import choose_next
 from markdown_scopes import math
-from markdown_cmdsub import command_swap
-
-spaces = ['\\!', '\\,', '\\:', '\\;', '\\quad', '\\qquad']
 
 endglobal
 
 ################################################################
 #                                                              #
-#                       Layout - Spacing                       #
+#               Letters & Unicode - Other Letter               #
 #                                                              #
 ################################################################
 
-# qd -> \qquad
 context "math()"
-snippet qd "Space" Ai
-\qquad
+snippet "aleph|alef" "Aleph" Awr
+\aleph 
+endsnippet
+
+context "math()"
+snippet re "Real" w
+\Re 
+endsnippet
+
+context "math()"
+snippet im "Image" w
+\Im 
 endsnippet

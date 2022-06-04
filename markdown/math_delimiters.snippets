@@ -11,17 +11,26 @@ endglobal
 ################################################################
 
 context "math()"
-snippet \} "大括号 Curly Braces" Ai
-\lbrace $1\rbrace$0
+snippet \) "Parenthasis" Ai
+\lparen $1 \rparen$0
 endsnippet
 
 context "math()"
-snippet \| "竖括号 Verticals" Ai
+snippet \] "Square Bracket" Ai
+\lbrack $1 \rbrack$0
+endsnippet
+
+context "math()"
+snippet \} "Curly Braces" Ai
+\lbrace $1 \rbrace$0
+endsnippet
+
+context "math()"
+snippet \| "Verticals" Ai
 \lVert $1\rVert$0
 endsnippet
 
 context "math()"
-snippet "<([^>])+>" "Description" r
-\lang `!p snip.rv = match.group(1)`\rang
+snippet "<(.+)>" "Description" r
+\lang `!p snip.rv = match.group(1)` \rang
 endsnippet
-

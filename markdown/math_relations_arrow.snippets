@@ -6,7 +6,6 @@ from markdown_scopes import math
 left_arrows = ['\\leftarrow', '\\gets', '\\longleftarrow', '\\Leftarrow', '\\Longleftarrow', '\\impliedby']
 right_arrows = ['\\rightarrow', '\\to', '\\longrightarrow', '\\Rightarrow', '\\Longrightarrow', '\\implies']
 leftright_arrows = ['\\leftrightarrow', '\\longleftrightarrow', '\\Leftrightarrow', '\\Longleftrightarrow', '\\iff']
-nornots = ['', 'n']
 
 endglobal
 
@@ -16,60 +15,76 @@ endglobal
 #                                                              #
 ################################################################
 
+# => -> \Rightarrow
 context "math()"
-snippet => "推出 Imply" Ai
+snippet => "Imply" Ai
 \Rightarrow 
 endsnippet
 
+# <>- -> \leftarrow
 context "math()"
-snippet "<>?-" "左箭头 Left Arrow" Ar
+snippet "<>?-" "Left Arrow" Ar
 \leftarrow 
 endsnippet
 
+# -> -> \rightarrow
 context "math()"
-snippet -> "右箭头 Right Arrow" Ai
+snippet -> "Right Arrow" Ai
 \rightarrow 
 endsnippet
 
+# _<> -> \xleftarrow{}
 context "math()"
-snippet "_<>?" "左箭头 Left Arrow" Ar
+snippet "_<>" "Left Arrow" Ar
 \xleftarrow{${1:${VISUAL}}}$0
 endsnippet
 
+# _> -> \xrightarrow
 context "math()"
-snippet _> "右箭头 Right Arrow" Ai
+snippet _> "Right Arrow" Ai
 \xrightarrow[${1:${VISUAL}}]{$2}$0
 endsnippet
 
+# == -> \Leftrightarrow
 context "math()"
-snippet == "等价 Iff" Ai
+snippet == "Iff" Ai
 \Leftrightarrow 
 endsnippet
 
+# \leftarrow			-> \gets
+# \gets           -> \longleftarrow
+# \longleftarrow  -> \Leftarrow
+# \Leftarrow      -> \Longleftarrow
+# \Longleftarrow  -> \impliedby
+# \impliedby      -> \leftarrow
 context "math()"
-snippet "(\\leftarrow|\\gets|\\longleftarrow|\\Leftarrow|\\Longleftarrow|\\impliedby)" "左箭头转换 LeftArrow Transformation" r
+snippet "(\\leftarrow|\\gets|\\longleftarrow|\\Leftarrow|\\Longleftarrow|\\impliedby)" "LeftArrow Transformation" r
 `!p
 snip.rv = choose_next(match.group(1), left_arrows, 6)
 `
 endsnippet
 
+# \rightarrow			-> \to
+# \to             -> \longrightarrow
+# \longrightarrow -> \Rightarrow
+# \Rightarrow     -> \Longrightarrow
+# \Longrightarrow -> \implies
+# \implies        -> \rightarrow
 context "math()"
-snippet "(\\rightarrow|\\to|\\longrightarrow|\\Rightarrow|\\Longrightarrow|\\implies)" "右箭头转换 RightArrow Transformation" r
+snippet "(\\rightarrow|\\to|\\longrightarrow|\\Rightarrow|\\Longrightarrow|\\implies)" "RightArrow Transformation" r
 `!p
 snip.rv = choose_next(match.group(1), right_arrows, 6)
 `
 endsnippet
 
+# \leftrightarrow			 -> \longleftrightarrow
+# \longleftrightarrow  -> \Leftrightarrow
+# \Leftrightarrow      -> \Longleftrightarrow
+# \Longleftrightarrow  -> \iff
+# \iff                 -> \leftrightarrow
 context "math()"
-snippet "(\\leftrightarrow|\\longleftrightarrow|\\Leftrightarrow|\\Longleftrightarrow|\\iff)" "左右箭头转换 LeftRightArrow Transformation" r
+snippet "(\\leftrightarrow|\\longleftrightarrow|\\Leftrightarrow|\\Longleftrightarrow|\\iff)" "LeftRightArrow Transformation" r
 `!p
 snip.rv = choose_next(match.group(1), leftright_arrows, 5)
-`
-endsnippet
-
-context "math()"
-snippet "\\(n?)([Rr]ightarrow|[Ll]eft(?:right)?arrow)(\s?)/" "正反箭头转换 Positive & Negative Arrow Transformation" Ar
-\\`!p
-snip.rv = choose_next(match.group(1), nornots, 2) + match.group(2) + match.group(3)
 `
 endsnippet

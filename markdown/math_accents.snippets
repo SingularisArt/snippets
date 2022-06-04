@@ -10,7 +10,6 @@ def long_bar_hat_vec(target, word, subscript = ''):
     return map_bar_hat_vec[target] + '{' + word + '}' + (subscript or '')
 
 special_bar_hat_vec = ['i', 'j']
-special_hbar = ['\\bar{h}', '\\hbar']
 map_bar_hat_vec = {'bar': '\\overline', 'hat': '\\widehat', 'vec': '\\overrightarrow'}
 bars = ['\\bar', '\\overline']
 hats = ['\\hat', '\\widehat']
@@ -24,44 +23,44 @@ endglobal
 #                                                              #
 ################################################################
 
+# xbar -> \bar{x}
+# xhat -> \hat{x}
+# xvec -> \vec{x}
 context "math()"
-snippet "(\\bar{h}|\\hbar)\\" "hbar" ir
-`!p
-snip.rv = choose_next(match.group(1), special_hbar, 2)
-`
-endsnippet
-
-context "math()"
-snippet "(\b[a-zA-Z0]|\\[a-zA-Z]+)([_^](?:\{\S+\s?\}|[\da-zA-Z]))?(bar|hat|vec)" "拔/帽/向量 Bar/Hat/Vector" Ar
+snippet "(\b[a-zA-Z0]|\\[a-zA-Z]+)([_^](?:\{\S+\s?\}|[\da-zA-Z]))?(bar|hat|vec)" "Bar/Hat/Vector" Ar
 `!p snip.rv = bar_hat_vec(match.group(3) or match.group(2), match.group(1), match.group(2) if match.group(3) else '')`
 endsnippet
 
+# xxbar -> \overline{xx}
+# xxhat -> \widehat{xx}
+# xxvec -> \overrightarrow{xx}
 context "math()"
-snippet "(?<!\\)\b([a-zA-Z]{2,})([_^](?:\{\S+\s?\}|[\da-zA-Z]))?(bar|hat|vec)" "长拔/帽/向量 Long Bar/Hat/Vector" Ar
+snippet "(?<!\\)\b([a-zA-Z]{2,})([_^](?:\{\S+\s?\}|[\da-zA-Z]))?(bar|hat|vec)" "Long Bar/Hat/Vector" Ar
 `!p snip.rv = long_bar_hat_vec(match.group(3) or match.group(2), match.group(1), match.group(2) if match.group(3) else '')`
 endsnippet
 
-# 为避免冲突，仅支持包含简单下标的变形
-# Only support simple subscript to avoid comflict
-# √: \bar{a}_a              --> \overline{a}_a
-# √: \bar{a}_{\alpha}       --> \overline{a}_{\alpha}
-# ×: \bar{a}_{\dfrac{1}{2}} --> \overline{a}_{\dfrac{1}{2}}
+# \bar{xx} 			-> \overline{xx}
+# \overline{xx} -> \bar{xx}
 context "math()"
-snippet "(\\bar|\\overline)(\{[\\a-zA-Z]+\s?\})((?:[_^](?:[\da-zA-Z]|\{[\\\w\d\s]+\}))?)" "拔 Bar" r
+snippet "(\\bar|\\overline)(\{[\\a-zA-Z]+\s?\})((?:[_^](?:[\da-zA-Z]|\{[\\\w\d\s]+\}))?)" "Bar" r
 `!p
 snip.rv = choose_next(match.group(1), bars, 2) + match.group(2) + match.group(3)
 `
 endsnippet
 
+# \hat{xx} 			-> \widehat{xx}
+# \widehat{xx} 	-> \hat{xx}
 context "math()"
-snippet "(\\hat|\\widehat)(\{[\\a-zA-Z]+\s?\})((?:[_^](?:[\da-zA-Z]|\{[\\\w\d\s]+\}))?)" "帽 Hat" r
+snippet "(\\hat|\\widehat)(\{[\\a-zA-Z]+\s?\})((?:[_^](?:[\da-zA-Z]|\{[\\\w\d\s]+\}))?)" "Hat" r
 `!p
 snip.rv = choose_next(match.group(1), hats, 2) + match.group(2) + match.group(3)
 `
 endsnippet
 
+# \vec{xx} 						-> \overrightarrow{xx}
+# \overrightarrow{xx}	-> \vec{xx}
 context "math()"
-snippet "(\\vec|\\overrightarrow)(\{[\\0a-zA-Z]+\s?\})((?:[_^](?:[\da-zA-Z]|\{[\\\w\d\s]+\}))?)" "向量 Vector" r
+snippet "(\\vec|\\overrightarrow)(\{[\\0a-zA-Z]+\s?\})((?:[_^](?:[\da-zA-Z]|\{[\\\w\d\s]+\}))?)" "Vector" r
 `!p
 snip.rv = choose_next(match.group(1), vecs, 2) + match.group(2) + match.group(3)
 `

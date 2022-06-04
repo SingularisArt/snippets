@@ -10,62 +10,75 @@ endglobal
 #                                                              #
 ################################################################
 
+# color -> \textcolor{red}{}
 context "math()"
-snippet color "颜色 Color" Aw
+snippet color "Color" Aw
 \textcolor{${1:red}}{${2:${VISUAL}}}$0
 endsnippet
 
+# cbox -> \fcolorbox{#ff69b4}{trasparent}{$$}
 context "display_math()"
-snippet cbox "定理盒子 Theorem Box" w
+snippet cbox "Theorem Box" w
 \fcolorbox{#ff69b4}{trasparent}{$$1$}$0
 endsnippet
 
+# rm 	-> \mathrm{}
+# xrm -> \mathrm{x}
 context "math()"
-snippet "(\w*)rm" "直立罗马体 Upright Roman Font" r
+snippet "(\w*)rm" "Upright Roman Font" r
 \mathrm{${1:`!p snip.rv = match.group(1)`}}$0
 endsnippet
 
+# bb 	-> \mathbb{}
+# xbb -> \mathbb{x}
 context "math()"
-snippet "(\w*)bb" "缕空粗体 Blank Bold Font" r
+snippet "(\w*)bb" "Blank Bold Font" r
 \mathbb{${1:`!p snip.rv = match.group(1)`}}$0
 endsnippet
 
+# bf 	-> \mathbf{}
+# xbf -> \mathbf{x}
 context "math()"
-snippet "(\w*)bf" "直立粗体 Upright Bold Font" r
+snippet "(\w*)bf" "Upright Bold Font" r
 \mathbf{${1:`!p snip.rv = match.group(1)`}}$0
 endsnippet
 
+# cal  -> \mathcal{}
+# xcal -> \mathcal{x}
 context "math()"
-snippet "(\w*)cal" "手写体 Calligraphic Font" r
+snippet "(\w*)cal" "Calligraphic Font" r
 \mathcal{${1:`!p snip.rv = match.group(1)`}}$0
 endsnippet
 
+# it  -> \mathit{}
+# xit -> \mathit{x}
 context "math()"
-snippet "(\w*)it" "意大利斜体 Italic Font" r
+snippet "(\w*)it" "Italic Font" r
 \mathit{${1:`!p snip.rv = match.group(1)`}}$0
 endsnippet
 
+# sf  -> \mathsf{}
+# xsf -> \mathsf{x}
 context "math()"
-snippet "(\w*)sf" "直立无衬线字体 Upright Sans Serif Font" r
+snippet "(\w*)sf" "Upright Sans Serif Font" r
 \mathsf{${1:`!p snip.rv = match.group(1)`}}$0
 endsnippet
 
+# frak  -> \mathfrak{}
+# xfrak -> \mathfrak{x}
 context "math()"
-snippet "(\w*)frak" "哥特字体 Fraktur Font" r
+snippet "(\w*)frak" "Fraktur Font" r
 \mathfrak{${1:`!p snip.rv = match.group(1)`}}$0
 endsnippet
 
+# dis -> \displaystyle
 context "math()"
-snippet dis "展示样式 Display Style" w
+snippet dis "Display Style" w
 \displaystyle 
 endsnippet
 
+# tes -> \textstyle
 context "math()"
-snippet tes "文本样式 Text Style" w
+snippet tes "Text Style" w
 \textstyle 
-endsnippet
-
-context "math()"
-snippet "\Blmt" "Limits" r
-\limits_{$1}$0
 endsnippet

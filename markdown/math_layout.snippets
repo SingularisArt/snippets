@@ -10,67 +10,86 @@ endglobal
 #                                                              #
 ################################################################
 
+# \\ -> \\
 context "inline_math()"
-snippet \\ "换行 Line Break" Ai
+snippet \\ "Line Break" Ai
 \\\\ 
 endsnippet
 
+# \\ -> \\
+#
 context "display_math()"
-snippet \\ "换行 Line Break" Ai
+snippet \\ "Line Break" Ai
 \\\\
 
 endsnippet
 
+# , -> _{}
 context "math()"
-snippet , "下标 Subscript" i
+snippet , "Subscript" i
 _{${1:${VISUAL}}}$0
 endsnippet
 
+# x3 -> x_3
 context "pure_math()"
-snippet "([a-zA-Z])(\d)" "自动数字下标 Auto Number Subscript" Ar
+snippet "([a-zA-Z])(\d)" "Auto Number Subscript" Ar
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
 
+# x_3 -> x_{33}
 context "math()"
-snippet "([a-zA-Z])_(\d\d)" "自动数字下标 Auto Number Subscript" Ar
+snippet "([a-zA-Z])_(\d\d)" "Auto Number Subscript" Ar
 `!p snip.rv = match.group(1)`_`!p snip.rv = "{" + match.group(2) + "}"`
 endsnippet
 
+# x_{33}3 -> x_{333}
 context "math()"
-snippet "([a-zA-Z])_\{(\d+)\}(\d)" "自动数字下标 Auto Number Subscript" Ar
+snippet "([a-zA-Z])_\{(\d+)\}(\d)" "Auto Number Subscript" Ar
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2) + match.group(3)`}
 endsnippet
 
+# x,i -> x_i
+# x,k -> x_k
+# x,p -> x_p
+# x,q -> x_q
+# x,m -> x_m
+# x,n -> x_n
 context "math()"
-snippet "([a-zA-Z]),(i|k|p|q|m|n)" "自动变量下标 Auto Variable Subscript" Ar
+snippet "([a-zA-Z]),(i|k|p|q|m|n)" "Auto Variable Subscript" Ar
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
 
+# ' -> ^{}
 context "math()"
-snippet ' "上标 Superscript" i
+snippet ' "Superscript" i
 ^{${1:${VISUAL}}}$0
 endsnippet
 
+# 10x'x -> 10x^x
 context "math()"
-snippet "([a-zA-Z\d])'([a-zA-Z\d-])" "数字上标 Number Superscript" Ar
+snippet "([a-zA-Z\d])'([a-zA-Z\d-])" "Superscript" Ar
 `!p snip.rv = match.group(1)`^`!p snip.rv = match.group(2)`
 endsnippet
 
+# 10x^xx -> 10x^{xx}
 context "math()"
-snippet "([a-zA-Z\d])\^((?:\d|-)\d)" "自动数字上标 Auto Number Superscript" Ar
-`!p snip.rv = match.group(1)`^`!p snip.rv = "{" + match.group(2) + "}"`
+snippet "([a-zA-Z\d])\^([a-zA-Z\d-]+)" "Superscript" Ar
+`!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2)`}
 endsnippet
 
+# 10x^{xx}x -> 10x^{xxx}
 context "math()"
-snippet "([a-zA-Z\d])\^\{(-?\d+)\}(\d)" "自动数字上标 Auto Number Superscript" Ar
+snippet "([a-zA-Z\d])\^{([a-zA-Z\d-]+)}([a-zA-Z\d-]+)" "Superscript" Ar
 `!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2) + match.group(3)`}
 endsnippet
 
+# subst -> _{\substack{}}
 context "math()"
 snippet subst "Substack" w
 _{\substack{${1:${VISUAL}}}}$0
 endsnippet
 
+# smash -> \smash[1|t,b, |]{}
 context "math()"
 snippet smash "Smash" w
 \smash[${1|t,b, |}]{${2:${VISUAL}}}$0

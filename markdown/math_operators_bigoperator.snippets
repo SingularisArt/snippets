@@ -10,63 +10,78 @@ endglobal
 #                                                              #
 ################################################################
 
+# dx 	-> \dfrac{\d }{\d x}
+# d 	-> \dfrac{\d }{\d }
 context "math()"
-snippet "\bd([a-zA-Z])" "导数 Derivative" r
+snippet "\bd([a-zA-Z])" "Derivative" r
 \dfrac{\d ${1:${VISUAL}}}{\d `!p snip.rv = match.group(1)`}$0
 endsnippet
 
+# pdx -> \dfrac{\partial }{\partial x}
+# pd 	-> \dfrac{\partial }{\partial }
 context "math()"
-snippet "\bpd([a-zA-Z])" "偏导数 Partial Derivative" r
-\dfrac{\pd ${1:${VISUAL}}}{\pd `!p snip.rv = match.group(1)`}$0
+snippet "\bpd([a-zA-Z])" "Partial Derivative" r
+\dfrac{\partial ${1:${VISUAL}}}{\partial `!p snip.rv = match.group(1)`}$0
 endsnippet
 
+# sumx 	-> \sum_{x=1}^{\infty}
+# sum 	-> \sum_{i=1}^{\infty}
 context "math()"
-snippet "\\?\bsum([a-zA-Z]?)" "求和 Sum" r
+snippet "\\?\bsum([a-zA-Z]?)" "Sum" r
 \sum_{${1:`!p snip.rv = match.group(1) or 'i'`}=${2:1}}^{${3:\infty}}$0
 endsnippet
 
+# prodx -> \prod_{x=1}^{\infty}
+# prod 	-> \prod_{i=1}^{\infty}
 context "math()"
-snippet "\\?\bprod([a-zA-Z]?)" "求积 Product" r
+snippet "\\?\bprod([a-zA-Z]?)" "Product" r
 \prod_{${1:`!p snip.rv = match.group(1) or 'i'`}=${2:1}}^{${3:\infty}}$0
 endsnippet
 
+# 1inty -> \int_{0}^{\infty} y
+# 2inty -> \iint_{0}^{\infty} y
+# 3inty -> \iiint_{0}^{\infty} y
+# 1int 	-> \int_{0}^{\infty} x
+# 2int 	-> \iint_{0}^{\infty} x
+# 3int 	-> \iiint_{0}^{\infty} x
 context "math()"
-snippet "\\?\b(o?i{1,3})nt([a-zA-Z]?)" "定积分 Definite Integral" r
-\\`!p snip.rv = match.group(1)`nt_{${1:0}}^{${2:\infty}}${3:${VISUAL}}\d `!p snip.rv = match.group(2) or 'x'`$0
+snippet "\\?\b([1-3])(o?)int([a-zA-Z]?)" "Definite Integral" r
+\\`!p snip.rv = match.group(2) + 'i' * int(match.group(1))`nt_{${1:0}}^{${2:\infty}}${3:${VISUAL}} `!p snip.rv = match.group(3) or 'x'`$0
 endsnippet
 
+# 1ninty 	-> \int  y
+# 2ninty 	-> \iint  y
+# 3ninty 	-> \iiint  y
+# 1nint 	-> \int  x
+# 2nint 	-> \iint  x
+# 3nint 	-> \iiint  x
 context "math()"
-snippet "\\?\bn(o?i{1,3})nt([a-zA-Z]?)" "不定积分 Indefinite Integral" r
-\\`!p snip.rv = match.group(2)`nt ${1:${VISUAL}}\d `!p snip.rv = match.group(3) or 'x'`$0
+snippet "\\?\b([1-3])n(o?)int([a-zA-Z]?)" "Indefinite Integral" r
+\\`!p snip.rv = match.group(2) + 'i' * int(match.group(1))`nt ${1:${VISUAL}} `!p snip.rv = match.group(3) or 'x'`$0
 endsnippet
 
+# limy 	-> \lim\limits_{y \to \infty}
+# lim 	-> \lim\limits_{x \to \infty}
 context "math()"
-snippet "\\?\b([1-3])(o?)int([a-zA-Z]?)" "定积分 Definite Integral" r
-\\`!p snip.rv = match.group(2) + 'i' * int(match.group(1))`nt_{${1:0}}^{${2:\infty}}${3:${VISUAL}}\d `!p snip.rv = match.group(3) or 'x'`$0
-endsnippet
-
-context "math()"
-snippet "\\?\b([1-3])n(o?)int([a-zA-Z]?)" "不定积分 Indefinite Integral" r
-\\`!p snip.rv = match.group(2) + 'i' * int(match.group(1))`nt ${1:${VISUAL}}\d `!p snip.rv = match.group(3) or 'x'`$0
-endsnippet
-
-context "math()"
-snippet "\\?\blim([a-zA-Z]?)" "极限 Limit" r
+snippet "\\?\blim([a-zA-Z]?)" "Limit" r
 \lim\limits_{${1:`!p snip.rv = match.group(1) or 'x'`} \to ${2:\infty}}$0
 endsnippet
 
+# dd -> \dfrac{\d }{\d }
 priority 1
 context "math()"
-snippet dd "导数 Derivative" w
+snippet dd "Derivative" w
 \dfrac{\d ${1:${VISUAL}}}{\d $2}$0
 endsnippet
 
+# pd -> \dfrac{\partial }{\partial }
 context "math()"
-snippet pd "偏导数 Partial Derivative" w
-\dfrac{\pd ${1:${VISUAL}}}{\pd $2}$0
+snippet pd "Partial Derivative" w
+\dfrac{\partial ${1:${VISUAL}}}{\partial $2}$0
 endsnippet
 
+# '' -> ^{()}
 context "math()"
-snippet '' "导数 Derivative" i
+snippet '' "Derivative" i
 ^{($1)}$0
 endsnippet
