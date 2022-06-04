@@ -1,0 +1,61 @@
+global !p
+from latex_.scopes import display_math
+endglobal
+
+#######################################################################
+#                             Parenthesis                             #
+#######################################################################
+
+# () -> \left(\right)
+context "display_math()"
+snippet () "Parenthesis"
+\left($1\right)$0
+endsnippet
+
+# {} -> \left{\right}
+context "display_math()"
+snippet {} "Parenthesis" i
+\left\{$1\right\}$0
+endsnippet
+
+# [] -> \left[\right]
+context "display_math()"
+snippet [] "Parenthesis" i
+\left\[$1\right\]$0
+endsnippet
+
+# ( -> \left(
+context "display_math()"
+snippet ( "Left(" i
+\left(
+endsnippet
+
+# ) -> \right)
+context "display_math()"
+snippet ) "Right)" i
+\right)
+endsnippet
+
+# { -> \left{
+context "display_math()"
+snippet { "Left{" i
+\left{
+endsnippet
+
+# } -> \right}
+context "display_math()"
+snippet } "Right}" i
+\right}
+endsnippet
+
+# [ -> \left[
+context "display_math()"
+snippet [ "Left["
+\left[
+endsnippet
+
+# ] -> \right]
+context "display_math()"
+snippet ] "Right]" i
+\right]
+endsnippet

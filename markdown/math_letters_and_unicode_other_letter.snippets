@@ -1,6 +1,6 @@
 global !p
 
-from markdown_scopes import math
+from markdown_.scopes import math
 
 endglobal
 
@@ -10,16 +10,20 @@ endglobal
 #                                                              #
 ################################################################
 
+# aleph -> \aleph
+# alef 	-> \aleph
 context "math()"
 snippet "aleph|alef" "Aleph" Awr
 \aleph 
 endsnippet
 
+# re -> \Re
 context "math()"
 snippet re "Real" w
 \Re 
 endsnippet
 
+# im -> \Im
 context "math()"
 snippet im "Image" w
 \Im 

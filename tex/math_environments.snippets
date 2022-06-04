@@ -1,0 +1,194 @@
+global !p
+from latex_.scopes import math, display_math, inline_math, chem, not_chem, unit, not_unit, text, env
+endglobal
+
+#######################################################################
+#                                                                     #
+#                            Environments             								#
+#                                                         						#
+#######################################################################
+
+context "text()"
+snippet beg "begin{} / end{}" bAi
+\begin{$1}[$2]
+	\label{$3:${4:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${VISUAL}$5
+\end{$1}$0
+endsnippet
+
+context "text()"
+snippet doc "Document Environment" bAi
+\begin{document}
+	${VISUAL}$1
+\end{document}$0
+endsnippet
+
+context "text()"
+snippet cnt "Center Environment" bAi
+\begin{center}
+	${VISUAL}$1
+\end{center}$0
+endsnippet
+
+context "text()"
+snippet enum "Enumerate Environment" bAi
+\begin{enumerate}
+	\label{enum:$1}
+
+	\item ${VISUAL}$2
+\end{enumerate}$0
+endsnippet
+
+context "text()"
+snippet item "Itemize Environment" bAi
+\begin{itemize}
+	\label{item:$1}
+
+	\item ${VISUAL}$2
+\end{itemize}$0
+endsnippet
+
+context "text()"
+snippet case "Cases Environment" bAi
+\begin{cases}
+	\label{case:$1}
+
+	${VISUAL}$2
+\end{cases}$0
+endsnippet
+
+context "text()"
+snippet prf "Proof Environment" bAi
+\begin{proof}
+	\label{prf:$1}
+
+	${VISUAL}$2
+\end{proof}
+endsnippet
+
+context "text()"
+snippet ali "Align* Environment" bAi
+\begin{align*}
+	${VISUAL}$1
+.\end{align*}$0
+endsnippet
+
+context "text()"
+snippet ali "Align Environment" bAi
+\begin{align}
+	${VISUAL}$1
+.\end{align}$0
+endsnippet
+
+context "text()"
+snippet eqt "Equation Environment" bAi
+\begin{equation}
+	\label{eqt:$1}
+
+	${VISUAL}$2
+.\end{equation}$0
+endsnippet
+
+context "text()"
+snippet eqt "Equation Environment" bAi
+\begin{equation*}
+	\label{eqt:$1}
+
+	${VISUAL}$2
+.\end{equation*}$0
+endsnippet
+
+context "text()"
+snippet spt "Equation Split Environment" bAi
+\begin{equation}
+	\label{spt:$1}
+
+	\begin{split}
+		${VISUAL}$2
+	\end{split}
+.\end{equation}$0
+endsnippet
+
+context "env('equation')"
+snippet spt "Equation Split Environment" bAi
+\begin{split}
+	${VISUAL}$1
+\end{split}$0
+endsnippet
+
+context "text()"
+snippet edt "Equation Dat Environment" bAi
+\begin{equation}
+	\label{edt:$1}
+
+	\begin{alignedat}{$2}
+		${VISUAL}$3
+	\end{alignedat}
+.\end{equation}$0
+endsnippet
+
+context "env('equation')"
+snippet edt "Equation Dat Environment" bAi
+\begin{alignedat}{$1}
+	${VISUAL}$2
+\end{alignedat}$0
+endsnippet
+
+context "text()"
+snippet cse "Equation Case Environment" bAi
+\begin{equation}
+	\label{cse:$1}
+
+	\begin{cases}
+		${VISUAL}$2
+	\end{cases}
+.\end{equation}$0
+endsnippet
+
+context "env('equation')"
+snippet cse "Equation Case Environment" bAi
+\begin{cases}
+	${VISUAL}$1
+\end{cases}$0
+endsnippet
+
+context "text()"
+snippet fig "Figure Environment (Image)" bAi
+\begin{figure}[${1:htpb}]
+	\centering
+	\includegraphics[width=0.8\textwidth]{$2}
+	\caption{${3}}
+	\label{fig:${4:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\end{figure}$0
+endsnippet
+
+context "text()"
+snippet fig "Figure Environment (PDF)" bAi
+\begin{figure}[${1:htpb}]
+	\centering
+	\incfig{$2}
+	\caption{${3}}
+	\label{fig:${4:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\end{figure}$0
+endsnippet
+
+context "text()"
+snippet tab "Tabular / Array Environment" bAi
+	\begin{${1:t}${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${2:c}}
+		$0${2/(?<=.)(c|l|r)|./(?1: & )/g}
+	\end{$1${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}$0
+endsnippet
+
+context "text()"
+snippet tbl "Table Environment" bAi
+\begin{table}[${1:htpb}]
+	\centering
+	\caption{${2:caption}}
+	\label{tab:${3:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	\begin{${4:t}${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${5:c}}
+		$6${5/(?<=.)(c|l|r)|./(?1: & )/g}
+	\end{$4${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
+\end{table}$0
+endsnippet

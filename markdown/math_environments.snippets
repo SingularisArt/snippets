@@ -1,6 +1,6 @@
 global !p
 
-from markdown_scopes import math, display_math, inline_math, chem, not_chem, unit, not_unit
+from markdown_.scopes import math, display_math, inline_math, chem, not_chem, unit, not_unit
 
 def inline_environment(snip, env = '', option = ''):
 	before_text = snip.buffer[snip.line][:snip.snippet_start[1]]
@@ -82,4 +82,81 @@ endsnippet
 context "math()"
 snippet btag "Tag" w
 \tag{$1}$0
+endsnippet
+
+context "display_math()"
+snippet mat "Matrix"
+\begin{bmatrix}
+$0
+\end{bmatrix}
+endsnippet
+
+context "display_math()"
+snippet det "Determinant matrix"
+\begin{vmatrix}
+$0
+\end{vmatrix}
+endsnippet
+
+context "display_math()"
+snippet vec "Vector"
+\begin{pmatrix}
+$0
+\end{pmatrix}
+endsnippet
+
+context "display_math()"
+snippet matil "Inline matrix"
+\left[ \begin{smallmatrix}
+$0
+\end{smallmatrix} \right]
+endsnippet
+
+context "display_math()"
+snippet detil "Inline determinant"
+\left| \begin{smallmatrix}
+$0
+\end{smallmatrix} \right|
+endsnippet
+
+context "display_math()"
+snippet vecil "Inline vector"
+\left( \begin{smallmatrix}
+$0
+\end{smallmatrix} \right)
+endsnippet
+
+context "inline_math()"
+snippet mat "Matrix"
+\begin{bmatrix} $0 \end{bmatrix}
+endsnippet
+
+context "inline_math()"
+snippet det "Determinant matrix"
+\begin{vmatrix} $0 \end{vmatrix}
+endsnippet
+
+context "inline_math()"
+snippet vec "Vector"
+\begin{pmatrix} $0 \end{pmatrix}
+endsnippet
+
+context "inline_math()"
+snippet matil "Inline matrix"
+\left[ \begin{smallmatrix} $0 \end{smallmatrix} \right]
+endsnippet
+
+context "inline_math()"
+snippet detil "Inline determinant"
+\left| \begin{smallmatrix} $0 \end{smallmatrix} \right|
+endsnippet
+
+context "inline_math()"
+snippet vecil "Inline vector"
+\left( \begin{smallmatrix} $0 \end{smallmatrix} \right)
+endsnippet
+
+context "math()"
+snippet chse "n choose p"
+{${1:n} \choose ${2:p}} $0
 endsnippet
