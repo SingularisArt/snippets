@@ -5,11 +5,11 @@ from latex_.text import *
 
 endglobal
 
-################################################################
-#                                                              #
-#                            Common                            #
-#                                                              #
-################################################################
+#######################################################################
+#																																			#
+#                               Common                                #
+#																																			#
+#######################################################################
 
 # ilm -> $$
 snippet ilm "Inline Math" wA
@@ -27,8 +27,12 @@ ${VISUAL}$1
 \].$0
 endsnippet
 
-# tb53 -> a table with 3 three columns and 5 rows
-context "text()"
+# tb3x5 -> Generate a table of 3 by 5
 pre_expand "create_table(snip)"
-snippet "\btb([1-9]{2})" "Table" br
+snippet "tb(\d+)x(\d+)" "Generate table of *width* by *height*" wrAbi
+endsnippet
+
+# tr3 -> Add a table row of dimension 3
+pre_expand "add_row(snip)"
+snippet "tr(\d+)" "Add table row of dimension ..." wrbi
 endsnippet

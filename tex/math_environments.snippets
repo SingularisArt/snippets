@@ -1,5 +1,7 @@
 global !p
+
 from latex_.scopes import math, display_math, inline_math, chem, not_chem, unit, not_unit, text, env
+
 endglobal
 
 #######################################################################
@@ -191,4 +193,81 @@ snippet tbl "Table Environment" bAi
 		$6${5/(?<=.)(c|l|r)|./(?1: & )/g}
 	\end{$4${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
 \end{table}$0
+endsnippet
+
+context "display_math()"
+snippet mat "Matrix"
+\begin{bmatrix}
+$0
+\end{bmatrix}
+endsnippet
+
+context "display_math()"
+snippet det "Determinant matrix"
+\begin{vmatrix}
+	$0
+\end{vmatrix}
+endsnippet
+
+context "display_math()"
+snippet vec "Vector"
+\begin{pmatrix}
+	$0
+\end{pmatrix}
+endsnippet
+
+context "display_math()"
+snippet matil "Inline matrix"
+\left[ \begin{smallmatrix}
+	$0
+\end{smallmatrix} \right]
+endsnippet
+
+context "display_math()"
+snippet detil "Inline determinant"
+\left| \begin{smallmatrix}
+	$0
+\end{smallmatrix} \right|
+endsnippet
+
+context "display_math()"
+snippet vecil "Inline vector"
+\left( \begin{smallmatrix}
+	$0
+\end{smallmatrix} \right)
+endsnippet
+
+context "inline_math()"
+snippet mat "Matrix"
+\begin{bmatrix} $0 \end{bmatrix}
+endsnippet
+
+context "inline_math()"
+snippet det "Determinant matrix"
+\begin{vmatrix} $0 \end{vmatrix}
+endsnippet
+
+context "inline_math()"
+snippet vec "Vector"
+\begin{pmatrix} $0 \end{pmatrix}
+endsnippet
+
+context "inline_math()"
+snippet matil "Inline matrix"
+\left[ \begin{smallmatrix} $0 \end{smallmatrix} \right]
+endsnippet
+
+context "inline_math()"
+snippet detil "Inline determinant"
+\left| \begin{smallmatrix} $0 \end{smallmatrix} \right|
+endsnippet
+
+context "inline_math()"
+snippet vecil "Inline vector"
+\left( \begin{smallmatrix} $0 \end{smallmatrix} \right)
+endsnippet
+
+context "math()"
+snippet chse "n choose p"
+{${1:n} \choose ${2:p}} $0
 endsnippet
