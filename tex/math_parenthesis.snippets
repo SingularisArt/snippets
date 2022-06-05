@@ -1,6 +1,11 @@
 global !p
 
-from latex_.scopes import display_math
+from builtin import choose_next
+from latex_.scopes import display_math, math
+
+opening = ["(", "[", "{"]
+closing = [")", "]", "}"]
+vert = ["\\vert", "\\Vert"]
 
 endglobal
 
@@ -12,54 +17,52 @@ endglobal
 
 # () -> \left(\right)
 context "display_math()"
-snippet () "Parenthesis"
+snippet "\(\)" "Parenthesis" r
 \left($1\right)$0
 endsnippet
 
 # {} -> \left{\right}
 context "display_math()"
-snippet {} "Parenthesis" i
+snippet "{}" "Curly Brackets" r
 \left\{$1\right\}$0
 endsnippet
 
 # [] -> \left[\right]
 context "display_math()"
-snippet [] "Parenthesis" i
+snippet "\[\]" "Square Brackets" r
 \left\[$1\right\]$0
 endsnippet
 
-# ( -> \left(
-context "display_math()"
-snippet ( "Left(" i
-\left(
+# \left(x\right) -> \left[x\right]
+# \left[x\right] -> \left{x\right}
+# \left{x\right} -> \left(x\right)
+context "math()"
+snippet "\\left(\(|\[|\{)(.+)?\\right(\)|\]|\})" "Cycle Parenthesis" r
+`!p
+next_open = choose_next(match.group(1), opening, 3)
+next_close = choose_next(match.group(3), closing, 3)
+content = "" if match.group(2) is None else match.group(2)
+snip.rv = "\\left" + next_open + content + "\\right" + next_close
+`
 endsnippet
 
-# ) -> \right)
-context "display_math()"
-snippet ) "Right)" i
-\right)
+# | -> \vert  \vert
+context "math()"
+snippet | "One Verticals"
+\vert $1 \vert$0
 endsnippet
 
-# { -> \left{
-context "display_math()"
-snippet { "Left{" i
-\left{
+# | -> \Vert  \Vert
+context "math()"
+snippet | "Two Verticals"
+\Vert $1 \Vert$0
 endsnippet
 
-# } -> \right}
-context "display_math()"
-snippet } "Right}" i
-\right}
-endsnippet
-
-# [ -> \left[
-context "display_math()"
-snippet [ "Left["
-\left[
-endsnippet
-
-# ] -> \right]
-context "display_math()"
-snippet ] "Right]" i
-\right]
+context "math()"
+snippet "(\\vert|\\Vert)(.+)?(\\vert|\\Vert)" "Cycle Parenthesis" r
+`!p
+next_vert = choose_next(match.group(1), vert, 2)
+content = "" if match.group(2) is None else match.group(2)
+snip.rv = next_vert + content + next_vert
+`
 endsnippet

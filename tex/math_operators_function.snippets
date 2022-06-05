@@ -58,14 +58,14 @@ snippet fun "F something Subset of R" iA
 f : $1 \subset \mathbf{R} \to \mathbf{R} : $2
 endsnippet
 
-# sqrt -> \sqrt[3]{}
+# sr -> \sqrt{}
 context "math()"
-snippet sqrt "Root" Aw
-\sqrt[${1:3}]{${2:${VISUAL}}}$0
+snippet sr "Root" Aw
+\sqrt{${1:${VISUAL}}}$0
 endsnippet
 
-# gen -> \sqrt{}
+# sn -> \sqrt{}
 context "math()"
-snippet gen "Square Root" Aw
-\sqrt{${1:${VISUAL}}}$0
+snippet sn "Root" Aw
+\sqrt[${1:3}]{${2:${VISUAL}}}$0
 endsnippet
