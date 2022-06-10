@@ -1,0 +1,29 @@
+snippet electron-template "Electron Template"
+const { app, Menu, BrowserWindow } = require('electron');
+const path = require('path');
+
+const createWindow = () => {
+  const win = new BrowserWindow({
+    height: 750,
+    width: 1000,
+    frame: false,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    }
+  });
+
+  win.loadFile('index.html');
+};
+
+app.whenReady().then(()=> {
+  createWindow();
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0 ) createWindow();
+  });
+})
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
+});
+endsnippet
