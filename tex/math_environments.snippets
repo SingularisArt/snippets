@@ -73,14 +73,14 @@ context "text()"
 snippet ali "Align* Environment" bAi
 \begin{align*}
 	${VISUAL}$1
-.\end{align*}$0
+${2:.}\end{align*}$0
 endsnippet
 
 context "text()"
 snippet ali "Align Environment" bAi
 \begin{align}
 	${VISUAL}$1
-.\end{align}$0
+${2:.}\end{align}$0
 endsnippet
 
 context "text()"
@@ -89,7 +89,7 @@ snippet eqt "Equation Environment" bAi
 	\label{eqt:$1}
 
 	${VISUAL}$2
-.\end{equation}$0
+${2:.}\end{equation}$0
 endsnippet
 
 context "text()"
@@ -98,7 +98,7 @@ snippet eqt "Equation Environment" bAi
 	\label{eqt:$1}
 
 	${VISUAL}$2
-.\end{equation*}$0
+${2:.}\end{equation*}$0
 endsnippet
 
 context "text()"
@@ -109,7 +109,7 @@ snippet spt "Equation Split Environment" bAi
 	\begin{split}
 		${VISUAL}$2
 	\end{split}
-.\end{equation}$0
+${2:.}\end{equation}$0
 endsnippet
 
 context "env('equation')"
@@ -127,7 +127,7 @@ snippet edt "Equation Dat Environment" bAi
 	\begin{alignedat}{$2}
 		${VISUAL}$3
 	\end{alignedat}
-.\end{equation}$0
+${2:.}\end{equation}$0
 endsnippet
 
 context "env('equation')"
@@ -145,7 +145,7 @@ snippet cse "Equation Case Environment" bAi
 	\begin{cases}
 		${VISUAL}$2
 	\end{cases}
-.\end{equation}$0
+${2:.}\end{equation}$0
 endsnippet
 
 context "env('equation')"
@@ -153,6 +153,15 @@ snippet cse "Equation Case Environment" bAi
 \begin{cases}
 	${VISUAL}$1
 \end{cases}$0
+endsnippet
+
+context "text()"
+snippet minipage "Minipage equation" bAi
+\begin{minipage}{.${1:5}\linewidth}
+	\begin{${2:align*}}
+		${VISUAL}$3
+	${4:.}\end{$2}
+\end{minipage}
 endsnippet
 
 context "text()"
@@ -198,73 +207,73 @@ endsnippet
 context "display_math()"
 snippet mat "Matrix"
 \begin{bmatrix}
-$0
-\end{bmatrix}
+	$0
+${2:.}\end{bmatrix}
 endsnippet
 
 context "display_math()"
 snippet det "Determinant matrix"
 \begin{vmatrix}
 	$0
-\end{vmatrix}
+${2:.}\end{vmatrix}
 endsnippet
 
 context "display_math()"
 snippet vec "Vector"
 \begin{pmatrix}
 	$0
-\end{pmatrix}
+${2:.}\end{pmatrix}
 endsnippet
 
 context "display_math()"
 snippet matil "Inline matrix"
 \left[ \begin{smallmatrix}
 	$0
-\end{smallmatrix} \right]
+${2:.}\end{smallmatrix} \right]
 endsnippet
 
 context "display_math()"
 snippet detil "Inline determinant"
 \left| \begin{smallmatrix}
 	$0
-\end{smallmatrix} \right|
+${2:.}\end{smallmatrix} \right|
 endsnippet
 
 context "display_math()"
 snippet vecil "Inline vector"
 \left( \begin{smallmatrix}
 	$0
-\end{smallmatrix} \right)
+${2:.}\end{smallmatrix} \right)
 endsnippet
 
 context "inline_math()"
 snippet mat "Matrix"
-\begin{bmatrix} $0 \end{bmatrix}
+\begin{bmatrix} $0 \end{bmatrix}${2:.}
 endsnippet
 
 context "inline_math()"
 snippet det "Determinant matrix"
-\begin{vmatrix} $0 \end{vmatrix}
+\begin{vmatrix} $0 \end{vmatrix}${2:.}
 endsnippet
 
 context "inline_math()"
 snippet vec "Vector"
-\begin{pmatrix} $0 \end{pmatrix}
+\begin{pmatrix} $0 \end{pmatrix}${2:.}
 endsnippet
 
 context "inline_math()"
 snippet matil "Inline matrix"
-\left[ \begin{smallmatrix} $0 \end{smallmatrix} \right]
+\left[ \begin{smallmatrix} $0 \end{smallmatrix} \right]${2:.}
 endsnippet
 
 context "inline_math()"
 snippet detil "Inline determinant"
-\left| \begin{smallmatrix} $0 \end{smallmatrix} \right|
+\left| \begin{smallmatrix} $0 \end{smallmatrix} \right|${2:.}
 endsnippet
 
 context "inline_math()"
 snippet vecil "Inline vector"
-\left( \begin{smallmatrix} $0 \end{smallmatrix} \right)
+\left( \begin{smallmatrix} $0 \end{smallmatrix} \right)${2:.}
 endsnippet
 
 context "math()"

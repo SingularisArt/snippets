@@ -1,6 +1,6 @@
 global !p
 
-from latex_.scopes import text
+from latex_.scopes import text, math
 from latex_.text import *
 
 endglobal
@@ -12,19 +12,30 @@ endglobal
 #######################################################################
 
 # ilm -> $$
+context "text()"
 snippet ilm "Inline Math" wA
-$${VISUAL}$1$`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
-    snip.rv = ' '
-else:
-    snip.rv = ''
-`$2
+$${VISUAL}$1$
 endsnippet
 
+context "text()"
 snippet dm "Display Math" wA
-\[
-${VISUAL}$1
-\].$0
+\[%
+	${VISUAL}$1
+${2:.}\]%$0
+endsnippet
+
+context "math()"
+snippet systeme "Systeme*" wA
+\systeme* {
+	${VISUAL}$1
+}
+endsnippet
+
+context "math()"
+snippet systeme "Systeme" wA
+\systeme {
+	${VISUAL}$1
+}
 endsnippet
 
 # tb3x5 -> Generate a table of 3 by 5
