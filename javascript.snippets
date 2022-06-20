@@ -1,29 +1,29 @@
-snippet electron-template "Electron Template"
-const { app, Menu, BrowserWindow } = require('electron');
-const path = require('path');
+snippet imp ""
+import ${1:moduleName} from '${2:module}'
+endsnippet
 
-const createWindow = () => {
-  const win = new BrowserWindow({
-    height: 750,
-    width: 1000,
-    frame: false,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
-  });
+snippet imn ""
+import '${1:module}'
+endsnippet
 
-  win.loadFile('index.html');
-};
+snippet imd ""
+import { ${1:destructuredModule} } from '${2:module}'
+endsnippet
 
-app.whenReady().then(()=> {
-  createWindow();
+snippet ime ""
+import * as ${1:alias} from '${2:module}'
+endsnippet
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0 ) createWindow();
-  });
-})
+snippet ima ""
+import { ${1:originalName} as ${2:aliasName}} from '${3:module}'
+endsnippet
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
-});
+snippet rafce ""
+const ${1:Header} = () => {
+	return (
+		<div>$2</div>
+	)
+}
+
+export default $1
 endsnippet
