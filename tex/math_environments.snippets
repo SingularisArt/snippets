@@ -13,8 +13,7 @@ endglobal
 context "text()"
 snippet beg "begin{} / end{}" bAi
 \begin{$1}[$2]
-	\label{$3:${4:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
+	\label{$3:${4:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}`!p snip.rv = '\n'`
 	${VISUAL}$5
 \end{$1}$0
 endsnippet
@@ -36,8 +35,7 @@ endsnippet
 context "text()"
 snippet enum "Enumerate Environment" bAi
 \begin{enumerate}
-	\label{enum:$1}
-
+	\label{enum:$1}`!p snip.rv = '\n'`
 	\item ${VISUAL}$2
 \end{enumerate}$0
 endsnippet
@@ -45,8 +43,7 @@ endsnippet
 context "text()"
 snippet item "Itemize Environment" bAi
 \begin{itemize}
-	\label{item:$1}
-
+	\label{item:$1}`!p snip.rv = '\n'`
 	\item ${VISUAL}$2
 \end{itemize}$0
 endsnippet
@@ -54,8 +51,7 @@ endsnippet
 context "text()"
 snippet case "Cases Environment" bAi
 \begin{cases}
-	\label{case:$1}
-
+	\label{case:$1}`!p snip.rv = '\n'`
 	${VISUAL}$2
 \end{cases}$0
 endsnippet
@@ -63,8 +59,7 @@ endsnippet
 context "text()"
 snippet prf "Proof Environment" bAi
 \begin{proof}
-	\label{prf:$1}
-
+	\label{prf:$1}`!p snip.rv = '\n'`
 	${VISUAL}$2
 \end{proof}
 endsnippet
@@ -86,8 +81,7 @@ endsnippet
 context "text()"
 snippet eqt "Equation Environment" bAi
 \begin{equation}
-	\label{eqt:$1}
-
+	\label{eqt:$1}`!p snip.rv = '\n'`
 	${VISUAL}$2
 ${2:.}\end{equation}$0
 endsnippet
@@ -95,8 +89,7 @@ endsnippet
 context "text()"
 snippet eqt "Equation Environment" bAi
 \begin{equation*}
-	\label{eqt:$1}
-
+	\label{eqt:$1}`!p snip.rv = '\n'`
 	${VISUAL}$2
 ${2:.}\end{equation*}$0
 endsnippet
@@ -104,8 +97,7 @@ endsnippet
 context "text()"
 snippet spt "Equation Split Environment" bAi
 \begin{equation}
-	\label{spt:$1}
-
+	\label{spt:$1}`!p snip.rv = '\n'`
 	\begin{split}
 		${VISUAL}$2
 	\end{split}
@@ -122,8 +114,7 @@ endsnippet
 context "text()"
 snippet edt "Equation Dat Environment" bAi
 \begin{equation}
-	\label{edt:$1}
-
+	\label{edt:$1}`!p snip.rv = '\n'`
 	\begin{alignedat}{$2}
 		${VISUAL}$3
 	\end{alignedat}
@@ -140,8 +131,7 @@ endsnippet
 context "text()"
 snippet cse "Equation Case Environment" bAi
 \begin{equation}
-	\label{cse:$1}
-
+	\label{cse:$1}`!p snip.rv = '\n'`
 	\begin{cases}
 		${VISUAL}$2
 	\end{cases}
@@ -196,8 +186,7 @@ snippet tbl "Table Environment" bAi
 \begin{table}[${1:htpb}]
 	\centering
 	\caption{${2:caption}}
-	\label{tab:${3:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-
+	\label{tab:${3:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}`!p snip.rv = '\n'`
 	\begin{${4:t}${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${5:c}}
 		$6${5/(?<=.)(c|l|r)|./(?1: & )/g}
 	\end{$4${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
