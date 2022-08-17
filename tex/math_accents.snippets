@@ -27,7 +27,7 @@ endglobal
 # xhat -> \hat{x}
 # xvec -> \vec{x}
 context "math()"
-snippet "(\b[a-zA-Z0]|\\[a-zA-Z]+)([_^](?:\{\S+\s?\}|[\da-zA-Z]))?(bar|hat|vec)" "Bar/Hat/Vector" Ar
+snippet "(\b[\da-zA-Z0-9]|\\[\da-zA-Z]+)([_^](?:\{\S+\s?\}|[\da-zA-Z]))?(bar|hat|vec)" "Bar/Hat/Vector" Ar
 `!p snip.rv = bar_hat_vec(match.group(3) or match.group(2), match.group(1), match.group(2) if match.group(3) else '')`
 endsnippet
 
