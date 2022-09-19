@@ -5,10 +5,11 @@ from latex_.text import *
 
 endglobal
 
+
 #######################################################################
-#																																			#
+#                                                                     #
 #                               Common                                #
-#																																			#
+#                                                                     #
 #######################################################################
 
 # ilm -> $$
@@ -51,5 +52,47 @@ endsnippet
 # temp -> a basic template
 snippet temp "Template"
 \documentclass[${1:a4paper,twoside}]{${2:article}}
+
 \input{preamble.tex}
+
+\title{${3:Title}}
+\author{${4:Author}}
+\date{${5:\today}}
+
+\begin{document}
+	$0
+\end{document}
+endsnippet
+
+
+#######################################################################
+#                                                                     #
+#                             Text Styles                             #
+#                                                                     #
+#######################################################################
+
+
+context "text()"
+snippet bf "Bold"
+\textbf{${VISUAL}$1}$0
+endsnippet
+
+context "text()"
+snippet it "Italic"
+\textit{${VISUAL}$1}$0
+endsnippet
+
+context "text()"
+snippet un "Underline"
+\underline{${VISUAL}$1}$0
+endsnippet
+
+context "text()"
+snippet sc "Smallcaps"
+\textsc{${VISUAL}$1}$0
+endsnippet
+
+context "math()"
+snippet rm "Text"
+\textrm{${VISUAL}$1}$0
 endsnippet

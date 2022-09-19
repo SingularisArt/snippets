@@ -13,7 +13,7 @@ endglobal
 
 priority 1000
 context "text()"
-snippet "(math|sympy)" "mathematica block" rw
+snippet "(math|sympy)" "mathematica / sympy block" rw
 `!p
 match match.group(1):
 	case "math":
@@ -31,7 +31,7 @@ endsnippet
 
 priority 10000
 context "text()"
-snippet "(math|sympy)(.*)(math|sympy)" "evaluate mathematica" wr
+snippet "(math|sympy)(.*)(math|sympy)" "evaluate mathematica / sympy" wr
 `!p
 match match.group(1):
 	case "math":

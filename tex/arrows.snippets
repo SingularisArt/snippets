@@ -11,9 +11,10 @@ endglobal
 
 #######################################################################
 #                                                                     #
-#                          Relations - Arrow                          #
+#                               Arrows                                #
 #                                                                     #
 #######################################################################
+
 
 # => -> \Rightarrow
 context "math()"
@@ -51,7 +52,7 @@ snippet == "Iff" Ai
 \Leftrightarrow 
 endsnippet
 
-# \leftarrow			-> \gets
+# \leftarrow      -> \gets
 # \gets           -> \longleftarrow
 # \longleftarrow  -> \Leftarrow
 # \Leftarrow      -> \Longleftarrow
@@ -64,7 +65,7 @@ snip.rv = choose_next(match.group(1), left_arrows, 6)
 `
 endsnippet
 
-# \rightarrow			-> \to
+# \rightarrow     -> \to
 # \to             -> \longrightarrow
 # \longrightarrow -> \Rightarrow
 # \Rightarrow     -> \Longrightarrow
@@ -77,7 +78,7 @@ snip.rv = choose_next(match.group(1), right_arrows, 6)
 `
 endsnippet
 
-# \leftrightarrow			 -> \longleftrightarrow
+# \leftrightarrow      -> \longleftrightarrow
 # \longleftrightarrow  -> \Leftrightarrow
 # \Leftrightarrow      -> \Longleftrightarrow
 # \Longleftrightarrow  -> \iff

@@ -39,7 +39,7 @@ snippet "(?<!\\)\b([a-zA-Z]{2,})([_^](?:\{\S+\s?\}|[\da-zA-Z]))?(bar|hat|vec)" "
 `!p snip.rv = long_bar_hat_vec(match.group(3) or match.group(2), match.group(1), match.group(2) if match.group(3) else '')`
 endsnippet
 
-# \bar{xx} 			-> \overline{xx}
+# \bar{xx}      -> \overline{xx}
 # \overline{xx} -> \bar{xx}
 context "math()"
 snippet "(\\bar|\\overline)(\{[\\a-zA-Z]+\s?\})((?:[_^](?:[\da-zA-Z]|\{[\\\w\d\s]+\}))?)" "Bar" r
@@ -48,8 +48,8 @@ snip.rv = choose_next(match.group(1), bars, 2) + match.group(2) + match.group(3)
 `
 endsnippet
 
-# \hat{xx} 			-> \widehat{xx}
-# \widehat{xx} 	-> \hat{xx}
+# \hat{xx}      -> \widehat{xx}
+# \widehat{xx}  -> \hat{xx}
 context "math()"
 snippet "(\\hat|\\widehat)(\{[\\a-zA-Z]+\s?\})((?:[_^](?:[\da-zA-Z]|\{[\\\w\d\s]+\}))?)" "Hat" r
 `!p
@@ -57,8 +57,8 @@ snip.rv = choose_next(match.group(1), hats, 2) + match.group(2) + match.group(3)
 `
 endsnippet
 
-# \vec{xx} 						-> \overrightarrow{xx}
-# \overrightarrow{xx}	-> \vec{xx}
+# \vec{xx}            -> \overrightarrow{xx}
+# \overrightarrow{xx} -> \vec{xx}
 context "math()"
 snippet "(\\vec|\\overrightarrow)(\{[\\0a-zA-Z]+\s?\})((?:[_^](?:[\da-zA-Z]|\{[\\\w\d\s]+\}))?)" "Vector" r
 `!p
@@ -66,24 +66,24 @@ snip.rv = choose_next(match.group(1), vecs, 2) + match.group(2) + match.group(3)
 `
 endsnippet
 
-# <a| = \bra{a}
-# <| = \bra{}
+# <a| -> \bra{a}
+# <|  -> \bra{}
 context "math()"
 snippet '\<(.*?)\|' "Bra" riA
 \bra{`!p snip.rv = match.group(1)`}
 endsnippet
 
-# |a> = \ket{a}
-# |> = \ket{}
+# |a> -> \ket{a}
+# |>  -> \ket{}
 context "math()"
 snippet '\|(.*?)\>' "Ket" riA
 \ket{`!p snip.rv = match.group(1)`}
 endsnippet
 
-# \bra{a}|a> = \braket{a|a}
-# \ket{a}|a> = \braket{a|a}
-# \bra{a},a> = \braket{a,a}
-# \ket{a},a> = \braket{a,a}
+# \bra{a}|a> -> \braket{a|a}
+# \ket{a}|a> -> \braket{a|a}
+# \bra{a},a> -> \braket{a,a}
+# \ket{a},a> -> \braket{a,a}
 context "math()"
 snippet '\\(bra|ket){(.*?)}(,)?([^\|]*?)\>' "Braket" riA
 \braket{`!p

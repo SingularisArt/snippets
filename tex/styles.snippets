@@ -1,14 +1,14 @@
 global !p
 
-from markdown_.scopes import math, display_math
+from latex_.scopes import math, display_math
 
 endglobal
 
-################################################################
-#                                                              #
-#                            Styles                            #
-#                                                              #
-################################################################
+#######################################################################
+#                                                                     #
+#                               Styles                                #
+#                                                                     #
+#######################################################################
 
 # color -> \textcolor{red}{}
 context "math()"
@@ -22,21 +22,21 @@ snippet cbox "Theorem Box" w
 \fcolorbox{#ff69b4}{trasparent}{$$1$}$0
 endsnippet
 
-# rm 	-> \mathrm{}
+# rm  -> \mathrm{}
 # xrm -> \mathrm{x}
 context "math()"
 snippet "(\w*)rm" "Upright Roman Font" r
 \mathrm{${1:`!p snip.rv = match.group(1)`}}$0
 endsnippet
 
-# bb 	-> \mathbb{}
+# bb  -> \mathbb{}
 # xbb -> \mathbb{x}
 context "math()"
 snippet "(\w*)bb" "Blank Bold Font" r
 \mathbb{${1:`!p snip.rv = match.group(1)`}}$0
 endsnippet
 
-# bf 	-> \mathbf{}
+# bf  -> \mathbf{}
 # xbf -> \mathbf{x}
 context "math()"
 snippet "(\w*)bf" "Upright Bold Font" r
@@ -104,11 +104,11 @@ endsnippet
 # dis -> \displaystyle
 context "math()"
 snippet dis "Display Style" w
-\displaystyle 
+\displaystyle
 endsnippet
 
 # tes -> \textstyle
 context "math()"
 snippet tes "Text Style" w
-\textstyle 
+\textstyle
 endsnippet

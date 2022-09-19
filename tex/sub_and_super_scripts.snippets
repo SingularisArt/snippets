@@ -6,23 +6,10 @@ endglobal
 
 #######################################################################
 #                                                                     #
-#                               Layout                                #
+#                        Sub and Super Scripts                        #
 #                                                                     #
 #######################################################################
 
-# \\ -> \\
-context "inline_math()"
-snippet \\ "Line Break" Ai
-\\\\ 
-endsnippet
-
-# \\ -> \\
-#
-context "display_math()"
-snippet \\ "Line Break" Ai
-\\\\
-
-endsnippet
 
 # , -> _{}
 context "math()"
@@ -93,6 +80,12 @@ endsnippet
 context "math()"
 snippet cb "Cube" iA
 ^{3}
+endsnippet
+
+# fr -> ^{4}
+context "math()"
+snippet cb "Forth" iA
+^{4}
 endsnippet
 
 # comp -> ^{c}

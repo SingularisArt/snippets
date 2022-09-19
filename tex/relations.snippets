@@ -1,17 +1,17 @@
 global !p
 
 from builtin import choose_next
-from markdown_.scopes import math, chem
+from latex_.scopes import math
 
 nornot = ['', 'n']
 
 endglobal
 
-################################################################
-#                                                              #
-#                          Relations                           #
-#                                                              #
-################################################################
+#######################################################################
+#                                                                     #
+#                              Relations                              #
+#                                                                     #
+#######################################################################
 
 # := -> \coloneq
 context "math()"
@@ -22,64 +22,58 @@ endsnippet
 # >> -> \gg
 context "math()"
 snippet >> "Much Larger Than" Ai
-\gg 
+\gg
 endsnippet
 
 # << -> \ll
 context "math()"
 snippet << "Much Smaller Than" Ai
-\ll 
+\ll
 endsnippet
 
 # <= -> \le
 context "math()"
 snippet <= "Smaller or Equal" Ai
-\le 
+\le
 endsnippet
 
 # >= -> \ge
 context "math()"
 snippet >= "Larger or Equal" Ai
-\ge 
+\ge
 endsnippet
 
 # != -> \ne
 snippet != "Not Equal" Ai
-\ne 
+\ne
 endsnippet
 
 # !! -> \approx
 context "math()"
 snippet ~~ "Approximation" Ai
-\approx 
+\approx
 endsnippet
 
 # oc -> \propto
 context "math()"
 snippet oc "Proportional" Aw
-\propto 
+\propto
 endsnippet
 
 # =~ -> \sim
 context "math()"
 snippet =~ "Similar" Ai
-\sim 
+\sim
 endsnippet
 
 # ~= -> \cong
 context "math()"
 snippet ~= "Congruent" Ai
-\cong 
-endsnippet
-
-# = -> \xlongequal[]{\enspace \enspace}
-context "chem()"
-snippet = "Chemical Equal" i
-	\xlongequal[$1]{\enspace $2\enspace} $0
+\cong
 endsnippet
 
 # \nsim -> \sim
-# \sim 	-> \nsim
+# \sim  -> \nsim
 context "math()"
 snippet "\\(n?)sim(\s?)" "Similar Transformation" r
 \\`!p
@@ -88,7 +82,7 @@ snip.rv = choose_next(match.group(1), nornot, 2) + 'sim' + match.group(2)
 endsnippet
 
 # \ncong -> \cong
-# \cong 	-> \ncong
+# \cong  -> \ncong
 context "math()"
 snippet "\\(n?)cong(\s?)" "Congruent Transformation" Ar
 \\`!p
