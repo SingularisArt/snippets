@@ -14,10 +14,11 @@ endglobal
 #######################################################################
 
 
-# sum -> \sum_{i=1}^{\infty}
+# sum -> \sum_{i=1}^{\infty} f(x)
+# prod -> \prod_{i=1}^{\infty} f(x)
 context "math()"
-snippet sum "Sum" A
-\sum_{${1:i=1}}^{${2:\infty}}
+snippet "(prod|sum)" "Product or Summation" rA
+\\`!p snip.rv = match.group(1)`_{${1:i=1}}^{${2:\infty}} ${3:f(x)}
 endsnippet
 
 # int   -> \int_{x}^{\infty} f(x)
