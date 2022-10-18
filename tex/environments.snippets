@@ -13,9 +13,9 @@ endglobal
 context "text()"
 snippet beg "begin{} / end{}" bAm
 \begin{$1}[$2]
-	\label{$3:${4:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+  \label{$3:${4:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
-	${VISUAL}$5
+  ${VISUAL}$5
 \end{$1}
 endsnippet
 
