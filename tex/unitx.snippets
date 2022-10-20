@@ -1,0 +1,103 @@
+global !p
+
+from latex_.scopes import math
+
+endglobal
+
+###############################################################################
+#                                                                             #
+#                                   SI UnitX                                  #
+#                                                                             #
+###############################################################################
+
+###########
+#  Units  #
+###########
+
+# unit -> \unit[]{\}
+snippet unit "Unit" i
+\unit[$1]{\\$2}$0
+endsnippet
+
+# unitkilometer -> \unit[]{\kilometer}
+snippet "unit([a-z]+)" "Unit" ir
+\unit[$1]{\\`!p snip.rv = match.group(1) or ""`}$0
+endsnippet
+
+# unitP -> \unit[]{\\per\}
+snippet unitP "Unit Per" i
+\unit[$1]{\\$2\per\\$3}$0
+endsnippet
+
+# unitPkilometer hour -> \unit[]{\kilometer\per\hour}
+snippet "unitP([a-z]+) ([a-z]+)" "Unit Per" ir
+\unit[$1]{\\`!p snip.rv = match.group(1) or ""`\per\\`!p snip.rv = match.group(2) or ""`}$0
+endsnippet
+
+########################
+#  Angles and Numbers  #
+########################
+
+snippet "(ang|num)" "Angle or Number" ir
+\\`!p snip.rv = match.group(1)`[$1]{$2}$0
+endsnippet
+
+snippet "(ang|num)([0-9a-z.]+)" "Angle or Number" ir
+\\`!p snip.rv = match.group(1)`[$1]{`!p snip.rv = match.group(2) or ""`}$0
+endsnippet
+
+#######################
+#  Units and Numbers  #
+#######################
+
+snippet SI "Unit with Number" i
+\SI[$1]{$2}{\\$3}$0
+endsnippet
+
+snippet "SI([0-9.]+)" "Unit with Number" ir
+\SI[$1]{`!p snip.rv = match.group(1) or ""`}{\\$2}$0
+endsnippet
+
+snippet "SI([a-z]+)" "Unit with Number" ir
+\SI[$1]{$2}{\\`!p snip.rv = match.group(1) or ""`}$0
+endsnippet
+
+snippet "SI([0-9.]+) ([a-z]+)" "Unit with Number" ir
+\SI[$1]{`!p snip.rv = match.group(1) or ""`}{\\`!p snip.rv = match.group(2) or ""`}$0
+endsnippet
+
+snippet SIP "Number with Unit Per Unit" i
+\SI[$1]{$2}{\\$3\per\\$4}$0
+endsnippet
+
+snippet "SIP([a-z]+)" "Number with Unit Per Unit" ir
+\SI[$1]{$2}{\\`!p snip.rv = match.group(1) or ""`\per\\$3}$0
+endsnippet
+
+snippet "SIP([a-z]+) ([a-z]+)" "Unit with Number" ir
+\SI[$1]{$2}{\\`!p snip.rv = match.group(1) or ""`\per\\`!p snip.rv = match.group(2)`}$0
+endsnippet
+
+snippet "SIP([0-9.]+) ([a-z]+) ([a-z]+)" "Unit with Number" ir
+\SI[$1]{`!p snip.rv = match.group(1) or ""`}{\\`!p snip.rv = match.group(2) or ""`\per\\`!p snip.rv = match.group(3)`}$0
+endsnippet
+
+##############
+#  Quantity  #
+##############
+
+snippet qty "Quantity" i
+\qty[$1]{$2}{\\$3}$0
+endsnippet
+
+snippet "qty([0-9.]+)" "Quantity" ir
+\qty[$1]{`!p snip.rv = match.group(1) or ""`}{\\$2}$0
+endsnippet
+
+snippet "qty([a-z]+)" "Quantity" ir
+\qty[$1]{$2}{\\`!p snip.rv = match.group(1) or ""`}$0
+endsnippet
+
+snippet "qty([0-9.]+) ([a-z]+)" "Quantity" ir
+\qty[$1]{`!p snip.rv = match.group(1) or ""`}{\\`!p snip.rv = match.group(2) or ""`}$0
+endsnippet
