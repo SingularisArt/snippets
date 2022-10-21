@@ -17,7 +17,7 @@ snippet "unit([a-z]+)" "Unit" ir
 endsnippet
 
 snippet "unit\(([a-z ]+)\)" "Unit" ir
-\unit[$1]{\\`!p snip.rv = match.group(1).replace(" ", "\\")`}$0
+\unit[$1]{\\`!p snip.rv = match.group(1).replace("  ", "\per\\").replace(" ", "\\")`}
 endsnippet
 
 ########################
@@ -29,7 +29,7 @@ snippet "(ang|num)" "Angle or Number" ir
 endsnippet
 
 snippet "(ang|num)([0-9a-z.]+)" "Angle or Number" ir
-\\`!p snip.rv = match.group(1)`[$1]{`!p snip.rv = match.group(2) or ""`}$0
+\\`!p snip.rv = match.group(1)`[$1]{`!p snip.rv = match.group(2)`}$0
 endsnippet
 
 ##############
@@ -41,7 +41,7 @@ snippet qty "Quantity" i
 endsnippet
 
 snippet "qty([0-9.]+) ([a-z]+)" "Quantity" ir
-\qty[$1]{`!p snip.rv = match.group(1) or ""`}{\\`!p snip.rv = match.group(2) or ""`}$0
+\qty[$1]{`!p snip.rv = match.group(1)`}{\\`!p snip.rv = match.group(2)`}$0
 endsnippet
 
 #######################
@@ -56,26 +56,6 @@ snippet SIP "Number with Unit Per Unit" i
 \SI[$1]{$2}{\\$3\per\\$4}$0
 endsnippet
 
-snippet "SI([0-9.]+) ([a-z]+)" "Number with Unit" ir
-\SI[$1]{`!p snip.rv = match.group(1)`}{\\`!p snip.rv = match.group(2)`}$0
-endsnippet
-
-snippet "SI([0-9.]+) \(([a-z ]+)\)" "Number with Unit" ir
-\SI[$1]{`!p snip.rv = match.group(1) or ""`}{\\`!p snip.rv = match.group(2).replace(" ", "\\").replace("(", "").replace(")", "")`}$0
-endsnippet
-
-snippet "SI([0-9.]+) ([a-z]+) ([a-z]+)" "Number with Unit Per Unit" ir
-\SI[$1]{`!p snip.rv = match.group(1) or ""`}{\\`!p snip.rv = match.group(2)`\per\\`!p snip.rv = match.group(3)`}$0
-endsnippet
-
-snippet "SI([0-9.]+) \(([a-z ]+)\) ([a-z]+)" "Number with Unit Per Unit" ir
-\SI[$1]{`!p snip.rv = match.group(1) or ""`}{\\`!p snip.rv = match.group(2).replace(" ", "\\")`\per\\`!p snip.rv = match.group(3)`}$0
-endsnippet
-
-snippet "SI([0-9.]+) ([a-z]+) \(([a-z ]+)\)" "Number with Unit Per Unit" ir
-\SI[$1]{`!p snip.rv = match.group(1) or ""`}{\\`!p snip.rv = match.group(2)`\per\\`!p snip.rv = match.group(3).replace(" ", "\\")`}$0
-endsnippet
-
-snippet "SI([0-9.]+) \(([a-z ]+)\) \(([a-z ]+)\)" "Number with Unit Per Unit" ir
-\SI[$1]{`!p snip.rv = match.group(1) or ""`}{\\`!p snip.rv = match.group(2).replace(" ", "\\")`\per\\`!p snip.rv = match.group(3).replace(" ", "\\")`}$0
+snippet "SI([0-9.]+) \(([a-z ]+)\)" "Number with Unit Per Unit" ir
+\SI[$1]{`!p snip.rv = match.group(1)`}{\\`!p snip.rv = match.group(2).replace("  ", "\per\\").replace(" ", "\\")`}$0
 endsnippet
