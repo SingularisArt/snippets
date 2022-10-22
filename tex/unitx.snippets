@@ -9,15 +9,15 @@
 ###########
 
 snippet unit "Unit" i
-\unit[$1]{\\$2}
+\unit{\\$1}
 endsnippet
 
 snippet "unit([a-z]+)" "Unit" ir
-\unit[$1]{\\`!p snip.rv = match.group(1)`}
+\unit{\\`!p snip.rv = match.group(1)`}
 endsnippet
 
 snippet "unit\(([a-z ]+)\)" "Unit" ir
-\unit[$1]{\\`!p snip.rv = match.group(1).replace("  ", "\per\\").replace(" ", "\\")`}
+\unit{\\`!p snip.rv = match.group(1).replace("  ", "\per\\").replace(" ", "\\")`}
 endsnippet
 
 ########################
@@ -25,11 +25,11 @@ endsnippet
 ########################
 
 snippet "(ang|num)" "Angle or Number" ir
-\\`!p snip.rv = match.group(1)`[$1]{$2}$0
+\\`!p snip.rv = match.group(1)`{$1}$0
 endsnippet
 
 snippet "(ang|num)([0-9a-z.]+)" "Angle or Number" ir
-\\`!p snip.rv = match.group(1)`[$1]{`!p snip.rv = match.group(2)`}$0
+\\`!p snip.rv = match.group(1)`{`!p snip.rv = match.group(2)`}$0
 endsnippet
 
 ##############
@@ -37,11 +37,11 @@ endsnippet
 ##############
 
 snippet qty "Quantity" i
-\qty[$1]{$2}{\\$3}$0
+\qty{$1}{\\$2}$0
 endsnippet
 
 snippet "qty([0-9.]+) ([a-z]+)" "Quantity" ir
-\qty[$1]{`!p snip.rv = match.group(1)`}{\\`!p snip.rv = match.group(2)`}$0
+\qty{`!p snip.rv = match.group(1)`}{\\`!p snip.rv = match.group(2)`}$0
 endsnippet
 
 #######################
@@ -49,13 +49,13 @@ endsnippet
 #######################
 
 snippet SI "Number with Unit" i
-\SI[$1]{$2}{\\$3}$0
+\SI{$1}{\\$2}$0
 endsnippet
 
 snippet SIP "Number with Unit Per Unit" i
-\SI[$1]{$2}{\\$3\per\\$4}$0
+\SI{$1}{\\$2\per\\$3}$0
 endsnippet
 
 snippet "SI([0-9.]+) \(([a-z ]+)\)" "Number with Unit Per Unit" ir
-\SI[$1]{`!p snip.rv = match.group(1)`}{\\`!p snip.rv = match.group(2).replace("  ", "\per\\").replace(" ", "\\")`}$0
+\SI{`!p snip.rv = match.group(1)`}{\\`!p snip.rv = match.group(2).replace("  ", "\per\\").replace(" ", "\\")`}$0
 endsnippet
