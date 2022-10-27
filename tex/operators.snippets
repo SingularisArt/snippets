@@ -41,7 +41,7 @@ endsnippet
 # oiiinty -> \oiiint_{0}^{\infty}\d y
 context "math()"
 snippet "(o?i{1,3})nt([a-zA-Z]?)" "Definite Integral" r
-\\`!p snip.rv = match.group(1)`nt_{${1:0}}^{${2:\infty}}${3:${VISUAL}}\d `!p snip.rv = match.group(2) or 'x'`$0
+\\`!p snip.rv = match.group(1)`nt_{${1:0}}^{${2:\infty}}${3:${VISUAL}}\d `!p snip.rv = match.group(2) or 'x'`
 endsnippet
 
 # nint -> \int \d x
@@ -58,25 +58,7 @@ endsnippet
 # noiiinty -> \oiiint \d y
 context "math()"
 snippet "n(o?i{1,3})nt([a-zA-Z]?)" "Indefinite Integral" r
-\\`!p snip.rv = match.group(1)`nt ${1:${VISUAL}}\d `!p snip.rv = match.group(2) or 'x'`$0
-endsnippet
-
-# dd -> \frac{\d }{\d }
-context "math()"
-snippet dd "Derivative" w
-\frac{\d ${1:${VISUAL}}}{\d $2}$0
-endsnippet
-
-# pd -> \frac{\pd }{\pd }
-context "math()"
-snippet pd "偏导数 Partial Derivative" w
-\frac{\pd ${1:${VISUAL}}}{\pd $2}$0
-endsnippet
-
-# " -> ^{()}
-context "math()"
-snippet " "Derivative" i
-^{($1)}$0
+\\`!p snip.rv = match.group(1)`nt ${1:${VISUAL}}\d `!p snip.rv = match.group(2) or 'x'`
 endsnippet
 
 
@@ -137,13 +119,13 @@ endsnippet
 # // -> \frac{}{}
 context "math()"
 snippet // "Fraction" iA
-\\frac{${VISUAL}$1}{$2}$0
+\\frac{${VISUAL}$1}{$2}
 endsnippet
 
 # 4\pi/ -> \frac{4\pi}{}
 context "math()"
 snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wAr
-\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+\\frac{`!p snip.rv = match.group(1)`}{$1}
 endsnippet
 
 # (4\pi \times 1)/ -> \frac{4\pi \times 1}{}
@@ -159,7 +141,7 @@ while True:
 	if depth == 0: break;
 	i -= 1
 snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
-`{$1}$0
+`{$1}
 endsnippet
 
 
