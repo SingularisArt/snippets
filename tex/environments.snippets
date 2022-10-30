@@ -4,14 +4,15 @@ from latex_.scopes import math, display_math, inline_math, chem, not_chem, unit,
 
 endglobal
 
-#######################################################################
-#                                                                     #
-#                            Environments             								#
-#                                                         						#
-#######################################################################
+
+################################################################################
+#                                                                              #
+#                                 Environments                                 #
+#                                                                              #
+################################################################################
 
 context "text()"
-snippet beg "begin{} / end{}" bAm
+snippet beg "begin{} / end{}" Abm
 \begin{$1}[$2]
   \label{$3:${4:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
@@ -20,21 +21,21 @@ snippet beg "begin{} / end{}" bAm
 endsnippet
 
 context "text()"
-snippet doc "Document Environment" bAm
+snippet doc "Document Environment" Abm
 \begin{document}
 	${VISUAL}$1
 \end{document}
 endsnippet
 
 context "text()"
-snippet cnt "Center Environment" bAm
+snippet cnt "Center Environment" Abm
 \begin{center}
 	${VISUAL}$1
 \end{center}
 endsnippet
 
 context "text()"
-snippet enum "Enumerate Environment" bAm
+snippet enum "Enumerate Environment" Abm
 \begin{enumerate}
 	\label{enum:$1}
 
@@ -43,7 +44,7 @@ snippet enum "Enumerate Environment" bAm
 endsnippet
 
 context "text()"
-snippet item "Itemize Environment" bAm
+snippet item "Itemize Environment" Abm
 \begin{itemize}
 	\label{item:$1}
 
@@ -52,7 +53,7 @@ snippet item "Itemize Environment" bAm
 endsnippet
 
 context "text()"
-snippet case "Cases Environment" bAm
+snippet case "Cases Environment" Abm
 \begin{cases}
 	\label{case:$1}
 
@@ -61,7 +62,7 @@ snippet case "Cases Environment" bAm
 endsnippet
 
 context "text()"
-snippet prf "Proof Environment" bAm
+snippet prf "Proof Environment" Abm
 \begin{proof}
 	\label{prf:$1}
 
@@ -70,21 +71,21 @@ snippet prf "Proof Environment" bAm
 endsnippet
 
 context "text()"
-snippet ali "Align* Environment" bAm
+snippet ali "Align* Environment" Abm
 \begin{align*}
 	${VISUAL}$1
 ${2:.}\end{align*}
 endsnippet
 
 context "text()"
-snippet ali "Align Environment" bAm
+snippet ali "Align Environment" Abm
 \begin{align}
 	${VISUAL}$1
 ${2:.}\end{align}
 endsnippet
 
 context "text()"
-snippet eqt "Equation Environment" bAm
+snippet eqt "Equation Environment" Abm
 \begin{equation}
 	\label{eqt:$1}
 
@@ -93,7 +94,7 @@ ${2:.}\end{equation}
 endsnippet
 
 context "text()"
-snippet eqt "Equation Environment" bAm
+snippet eqt "Equation Environment" Abm
 \begin{equation*}
 	\label{eqt:$1}
 
@@ -102,7 +103,7 @@ ${2:.}\end{equation*}
 endsnippet
 
 context "text()"
-snippet spt "Equation Split Environment" bAm
+snippet spt "Equation Split Environment" Abm
 \begin{equation}
 	\label{spt:$1}
 
@@ -113,14 +114,14 @@ ${2:.}\end{equation}
 endsnippet
 
 context "env('equation')"
-snippet spt "Equation Split Environment" bAm
+snippet spt "Equation Split Environment" Abm
 \begin{split}
 	${VISUAL}$1
 \end{split}
 endsnippet
 
 context "text()"
-snippet edt "Equation Dat Environment" bAm
+snippet edt "Equation Dat Environment" Abm
 \begin{equation}
 	\label{edt:$1}
 
@@ -131,14 +132,14 @@ ${2:.}\end{equation}
 endsnippet
 
 context "env('equation')"
-snippet edt "Equation Dat Environment" bAm
+snippet edt "Equation Dat Environment" Abm
 \begin{alignedat}{$1}
 	${VISUAL}$2
 \end{alignedat}
 endsnippet
 
 context "text()"
-snippet cse "Equation Case Environment" bAm
+snippet cse "Equation Case Environment" Abm
 \begin{equation}
 	\label{cse:$1}
 
@@ -149,14 +150,14 @@ ${2:.}\end{equation}
 endsnippet
 
 context "env('equation')"
-snippet cse "Equation Case Environment" bAm
+snippet cse "Equation Case Environment" Abm
 \begin{cases}
 	${VISUAL}$1
 \end{cases}
 endsnippet
 
 context "text()"
-snippet minipage "Minipage equation" bAm
+snippet minipage "Minipage equation" Abm
 \begin{minipage}{.${1:5}\linewidth}
 	\begin{${2:align*}}
 		${VISUAL}$3
@@ -165,7 +166,7 @@ snippet minipage "Minipage equation" bAm
 endsnippet
 
 context "text()"
-snippet fig "Figure Environment (Image)" bAm
+snippet fig "Figure Environment (Image)" Abm
 \begin{figure}[${1:htpb}]
 	\centering
 	\includegraphics[width=1\textwidth]{$2}
@@ -175,7 +176,7 @@ snippet fig "Figure Environment (Image)" bAm
 endsnippet
 
 context "text()"
-snippet fig "Figure Environment (PDF)" bAm
+snippet fig "Figure Environment (PDF)" Abm
 \begin{figure}[${1:htbp!H}]
 	\centering
 	\incfig{$2}
@@ -185,14 +186,14 @@ snippet fig "Figure Environment (PDF)" bAm
 endsnippet
 
 context "text()"
-snippet tab "Tabular / Array Environment" bAm
+snippet tab "Tabular / Array Environment" Abm
 	\begin{${1:t}${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${2:c}}
 		${2/(?<=.)(c|l|r)|./(?1: & )/g}
 	\end{$1${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
 endsnippet
 
 context "text()"
-snippet tbl "Table Environment" bAm
+snippet tbl "Table Environment" Abm
 \begin{table}[${1:htpb}]
 	\centering
 	\caption{${2:caption}}

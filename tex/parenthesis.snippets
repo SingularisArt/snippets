@@ -9,11 +9,12 @@ vert = ["\\vert", "\\Vert"]
 
 endglobal
 
-#######################################################################
-#                                                                     #
-#                             Parenthesis                             #
-#                                                                     #
-#######################################################################
+
+################################################################################
+#                                                                              #
+#                                 Parenthesis                                  #
+#                                                                              #
+################################################################################
 
 # () -> \left(\right)
 context "display_math()"
@@ -58,6 +59,8 @@ snippet | "Two Verticals"
 \Vert $1 \Vert
 endsnippet
 
+# \vert x \vert -> \Vert x \Vert
+# \Vert x \Vert -> \vert x \vert
 context "math()"
 snippet "(\\vert|\\Vert)(.+)?(\\vert|\\Vert)" "Cycle Parenthesis" r
 `!p

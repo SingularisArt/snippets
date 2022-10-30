@@ -7,12 +7,12 @@ plus_minus = ['\\pm', '\\mp']
 
 endglobal
 
-#######################################################################
-#                                                                     #
-#                            Big Operator                             #
-#                                                                     #
-#######################################################################
 
+################################################################################
+#                                                                              #
+#                                Big Operators                                 #
+#                                                                              #
+################################################################################
 
 # sum -> \sum_{i=1}^{\infty} f(x)
 # prod -> \prod_{i=1}^{\infty} f(x)
@@ -68,7 +68,6 @@ endsnippet
 #                                                                     #
 #######################################################################
 
-
 # xx -> \times
 context "math()"
 snippet xx "Multiply" Awi
@@ -83,7 +82,7 @@ endsnippet
 
 # div -> \div
 context "math()"
-snippet div "Devide" Aw
+snippet div "Divide" Aw
 \div
 endsnippet
 
@@ -114,7 +113,6 @@ endsnippet
 #                              Fractions                              #
 #                                                                     #
 #######################################################################
-
 
 # // -> \frac{}{}
 context "math()"
@@ -150,7 +148,6 @@ endsnippet
 #                              Functions                              #
 #                                                                     #
 #######################################################################
-
 
 # sin    -> \sin
 # cos    -> \cos
@@ -193,7 +190,7 @@ snippet '(.)of\<(.*?)\>' "Create Function" rwA
 `!p snip.rv = match.group(1)`(`!p snip.rv = match.group(2)`) = ${1:`!p snip.rv = match.group(2)`}
 endsnippet
 
-# fun -> f \:  \mathbb{R} \to \mathbb{R} \:
+# fun -> f :  \subset \mathbf{R} \to \mathbf{R} : 
 context "math()"
 snippet fun "F something Subset of R" iA
 f : $1 \subset \mathbf{R} \to \mathbf{R} : $2

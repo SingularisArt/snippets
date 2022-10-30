@@ -1,33 +1,103 @@
-###############################################################################
-#                                                                             #
-#                                   SI UnitX                                  #
-#                                                                             #
-###############################################################################
+global !p
+
+from latex_.scopes import text
+
+def expand_unit(string):
+	new_string = []
+
+	string_split = string.replace("  ", r" per ").split()
+
+	for str in string_split:
+		match str:
+			case "mm":
+				new_string.append(r"\millimeter")
+			case "cm":
+				new_string.append(r"\centimeter")
+			case "dm":
+				new_string.append(r"\decimeter")
+			case "in":
+				new_string.append(r"\inch")
+			case "ft":
+				new_string.append(r"\foot")
+			case "yd":
+				new_string.append(r"\yard")
+			case "m":
+				new_string.append(r"\meter")
+			case "km":
+				new_string.append(r"\kilometer")
+			case "mi":
+				new_string.append(r"\mile")
+			case "ms":
+				new_string.append(r"\millsecond")
+			case "sec":
+				new_string.append(r"\second")
+			case "min":
+				new_string.append(r"\minute")
+			case "hr":
+				new_string.append(r"\hour")
+			case "d":
+				new_string.append(r"\day")
+			case "wk":
+				new_string.append(r"\week")
+			case "mos":
+				new_string.append(r"\month")
+			case "yr":
+				new_string.append(r"\year")
+			case "mg":
+				new_string.append(r"\milligram")
+			case "g":
+				new_string.append(r"\gram")
+			case "oz":
+				new_string.append(r"\ounce")
+			case "lb":
+				new_string.append(r"\pound")
+			case "kg":
+				new_string.append(r"\kilogram")
+			case "t":
+				new_string.append(r"\ton")
+			case "per":
+				new_string.append(r"\per")
+			case _:
+				new_string.append("\\" + str)
+
+	return "".join(new_string)
+
+endglobal
+
+
+################################################################################
+#                                                                              #
+#                                   SI Units                                   #
+#                                                                              #
+################################################################################
 
 ###########
 #  Units  #
 ###########
 
+# unit -> \unit{\}
 snippet unit "Unit" i
 \unit{\\$1}
 endsnippet
 
-snippet "unit([a-z]+)" "Unit" ir
-\unit{\\`!p snip.rv = match.group(1)`}
-endsnippet
-
 snippet "unit\(([a-z ]+)\)" "Unit" ir
-\unit{\\`!p snip.rv = match.group(1).replace("  ", "\per\\").replace(" ", "\\")`}
+\unit{`!p snip.rv = expand_unit(match.group(1))`}
 endsnippet
 
 ########################
 #  Angles and Numbers  #
 ########################
 
+# ang -> \ang{}
+# num -> \num{}
 snippet "(ang|num)" "Angle or Number" ir
 \\`!p snip.rv = match.group(1)`{$1}$0
 endsnippet
 
+# ang5   -> \ang{5}
+# ang5.5 -> \ang{5.5}
+# num5   -> \num{5}
+# num5.5 -> \num{5.5}
 snippet "(ang|num)([0-9a-z.]+)" "Angle or Number" ir
 \\`!p snip.rv = match.group(1)`{`!p snip.rv = match.group(2)`}$0
 endsnippet
@@ -36,26 +106,35 @@ endsnippet
 #  Quantity  #
 ##############
 
+# qty -> \qty{}{\}
 snippet qty "Quantity" i
 \qty{$1}{\\$2}$0
 endsnippet
 
-snippet "qty([0-9.]+) ([a-z]+)" "Quantity" ir
-\qty{`!p snip.rv = match.group(1)`}{\\`!p snip.rv = match.group(2)`}$0
+# qty5   -> \qty{5}
+# qty5.5 -> \qty{5.5}
+snippet "qty([0-9.]+)" "Quantity" ir
+\qty{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
 #######################
 #  Units and Numbers  #
 #######################
 
+# SI -> \SI{}{\}
 snippet SI "Number with Unit" i
 \SI{$1}{\\$2}$0
 endsnippet
 
+# SIP -> \SI{}{\\per\}
 snippet SIP "Number with Unit Per Unit" i
 \SI{$1}{\\$2\per\\$3}$0
 endsnippet
 
+# SI(5 km) -> \SI{5}{\kilometer}
+# SI(5 km squared) -> \SI{5}{\kilometer\squared}
+# SI(5 km squared  hr) -> \SI{5}{\kilometer\squared\per\hour}
+# SI(5 km squared  hr  ft) -> \SI{5}{\kilometer\squared\per\hour\per\feet}
 snippet "SI\(([0-9.]+) ([a-z ]+)\)" "Number with Unit Per Unit" ir
-\SI{`!p snip.rv = match.group(1)`}{\\`!p snip.rv = match.group(2).replace("  ", "\per\\").replace(" ", "\\")`}$0
+\SI{`!p snip.rv = match.group(1)`}{`!p snip.rv = expand_unit(match.group(2))`}$0
 endsnippet

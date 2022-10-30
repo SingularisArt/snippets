@@ -11,12 +11,12 @@ ors = ['lor', 'bigvee']
 
 endglobal
 
-#######################################################################
-#                                                                     #
-#                                Logic                                #
-#                                                                     #
-#######################################################################
 
+################################################################################
+#                                                                              #
+#                                    Logic                                     #
+#                                                                              #
+################################################################################
 
 # yw  -> \because
 # sy  -> \therefore
@@ -27,7 +27,7 @@ context "math()"
 snippet "(?<!\\)\b(yw|sy|and|or|neg)" "Logical Terms" Ar
 \\`!p
 snip.rv = logical_terms[match.group(1)]
-` 
+`
 endsnippet
 
 # \because     -> \therefore
@@ -63,7 +63,7 @@ endsnippet
 # |-> -> \mapsto
 context "math()"
 snippet |-> "Map" Ai
-\mapsto 
+\mapsto
 endsnippet
 
 # exist -> \exists

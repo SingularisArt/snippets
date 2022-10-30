@@ -2,11 +2,12 @@ global !p
 from latex_.scopes import env
 endglobal
 
-#######################################################################
-#                                                                     #
-#                                Other                                #
-#                                                                     #
-#######################################################################
+
+################################################################################
+#                                                                              #
+#                                    Other                                     #
+#                                                                              #
+################################################################################
 
 snippet bit "Bibliography Item" wi
 \bibitem{${1:label}}
@@ -41,11 +42,6 @@ endsnippet
 context "env('itemize')
 snippet itm "New Item" bA
 \item ${VISUAL}$1
-endsnippet
-
-# box -> \boxed{}
-snippet box "Create box"
-\boxed{${VISUAL}$1}
 endsnippet
 
 # ac -> \ac{acronym}

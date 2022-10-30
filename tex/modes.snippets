@@ -1,18 +1,25 @@
 global !p
 
-from latex_.scopes import math
+from latex_.scopes import text, math
 
 endglobal
 
 
 ################################################################################
 #                                                                              #
-#                                   Spacing                                    #
+#                                    Modes                                     #
 #                                                                              #
 ################################################################################
 
-# qd -> \qquad
-context "math()"
-snippet qd "Space" Ai
-\qquad
+# ilm -> $$
+context "text()"
+snippet ilm "Inline Math" wA
+$${VISUAL}$1$
+endsnippet
+
+context "text()"
+snippet dm "Display Math" wA
+\[%
+	${VISUAL}$1
+${2:.}\]%$0
 endsnippet
