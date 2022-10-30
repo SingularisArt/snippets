@@ -1,6 +1,9 @@
 Custom UltiSnippets
 ===================
 
+**NOTE**: You're going to need to use my [snippet
+dependencies](https://github.com/SingularisArt/snippet-dependencies)
+
 Credit
 ======
 
