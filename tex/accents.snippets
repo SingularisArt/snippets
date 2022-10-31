@@ -3,17 +3,17 @@ global !p
 from builtin import choose_next
 from latex_.scopes import math
 
-def bar_hat_vec(target, word, subscript = ''):
-    return '\\' + target + '{' + ('\\' + word + 'math' if word in special_bar_hat_vec else word) + '}' + (subscript or '')
+def bar_hat_vec(target, word, subscript = ""):
+    return "\\" + target + "{" + ("\\" + word + "math" if word in special_bar_hat_vec else word) + "}" + (subscript or "")
 
-def long_bar_hat_vec(target, word, subscript = ''):
-    return map_bar_hat_vec[target] + '{' + word + '}' + (subscript or '')
+def long_bar_hat_vec(target, word, subscript = ""):
+    return map_bar_hat_vec[target] + "{" + word + "}" + (subscript or "")
 
-special_bar_hat_vec = ['i', 'j']
-map_bar_hat_vec = {'bar': '\\overline', 'hat': '\\widehat', 'vec': '\\overrightarrow'}
-bars = ['\\bar', '\\overline']
-hats = ['\\hat', '\\widehat']
-vecs = ['\\vec', '\\overrightarrow']
+special_bar_hat_vec = ["i", "j"]
+map_bar_hat_vec = {"bar": "\\overline", "hat": "\\widehat", "vec": "\\overrightarrow"}
+bars = ["\\bar", "\\overline"]
+hats = ["\\hat", "\\widehat"]
+vecs = ["\\vec", "\\overrightarrow"]
 
 endglobal
 
@@ -29,7 +29,7 @@ endglobal
 # xvec -> \vec{x}
 context "math()"
 snippet "(\b[\da-zA-Z0-9]|\\[\da-zA-Z]+)([_^](?:\{\S+\s?\}|[\da-zA-Z]))?(bar|hat|vec)" "Bar/Hat/Vector" Ar
-`!p snip.rv = bar_hat_vec(match.group(3) or match.group(2), match.group(1), match.group(2) if match.group(3) else '')`
+`!p snip.rv = bar_hat_vec(match.group(3) or match.group(2), match.group(1), match.group(2) if match.group(3) else "")`
 endsnippet
 
 # xxbar -> \overline{xx}
@@ -37,7 +37,7 @@ endsnippet
 # xxvec -> \overrightarrow{xx}
 context "math()"
 snippet "(?<!\\)\b([a-zA-Z]{2,})([_^](?:\{\S+\s?\}|[\da-zA-Z]))?(bar|hat|vec)" "Long Bar/Hat/Vector" Ar
-`!p snip.rv = long_bar_hat_vec(match.group(3) or match.group(2), match.group(1), match.group(2) if match.group(3) else '')`
+`!p snip.rv = long_bar_hat_vec(match.group(3) or match.group(2), match.group(1), match.group(2) if match.group(3) else "")`
 endsnippet
 
 # \bar{xx}      -> \overline{xx}
@@ -67,17 +67,24 @@ snip.rv = choose_next(match.group(1), vecs, 2) + match.group(2) + match.group(3)
 `
 endsnippet
 
+# <a,a> -> \braket{a,a}
+# <a|a> -> \braket{a|a}
+context "math()"
+snippet "\<(.*?)(,|\|)(.*?)\>" "Bra" riA
+\braket{`!p snip.rv = match.group(1)``!p snip.rv = match.group(2)``!p snip.rv = match.group(3)`}
+endsnippet
+
 # <a| -> \bra{a}
 # <|  -> \bra{}
 context "math()"
-snippet '\<(.*?)\|' "Bra" riA
+snippet "\<(.*?)\|" "Bra" riA
 \bra{`!p snip.rv = match.group(1)`}
 endsnippet
 
 # |a> -> \ket{a}
 # |>  -> \ket{}
 context "math()"
-snippet '\|(.*?)\>' "Ket" riA
+snippet "\|(.*?)\>" "Ket" riA
 \ket{`!p snip.rv = match.group(1)`}
 endsnippet
 
@@ -86,7 +93,7 @@ endsnippet
 # \bra{a},a> -> \braket{a,a}
 # \ket{a},a> -> \braket{a,a}
 context "math()"
-snippet '\\(bra|ket){(.*?)}(,)?([^\|]*?)\>' "Braket" riA
+snippet "\\(bra|ket){(.*?)}(,)?([^\|]*?)\>" "Braket" riA
 \braket{`!p
 brake = "|" if match.group(3) is None else match.group(3)
 snip.rv = match.group(2) + brake + match.group(4)`}

@@ -19,12 +19,18 @@ endglobal
 # => -> \Rightarrow
 context "math()"
 snippet => "Imply" Ai
-\Rightarrow 
+\implies
 endsnippet
 
-# <>- -> \leftarrow
+# <> -> \iff
 context "math()"
-snippet "<>?-" "Left Arrow" Ar
+snippet <> "If and only if" Ai
+\iff
+endsnippet
+
+# <- -> \leftarrow
+context "math()"
+snippet "<-" "Left Arrow" Ar
 \leftarrow 
 endsnippet
 
@@ -32,18 +38,6 @@ endsnippet
 context "math()"
 snippet -> "Right Arrow" Ai
 \rightarrow 
-endsnippet
-
-# _<> -> \xleftarrow{}
-context "math()"
-snippet "_<>" "Left Arrow" Ar
-\xleftarrow{${1:${VISUAL}}}
-endsnippet
-
-# _> -> \xrightarrow
-context "math()"
-snippet _> "Right Arrow" Ai
-\xrightarrow[${1:${VISUAL}}]{$2}
 endsnippet
 
 # == -> \Leftrightarrow
