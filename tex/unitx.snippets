@@ -12,7 +12,15 @@ units = {
 	"m": r"\meter",
 	"km": r"\kilometer",
 	"mi": r"\mile",
-	"ms": r"\millsecond",
+	"mph": r"\mile\per\hour",
+	"kph": r"\kilometer\per\hour",
+	"n": r"\newton",
+	"rad": r"\radian",
+	"deg": r"\degree",
+	"l": r"\liter",
+	"ml": r"\milliliter",
+	"gal": r"\gallon",
+	"ms": r"\millisecond",
 	"sec": r"\second",
 	"min": r"\minute",
 	"hr": r"\hour",
@@ -31,15 +39,19 @@ units = {
 	"per": r"\per",
 }
 
+
 def expand_unit(string):
 	new_string = []
 
 	string_split = string.replace("  ", r" per ").split()
 
 	for str in string_split:
-		for unit in units:
-			if str == unit:
-				new_string.append(units[unit])
+		if str not in units:
+			new_string.append(f"\\{str}")
+		else:
+			for unit in units:
+				if str == unit:
+					new_string.append(units[unit])
 
 	return "".join(new_string)
 
