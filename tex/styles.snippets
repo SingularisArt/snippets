@@ -1,6 +1,6 @@
 global !p
 
-from latex_.scopes import math, display_math
+from latex_.scopes import math
 
 endglobal
 
@@ -11,20 +11,10 @@ endglobal
 #                                                                              #
 ################################################################################
 
-# color -> \textcolor{red}{}
-context "math()"
-snippet color "Color" Aw
-\textcolor{${1:red}}{${2:${VISUAL}}}$0
-endsnippet
-
 # dis -> \displaystyle
 context "math()"
 snippet dis "Display Style" i
 \displaystyle
 endsnippet
 
-# tes -> \textstyle
-context "math()"
-snippet tes "Text Style" w
-\textstyle
-endsnippet
+# vim:ft=snippets:

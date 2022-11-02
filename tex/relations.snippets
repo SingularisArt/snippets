@@ -67,12 +67,6 @@ snippet =~ "Similar" Ai
 \sim
 endsnippet
 
-# ~= -> \cong
-context "math()"
-snippet ~= "Congruent" Ai
-\cong
-endsnippet
-
 # \nsim -> \sim
 # \sim  -> \nsim
 context "math()"
@@ -82,11 +76,4 @@ snip.rv = choose_next(match.group(1), nornot, 2) + 'sim' + match.group(2)
 `
 endsnippet
 
-# \ncong -> \cong
-# \cong  -> \ncong
-context "math()"
-snippet "\\(n?)cong(\s?)" "Congruent Transformation" Ar
-\\`!p
-snip.rv = choose_next(match.group(1), nornot, 2) + 'cong' + match.group(2)
-`
-endsnippet
+# vim:ft=snippets:

@@ -17,6 +17,12 @@ snippet , "Subscript" i
 _{${1:${VISUAL}}}
 endsnippet
 
+# ,t -> _{\textrm{}}
+context "math()"
+snippet ,t "Subscript" i
+_{\textrm{${1:${VISUAL}}}}
+endsnippet
+
 # x3 -> x_3
 context "pure_math()"
 snippet "([a-zA-Z])(\d)" "Auto Number Subscript" Ar
@@ -84,14 +90,14 @@ endsnippet
 
 # comp -> ^{c}
 context "math()"
-snippet compl "Complement" iA
+snippet comp "Complement" iA
 ^{c}
 endsnippet
 
 # inv -> ^{-}
 context "math()"
 snippet inv "Inverse" iA
-^{-$1}
+^{-1}
 endsnippet
 
 # ss -> ^{}
@@ -111,3 +117,5 @@ context "math()"
 snippet sn "Scientific Notation" w
 ${1:x} \times 10^{${2:n}}
 endsnippet
+
+# vim:ft=snippets:

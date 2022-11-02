@@ -3,8 +3,8 @@ global !p
 from builtin import choose_next
 from latex_.scopes import display_math, math
 
-opening = ["(", "[", "{"]
-closing = [")", "]", "}"]
+opening = ["(", "[", r"\{"]
+closing = [")", "]", r"\}"]
 vert = ["\\vert", "\\Vert"]
 
 endglobal
@@ -22,10 +22,10 @@ snippet "\(\)" "Parenthesis" r
 \left($1\right)
 endsnippet
 
-# {} -> \left{\right}
+# {} -> \left\{\right\}
 context "display_math()"
 snippet "{}" "Curly Brackets" r
-\left\{$1\right\}
+\left\\{$1\right\\}
 endsnippet
 
 # [] -> \left[\right]
@@ -35,10 +35,10 @@ snippet "\[\]" "Square Brackets" r
 endsnippet
 
 # \left(x\right) -> \left[x\right]
-# \left[x\right] -> \left{x\right}
-# \left{x\right} -> \left(x\right)
+# \left[x\right] -> \left\{x\right\}
+# \left\{x\right\} -> \left(x\right)
 context "math()"
-snippet "\\left(\(|\[|\{)(.+)?\\right(\)|\]|\})" "Cycle Parenthesis" r
+snippet "\\left(\(|\[|\\\{)(.+)?\\right(\)|\]|\\\})" "Cycle Parenthesis" r
 `!p
 next_open = choose_next(match.group(1), opening, 3)
 next_close = choose_next(match.group(3), closing, 3)
@@ -55,7 +55,7 @@ endsnippet
 
 # | -> \Vert  \Vert
 context "math()"
-snippet | "Two Verticals"
+snippet || "Two Verticals"
 \Vert $1 \Vert
 endsnippet
 
@@ -69,3 +69,5 @@ content = "" if match.group(2) is None else match.group(2)
 snip.rv = next_vert + content + next_vert
 `
 endsnippet
+
+# vim:ft=snippets:

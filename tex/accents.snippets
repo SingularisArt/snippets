@@ -98,3 +98,5 @@ snippet "\\(bra|ket){(.*?)}(,)?([^\|]*?)\>" "Braket" riA
 brake = "|" if match.group(3) is None else match.group(3)
 snip.rv = match.group(2) + brake + match.group(4)`}
 endsnippet
+
+# vim:ft=snippets:

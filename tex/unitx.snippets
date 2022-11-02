@@ -68,16 +68,16 @@ endglobal
 #  Units  #
 ###########
 
-# unit -> \unit{\}
-snippet unit "Unit" i
+# un -> \unit{\}
+snippet un "Unit" i
 \unit{\\$1}
 endsnippet
 
-# unit(km)            -> \unit{\kilometer}
-# unit(km sq)         -> \unit{\kilometer\squared}
-# unit(km sq  hr)     -> \unit{\kilometer\squared\per\hour}
-# unit(km sq  hr  ft) -> \unit{\kilometer\squared\per\hour\per\feet}
-snippet "unit\(([a-z ]+)\)" "Unit" ir
+# un(km)            -> \unit{\kilometer}
+# un(km sq)         -> \unit{\kilometer\squared}
+# un(km sq  hr)     -> \unit{\kilometer\squared\per\hour}
+# un(km sq  hr  ft) -> \unit{\kilometer\squared\per\hour\per\feet}
+snippet "un\(([a-z ]+)\)" "Unit" ir
 \unit{`!p snip.rv = expand_unit(match.group(1))`}
 endsnippet
 
@@ -97,21 +97,6 @@ endsnippet
 # num5.5 -> \num{5.5}
 snippet "(ang|num)([0-9a-z.]+)" "Angle or Number" ir
 \\`!p snip.rv = match.group(1)`{`!p snip.rv = match.group(2)`}$0
-endsnippet
-
-##############
-#  Quantity  #
-##############
-
-# qty -> \qty{}{\}
-snippet qty "Quantity" i
-\qty{$1}{\\$2}$0
-endsnippet
-
-# qty5   -> \qty{5}
-# qty5.5 -> \qty{5.5}
-snippet "qty([0-9.]+)" "Quantity" ir
-\qty{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
 #######################
@@ -135,3 +120,5 @@ endsnippet
 snippet "SI\(([0-9.]+) ([a-z ]+)\)" "Number with Unit Per Unit" ir
 \SI{`!p snip.rv = match.group(1)`}{`!p snip.rv = expand_unit(match.group(2))`}$0
 endsnippet
+
+# vim:ft=snippets:
