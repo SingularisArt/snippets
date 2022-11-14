@@ -3,8 +3,9 @@ global !p
 from builtin import choose_next
 from latex_.scopes import math
 
-logical_terms = {'yw': 'because', 'sy': 'therefore', 'and': 'land', 'or': 'lor', 'neg': 'neg'}
+logical_terms = {'be': 'because', 'tf': 'therefore', 'and': 'land', 'or': 'lor', 'neg': 'neg'}
 logical_terms_cycle = ['because', 'therefore', 'land', 'lor', 'neg']
+exists_terms_cycle = ['exists', 'nexists']
 
 ands = ['land', 'bigwedge']
 ors = ['lor', 'bigvee']
@@ -18,13 +19,13 @@ endglobal
 #                                                                              #
 ################################################################################
 
-# yw  -> \because
-# sy  -> \therefore
+# be  -> \because
+# tf  -> \therefore
 # and -> \land
 # or  -> \lor
 # neg -> \neg
 context "math()"
-snippet "(?<!\\)\b(yw|sy|and|or|neg)" "Logical Terms" Ar
+snippet "(?<!\\)\b(be|tf|and|or|neg)" "Logical Terms" Ar
 \\`!p
 snip.rv = logical_terms[match.group(1)]
 `
@@ -36,27 +37,32 @@ endsnippet
 # \lor         -> \neg
 # \neg         -> \because
 context "math()"
-snippet "\\(because|therefore|land|lor|neg)(\s?)" "Logical Terms Transformation" r
+snippet "\\(because|therefore|land|lor|neg)" "Logical Terms Transformation" r
 \\`!p
-snip.rv = choose_next(match.group(1), logical_terms_cycle, 5) + match.group(2)
+snip.rv = choose_next(match.group(1), logical_terms_cycle, 5)
 `
 endsnippet
 
-# \land /     -> \bigwedge
-# \bigwedge / -> \land
+# exist -> \exists
+# EE    -> \exists
 context "math()"
-snippet "\\(land|bigwedge)(\s?)/" "And" r
-\\`!p
-snip.rv = choose_next(match.group(1), ands, 2) + match.group(2)
-`
+snippet "(?<!\\)\b(exist|EE)" "Exist" Ar
+\exists
 endsnippet
 
-# \lor /    -> \bigvee
-# \bigvee / -> \lor
+# for     -> \forall,
+# AA      -> \forall,
 context "math()"
-snippet "\\(lor|bigvee)(\s?)/" "Or" r
+snippet "(?<!\\)\b(for|AA)" "Forall" Ar
+\forall
+endsnippet
+
+# \exists  -> \nexists
+# \nexists -> \exists
+context "math()"
+snippet "\\(exists|nexists)" "Exists Transformation" r
 \\`!p
-snip.rv = choose_next(match.group(1), ors, 2) + match.group(2)
+snip.rv = choose_next(match.group(1), exists_terms_cycle, 2)
 `
 endsnippet
 
@@ -64,20 +70,6 @@ endsnippet
 context "math()"
 snippet |-> "Map" Ai
 \mapsto
-endsnippet
-
-# exist -> \exists
-# EE    -> \exists
-context "math()"
-snippet "(?<!\\)\b(exist|EE)" "Exist" Ar
-\exist_{${1:${VISUAL}}},$0
-endsnippet
-
-# forall  -> \forall,
-# AA      -> \forall,
-context "math()"
-snippet "(?<!\\)\b(forall|AA)" "Forall" Ar
-\forall_{${1:${VISUAL}}},$0
 endsnippet
 
 # vim:ft=snippets:
