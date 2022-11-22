@@ -11,47 +11,49 @@ endglobal
 #                                                                              #
 ################################################################################
 
-priority 1000
-context "text()"
-snippet "(math|sympy)" "mathematica / sympy block" rw
-`!p
-match match.group(1):
-	case "math":
-		snip.rv = "math"
-	case "sympy":
-		snip.rv = "sympy"
-` $1 `!p
-match match.group(1):
-	case "math":
-		snip.rv = "math"
-	case "sympy":
-		snip.rv = "sympy"
-`
+context "math()"
+snippet "sympy" "sympy block" rw
+SYMPY
+$1
+SYMPY
 endsnippet
 
-priority 10000
-context "text()"
-snippet "(math|sympy)(.*)(math|sympy)" "evaluate mathematica / sympy" wr
+context "math()"
+snippet "math" "mathematica block" rw
+MATHEMATICA
+$1
+MATHEMATICA
+endsnippet
+
+# context "math()"
+# snippet "(MATHEMATICA|SYMPY)(.*)(MATHEMATICA|SYMPY)" "Evaluate Mathematica / Sympy" wr
+# `!p
+# match match.group(1):
+# 	case "math":
+# 		match match.group(2):
+# 			case "math":
+# 				import subprocess
+# 				code = 'ToString[' + match.group(2) + ', TeXForm]'
+# 				snip.rv = subprocess.check_output(['wolframscript', '-code', code])
+# `
+# endsnippet
+
+snippet "F(.|\n*)F" "" r
+`!p snip.rv=match.group(1)`
+endsnippet
+
+context "math()"
+snippet "SYMPY(.*)SYMPY" "Evaluate Sympy Block" wrm
 `!p
-match match.group(1):
-	case "math":
-		match match.group(2):
-			case "math":
-				import subprocess
-				code = 'ToString[' + match.group(2) + ', TeXForm]'
-				snip.rv = subprocess.check_output(['wolframscript', '-code', code])
-	case "sympy":
-		match match.group(3):
-			case "sympy":
-				from sympy import *
-				x, y, z, t = symbols('x y z t')
-				k, m, n = symbols('k m n', integer=True)
-				f, g, h = symbols('f g h', cls=Function)
-				init_printing()
-				snip.rv = eval('latex(' + match.group(2).replace('\\', '') \
-						.replace('^', '**') \
-						.replace('{', '(') \
-						.replace('}', ')') + ')')
+from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+snip.rv = eval("latex(" + match.group(1).replace("\\", "") \
+    .replace("^", "**") \
+    .replace("{", "(") \
+    .replace("}", ")") + ")")
 `
 endsnippet
 
