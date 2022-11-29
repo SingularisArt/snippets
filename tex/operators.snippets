@@ -14,7 +14,7 @@ endglobal
 #                                                                              #
 ################################################################################
 
-# sum -> \sum_{i=1}^{\infty} f(x)
+# sum  -> \sum_{i=1}^{\infty} f(x)
 # prod -> \prod_{i=1}^{\infty} f(x)
 context "math()"
 snippet "(prod|sum)" "Product or Summation" Ari
@@ -27,38 +27,59 @@ snippet lim "Limit" Ai
 \lim_{${1:x} \to ${2:\infty}} ${3:f(x)}
 endsnippet
 
-# int -> \int_{0}^{\infty}\d x
-# iint -> \iint_{0}^{\infty}\d x
-# iiint -> \iiint_{0}^{\infty}\d x
-# oint -> \oint_{0}^{\infty}\d x
-# oiint -> \oiint_{0}^{\infty}\d x
-# oiiint -> \oiiint_{0}^{\infty}\d x
-# inty -> \int_{0}^{\infty}\d y
-# iinty -> \iint_{0}^{\infty}\d y
-# iiinty -> \iiint_{0}^{\infty}\d y
-# ointy -> \oint_{0}^{\infty}\d y
-# oiinty -> \oiint_{0}^{\infty}\d y
+# int     -> \int_{0}^{\infty}\d x
+# iint    -> \iint_{0}^{\infty}\d x
+# iiint   -> \iiint_{0}^{\infty}\d x
+# oint    -> \oint_{0}^{\infty}\d x
+# oiint   -> \oiint_{0}^{\infty}\d x
+# oiiint  -> \oiiint_{0}^{\infty}\d x
+# inty    -> \int_{0}^{\infty}\d y
+# iinty   -> \iint_{0}^{\infty}\d y
+# iiinty  -> \iiint_{0}^{\infty}\d y
+# ointy   -> \oint_{0}^{\infty}\d y
+# oiinty  -> \oiint_{0}^{\infty}\d y
 # oiiinty -> \oiiint_{0}^{\infty}\d y
 context "math()"
 snippet "(o?i{1,3})nt([a-zA-Z]?)" "Definite Integral" r
 \\`!p snip.rv = match.group(1)`nt_{${1:0}}^{${2:\infty}}${3:${VISUAL}}\d `!p snip.rv = match.group(2) or 'x'`
 endsnippet
 
-# nint -> \int \d x
-# niint -> \iint \d x
-# niiint -> \iiint \d x
-# noint -> \oint \d x
-# noiint -> \oiint \d x
-# noiiint -> \oiiint \d x
-# ninty -> \int \d y
-# niinty -> \iint \d y
-# niiinty -> \iiint \d y
-# nointy -> \oint \d y
-# noiinty -> \oiint \d y
+# nint     -> \int \d x
+# niint    -> \iint \d x
+# niiint   -> \iiint \d x
+# noint    -> \oint \d x
+# noiint   -> \oiint \d x
+# noiiint  -> \oiiint \d x
+# ninty    -> \int \d y
+# niinty   -> \iint \d y
+# niiinty  -> \iiint \d y
+# nointy   -> \oint \d y
+# noiinty  -> \oiint \d y
 # noiiinty -> \oiiint \d y
 context "math()"
 snippet "n(o?i{1,3})nt([a-zA-Z]?)" "Indefinite Integral" r
 \\`!p snip.rv = match.group(1)`nt ${1:${VISUAL}}\d `!p snip.rv = match.group(2) or 'x'`
+endsnippet
+
+# ddx    -> \frac{\mathrm{d}}{\mathrm{d} x}
+# dydx   -> \frac{\mathrm{d} y}{\mathrm{d} x}
+# 2ddx   -> \frac{\mathrm{d}^{2}}{\mathrm{d}^{2} x}
+# 2dydx  -> \frac{\mathrm{d}^{2} y}{\mathrm{d}^{2} x}
+# pddx   -> \frac{\partial}{\partial x}
+# pdydx  -> \frac{\partial y}{\partial x}
+# 2pddx  -> \frac{\partial^{2}}{\partial^{2} x}
+# 2pdydx -> \frac{\partial^{2} y}{\partial^{2} x}
+context "math()"
+snippet "([0-9]+)?(p)?d([a-zA-Z])?([0-9]+)?d([a-zA-Z])" "Hi" r
+`!p
+derivative_type = "\\mathrm{d}" if not match.group(2) else "\\partial"
+derivative_number = "" if not match.group(1) else "^{" + match.group(1) + "}"
+derivative_function = "" if not match.group(3) else " " + match.group(3)
+
+frac_1 = "{" + derivative_type + derivative_number + derivative_function + "}"
+frac_2 = "{" + derivative_type + derivative_number + " " + match.group(5) + "}"
+snip.rv = "\\frac" + frac_1 + frac_2
+`
 endsnippet
 
 

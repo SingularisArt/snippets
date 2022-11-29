@@ -3,8 +3,6 @@ global !p
 from builtin import choose_next
 from latex_.scopes import math
 
-logical_terms = {'be': 'because', 'tf': 'therefore', 'and': 'land', 'or': 'lor', 'neg': 'neg'}
-logical_terms_cycle = ['because', 'therefore', 'land', 'lor', 'neg']
 exists_terms_cycle = ['exists', 'nexists']
 
 ands = ['land', 'bigwedge']
@@ -18,30 +16,6 @@ endglobal
 #                                    Logic                                     #
 #                                                                              #
 ################################################################################
-
-# be  -> \because
-# tf  -> \therefore
-# and -> \land
-# or  -> \lor
-# neg -> \neg
-context "math()"
-snippet "(?<!\\)\b(be|tf|and|or|neg)" "Logical Terms" Ar
-\\`!p
-snip.rv = logical_terms[match.group(1)]
-`
-endsnippet
-
-# \because     -> \therefore
-# \therefore   -> \land
-# \land        -> \lor
-# \lor         -> \neg
-# \neg         -> \because
-context "math()"
-snippet "\\(because|therefore|land|lor|neg)" "Logical Terms Transformation" r
-\\`!p
-snip.rv = choose_next(match.group(1), logical_terms_cycle, 5)
-`
-endsnippet
 
 # exist -> \exists
 # EE    -> \exists

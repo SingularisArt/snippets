@@ -11,21 +11,25 @@ endglobal
 #                                                                              #
 ################################################################################
 
+# bf -> \textbf{}
 context "text()"
 snippet bf "Bold"
 \textbf{${VISUAL}$1}$0
 endsnippet
 
+# it -> \textit{}
 context "text()"
 snippet it "Italic"
 \textit{${VISUAL}$1}$0
 endsnippet
 
+# un -> \underline{}
 context "text()"
 snippet un "Underline"
 \underline{${VISUAL}$1}$0
 endsnippet
 
+# sc -> \textsc{}
 context "text()"
 snippet sc "Smallcaps"
 \textsc{${VISUAL}$1}$0

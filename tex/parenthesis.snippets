@@ -31,11 +31,11 @@ endsnippet
 # [] -> \left[\right]
 context "display_math()"
 snippet "\[\]" "Square Brackets" r
-\left\[$1\right\]
+\left[$1\right]
 endsnippet
 
-# \left(x\right) -> \left[x\right]
-# \left[x\right] -> \left\{x\right\}
+# \left(x\right)   -> \left[x\right]
+# \left[x\right]   -> \left\{x\right\}
 # \left\{x\right\} -> \left(x\right)
 context "math()"
 snippet "\\left(\(|\[|\\\{)(.+)?\\right(\)|\]|\\\})" "Cycle Parenthesis" r
@@ -53,7 +53,7 @@ snippet | "One Verticals"
 \vert $1 \vert
 endsnippet
 
-# | -> \Vert  \Vert
+# || -> \Vert  \Vert
 context "math()"
 snippet || "Two Verticals"
 \Vert $1 \Vert
