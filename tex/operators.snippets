@@ -21,6 +21,14 @@ snippet "(prod|sum)" "Product or Summation" Ari
 \\`!p snip.rv = match.group(1)`_{${1:i=1}}^{${2:\infty}} ${3:f(x)}
 endsnippet
 
+# x*k -> x^{\ast}_{k}
+# y*k -> y^{\ast}_{k}
+# z*k -> z^{\ast}_{k}
+context "math()"
+snippet "([a-zA-Z])\*k" "kth item in sum" Ari
+`!p snip.rv = match.group(1)`^{\ast}_{k}
+endsnippet
+
 # lim -> \lim_{x \to \infty} f(x)
 context "math()"
 snippet lim "Limit" Ai
@@ -41,7 +49,7 @@ endsnippet
 # oiiinty -> \oiiint_{0}^{\infty}\d y
 context "math()"
 snippet "(o?i{1,3})nt([a-zA-Z]?)" "Definite Integral" r
-\\`!p snip.rv = match.group(1)`nt_{${1:0}}^{${2:\infty}}${3:${VISUAL}}\d `!p snip.rv = match.group(2) or 'x'`
+\\`!p snip.rv = match.group(1)`nt_{${1:0}}^{${2:\infty}} ${3:${VISUAL}} \textrm{d}`!p snip.rv = match.group(2) or 'x'`
 endsnippet
 
 # nint     -> \int \d x
@@ -57,8 +65,8 @@ endsnippet
 # noiinty  -> \oiint \d y
 # noiiinty -> \oiiint \d y
 context "math()"
-snippet "n(o?i{1,3})nt([a-zA-Z]?)" "Indefinite Integral" r
-\\`!p snip.rv = match.group(1)`nt ${1:${VISUAL}}\d `!p snip.rv = match.group(2) or 'x'`
+snippet "(o?I{1,3})nt([a-zA-Z]?)" "Indefinite Integral" r
+\\`!p snip.rv = match.group(1).lower()`nt ${1:${VISUAL}} \textrm{d}`!p snip.rv = match.group(2) or 'x'`
 endsnippet
 
 # ddx    -> \frac{\mathrm{d}}{\mathrm{d} x}
