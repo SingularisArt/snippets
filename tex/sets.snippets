@@ -40,32 +40,32 @@ endsnippet
 
 # set -> \{  \}
 context "math()"
-snippet set "Set" wA
-\\{ $2 \\}$0
-endsnippet
-
-# builder -> \{ x \in \mathbb{R} | P(x)  \}
-context "math()"
-snippet builder "Set Builder Notation" w
-\\{ ${1:x} \in ${2:\mathbb{R}} | ${3:P(x)} \\}
-endsnippet
-
-# cp -> \cap
-context "math()"
-snippet cp "Cap" iA
-\cap
+snippet set "Set" w
+\left\\{${1:x}${2: \in ${3:\mathbb{R}}}${4: \mid ${5:P(x)}}\right\\}$0
 endsnippet
 
 # up -> \cup
 context "math()"
-snippet up "Cup" iA
+snippet up "Cup" iAw
 \cup
 endsnippet
 
-# diff -> \backslash
+# UP -> \bigcup
 context "math()"
-snippet diff "Set Difference"
-\backslash
+snippet UP "Bigcup" iAw
+\bigcup
+endsnippet
+
+# ap -> \cap
+context "math()"
+snippet ap "Cap" iAw
+\cap
+endsnippet
+
+# AP -> \bigcap
+context "math()"
+snippet AP "Bigcap" iAw
+\bigcap
 endsnippet
 
 # vim:ft=snippets:
