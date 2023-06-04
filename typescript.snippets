@@ -1,0 +1,20 @@
+snippet int "interface"
+interface $1 {
+	$2
+}
+endsnippet
+
+snippet nspc "namespace"
+namespace $1 {
+	$2
+}
+endsnippet
+
+priority -49
+snippet fun "function (named)" b
+function ${1:function_name} (${2:argument}: ${3:argument_type}) {
+	$4
+}
+endsnippet
+
+# vim:ft=snippets:

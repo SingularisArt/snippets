@@ -1,0 +1,167 @@
+extends typescript
+extends javascriptreact
+
+snippet tsrce "typescript React Class Export Component"
+import React, { Component } from 'react'
+
+type Props = {}
+
+type State = {}
+
+class ${1:`!p snip.rv = snip.basename`} extends Component<Props, State> {
+  state = {}
+
+  render() {
+    return (
+      <div>$2</div>
+    )
+  }
+}
+
+export default $1
+endsnippet
+
+snippet tsrfce "typescript React Functional Export Component"
+import React from 'react'
+
+type Props = {}
+
+function ${1:`!p snip.rv = snip.basename`}({}: Props) {
+  return (
+    <div>$2</div>
+  )
+}
+
+export default $1
+endsnippet
+
+snippet tsrfc "typescript React Functional Component"
+import React from 'react'
+
+type Props = {}
+
+export default function ${1:`!p snip.rv = snip.basename`}({}: Props) {
+  return (
+    <div>$2</div>
+  )
+}
+endsnippet
+
+snippet tsrafce "typescript React Arrow Function Export Component"
+import React from 'react'
+
+type Props = {}
+
+const ${1:`!p snip.rv = snip.basename`} = (props: Props) => {
+  return (
+    <div>$2</div>
+  )
+}
+
+export default $1
+endsnippet
+
+snippet tsrafc "typescript React Arrow Function Component"
+import React from 'react'
+
+type Props = {}
+
+const ${1:`!p snip.rv = snip.basename`} = (props: Props) => {
+  return (
+    <div>$2</div>
+  )
+}
+endsnippet
+
+snippet tsrpc "typescript React Class Pure Component"
+import React, { PureComponent } from 'react'
+
+type Props = {}
+
+export default class ${1:`!p snip.rv = snip.basename`} extends PureComponent<Props> {
+  render() {
+    return (
+      <div>$2</div>
+    )
+  }
+}
+endsnippet
+
+snippet tsrpce "typescript React Class Export Pure Component"
+import React, { PureComponent } from 'react'
+
+type Props = {}
+
+class ${1:`!p snip.rv = snip.basename`} extends PureComponent<Props> {
+  render() {
+    return (
+      <div>$2</div>
+    )
+  }
+}
+
+export default $1
+endsnippet
+
+snippet tsrcredux "typescript React Class Component Redux"
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+
+type Props = {}
+
+type State = {}
+
+export class ${1:`!p snip.rv = snip.basename`} extends Component<Props, State> {
+  state = {}
+
+  render() {
+    return (
+      <div>$2</div>
+    )
+  }
+}
+
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps = {}
+
+export default connect(mapStateToProps, mapDispatchToProps)($1)
+endsnippet
+
+snippet tsrnf "typescript React Native Arrow Function Component"
+import { View, Text } from 'react-native'
+import React from 'react'
+
+type Props = {}
+
+const ${1:`!p snip.rv = snip.basename`} = (props: Props) => {
+  return (
+    <View>
+      <Text>$2</Text>
+    </View>
+  )
+}
+
+export default $1
+endsnippet
+
+snippet tsrnfs "typescript React Native Arrow Function Component With Styles"
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+
+type Props = {}
+
+const ${1:`!p snip.rv = snip.basename`} = (props: Props) => {
+  return (
+    <View>
+      <Text>$2</Text>
+    </View>
+  )
+}
+
+export default $1
+
+const styles = StyleSheet.create({})
+endsnippet
+
+# vim:ft=snippets:

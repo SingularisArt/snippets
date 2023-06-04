@@ -1,34 +1,278 @@
-snippet imp ""
-import ${1:moduleName} from '${2:module}'
+snippet exptp "export Type"
+export type $1 = {$2}
 endsnippet
 
-snippet imn ""
-import '${1:module}'
+snippet expint "export Interface"
+export interface $1 {$2}
 endsnippet
 
-snippet imd ""
-import { ${1:destructuredModule} } from '${2:module}'
+snippet cas "console Assert"
+console.assert($1, $2)
 endsnippet
 
-snippet ime ""
-import * as ${1:alias} from '${2:module}'
+snippet ccl "console Clear"
+console.clear()
 endsnippet
 
-snippet ima ""
-import { ${1:originalName} as ${2:aliasName}} from '${3:module}'
+snippet cco "console Count"
+console.count($1)
 endsnippet
 
-snippet rafce ""
-const ${1:`!p snip.rv = snip.basename`} = () => {
-  return <div>$1</div>;
-};
-
-export default $1;
+snippet cdi "console Dir"
+console.dir($1)
 endsnippet
 
-# Console Logging
-snippet cl "Console Log"
+snippet cer "console Error"
+console.error($1)
+endsnippet
+
+snippet cgr "console Group"
+console.group('$1')
+endsnippet
+
+snippet cge "console Group End"
+console.groupEnd()
+endsnippet
+
+snippet clg "console Log"
 console.log($1)
 endsnippet
 
-# vim:ft=snippets:
+snippet ctr "console Trace"
+console.trace($1)
+endsnippet
+
+snippet clo "console Log Object"
+console.log('$1', $1)
+endsnippet
+
+snippet clj "console Log JSON"
+console.log('$1', JSON.stringify($1, null, 2))
+endsnippet
+
+snippet ctm "console Time"
+console.time('$1')
+endsnippet
+
+snippet cte "console Time End"
+console.timeEnd('$1')
+endsnippet
+
+snippet cwa "console Warn"
+console.warn($1)
+endsnippet
+
+snippet cin "console Info"
+console.info($1)
+endsnippet
+
+snippet ctl "console Table"
+console.table([$1])
+endsnippet
+
+snippet useCallbackSnippet "useCallback" b
+useCallback(
+  () => {
+    $1
+  },
+  [$2],
+)
+endsnippet
+
+snippet useImperativeHandleSnippet "useImperativeHandle" b
+useImperativeHandle(
+  $1,
+  () => {
+    $2
+  },
+  [$3],
+)
+endsnippet
+
+snippet ima "import { } from ''" b
+import { $2 as $3 } from '$1'
+endsnippet
+
+snippet imd "import { } from ''" b
+import { $2 } from '$1'
+endsnippet
+
+snippet ime "import * as  from ''" b
+import * as $2 from '$1'
+endsnippet
+
+snippet imn "import ''" b
+import '$1'
+endsnippet
+
+snippet imp "import  from ''" b
+import $2 from '$1'
+endsnippet
+
+snippet desc "Describe Block" b
+describe('$1', () => { $2 })
+endsnippet
+
+snippet tita "Async It Block" b
+it('should $1', async () => { $2 })
+endsnippet
+
+snippet tit "It Block" b
+it('should $1', () => { $2 })
+endsnippet
+
+snippet fin "forIn"
+for(let $1 in $2) {$3}
+endsnippet
+
+snippet anfn "anonymousFunction"
+($1) => { $2 }
+endsnippet
+
+snippet nfn "namedFunction"
+const $1 = ($2) => { $3 }
+endsnippet
+
+snippet dob "destructingObject"
+const {$2} = $1
+endsnippet
+
+snippet dar "destructingArray"
+const [$2] = $1
+endsnippet
+
+snippet sti "setInterval"
+setInterval(() => { $1 }, $2)
+endsnippet
+
+snippet sto "setTimeOut"
+setTimeout(() => { $1 }, $2)
+endsnippet
+
+snippet prom "promise"
+return new Promise((resolve, reject) => { $1 })
+endsnippet
+
+snippet cp "destructProps"
+const { $1 } = this.props
+endsnippet
+
+snippet cs "destructState"
+const { $1 } = this.state
+endsnippet
+
+snippet rconst "classConstructor"
+constructor(props) {
+  super(props)
+
+  this.state = {
+    $1
+  }
+}
+endsnippet
+
+snippet est "emptyState"
+state = { $1 }
+endsnippet
+
+snippet cmmb "commentBigBlock"
+/**
+ * $1
+ */
+endsnippet
+
+snippet tpf "typeofSnippet"
+typeof $1
+endsnippet
+
+snippet fun "function (named)" b
+function ${1:function_name} (${2:argument}) {
+	$3
+}
+endsnippet
+
+snippet vf "function (assigned to var)"
+${1:var} ${2:function_name} = function $2 ($3) {
+	$4
+}
+endsnippet
+
+priority -51
+snippet fun "function (anonymous)" w
+function ($1) {
+	$2
+}
+endsnippet
+
+priority -50
+snippet anf "function (anonymous)" i
+function ($1) {
+	$2
+}
+endsnippet
+
+snippet iife "Immediately-Invoked Function Expression (iife)"
+(function (${1:window}) {
+	$2
+}(${3:$1}))`!p snip.rv = semi(snip)`
+endsnippet
+
+snippet ;fe "Minify safe iife"
+;(function (${1}) {
+	$2
+}($3))
+endsnippet
+
+snippet timeout "setTimeout function"
+setTimeout(function () {
+	$1
+}${2:.bind(${3:this})}, ${4:10})
+endsnippet
+
+snippet fi "for prop in obj using hasOwnProperty" b
+for (${1:prop} in ${2:obj}){
+	if ($2.hasOwnProperty($1)) {
+		$3
+	}
+}
+endsnippet
+
+snippet if "if (condition) { ... }"
+if (${1:true}) {
+	$2
+}
+endsnippet
+
+snippet ife "if (condition) { ... } else { ... }"
+if (${1:true}) {
+	$2
+} else {
+	${3}
+}
+endsnippet
+
+snippet switch
+switch (${1:expression}) {
+	case '${2:case}':
+		${3}
+		break
+	default:
+		${4}
+}
+endsnippet
+
+snippet case "case 'xyz': ... break"
+case '${1:case}':
+	$2
+	break
+endsnippet
+
+snippet do "do { ... } while (condition)"
+do {
+	$1
+} while (${2:/* condition */})
+endsnippet
+
+snippet ret "Return statement"
+return $1
+endsnippet
