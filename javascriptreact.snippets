@@ -96,13 +96,7 @@ endsnippet
 snippet rcc "React Class Component"
 import React, { Component } from 'react'
 
-type Props = {}
-
-type State = {}
-
-export default class ${1:`!p snip.rv = snip.basename`} extends Component<Props, State> {
-  state = {}
-
+export default class ${1:`!p snip.rv = snip.basename`} extends Component {
   render() {
     return (
       <div>$2</div>
@@ -114,13 +108,7 @@ endsnippet
 snippet rce "React Class Export Component"
 import React, { Component } from 'react'
 
-type Props = {}
-
-type State = {}
-
-class ${1:`!p snip.rv = snip.basename`} extends Component<Props, State> {
-  state = {}
-
+class ${1:`!p snip.rv = snip.basename`} extends Component {
   render() {
     return (
       <div>$2</div>
@@ -135,9 +123,9 @@ snippet rfcp "react Functional Component With PropTypes"
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function ${1:`!p snip.rv = snip.basename`}(props) {
+function ${1:`!p snip.rv = snip.basename`}({ $2 }) {
   return (
-    <div>$2</div>
+    <div>$3</div>
   )
 }
 
@@ -151,9 +139,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 
-export const ${1:`!p snip.rv = snip.basename`} = (props) => {
+export const ${1:`!p snip.rv = snip.basename`} = ({ $2 }) => {
   return (
-    <div>$1</div>
+    <div>$3</div>
   )
 }
 
@@ -172,9 +160,9 @@ snippet rfcredux "react Functional Component Redux"
 import React from 'react'
 import { connect } from 'react-redux'
 
-export const ${1:`!p snip.rv = snip.basename`} = (props) => {
+export const ${1:`!p snip.rv = snip.basename`} = ({ $2 }) => {
   return (
-    <div>$2</div>
+    <div>$3</div>
   )
 }
 
@@ -189,9 +177,9 @@ snippet rmcp "react Function Memo Component With PropTypes"
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
-const ${1:`!p snip.rv = snip.basename`} = memo((props) => {
+const ${1:`!p snip.rv = snip.basename`} = memo(({ $2 }) => {
   return (
-    <div>$2</div>
+    <div>$3</div>
   )
 })
 
@@ -209,7 +197,7 @@ const ${1:`!p snip.rv = snip.basename`} = memo(() => {
   )
 })
 
-export default $2
+export default $1
 endsnippet
 
 snippet rpcp "react Class Pure Component With PropTypes"
@@ -301,9 +289,7 @@ endsnippet
 snippet rfce "React Functional Export Component"
 import React from 'react'
 
-type Props = {}
-
-function ${1:`!p snip.rv = snip.basename`}({}: Props) {
+function ${1:`!p snip.rv = snip.basename`}({}) {
   return (
     <div>$2</div>
   )
@@ -315,9 +301,7 @@ endsnippet
 snippet rfc "React Functional Component"
 import React from 'react'
 
-type Props = {}
-
-export default function ${1:`!p snip.rv = snip.basename`}({}: Props) {
+export default function ${1:`!p snip.rv = snip.basename`}({}) {
   return (
     <div>$2</div>
   )
@@ -327,11 +311,9 @@ endsnippet
 snippet rafce "React Arrow Function Export Component"
 import React from 'react'
 
-type Props = {}
-
-const ${1:`!p snip.rv = snip.basename`} = (props: Props) => {
+const ${1:`!p snip.rv = snip.basename`} = ({ $2 }) => {
   return (
-    <div>$2</div>
+    <div>$3</div>
   )
 }
 
@@ -341,11 +323,9 @@ endsnippet
 snippet rafc "React Arrow Function Component"
 import React from 'react'
 
-type Props = {}
-
-const ${1:`!p snip.rv = snip.basename`} = (props: Props) => {
+const ${1:`!p snip.rv = snip.basename`} = ({ $2 }) => {
   return (
-    <div>$2</div>
+    <div>$3</div>
   )
 }
 endsnippet
@@ -353,9 +333,7 @@ endsnippet
 snippet rpc "React Class Pure Component"
 import React, { PureComponent } from 'react'
 
-type Props = {}
-
-export default class ${1:`!p snip.rv = snip.basename`} extends PureComponent<Props> {
+export default class ${1:`!p snip.rv = snip.basename`} extends PureComponent {
   render() {
     return (
       <div>$2</div>
@@ -367,9 +345,7 @@ endsnippet
 snippet rpce "React Class Export Pure Component"
 import React, { PureComponent } from 'react'
 
-type Props = {}
-
-class ${1:`!p snip.rv = snip.basename`} extends PureComponent<Props> {
+class ${1:`!p snip.rv = snip.basename`} extends PureComponent {
   render() {
     return (
       <div>$2</div>
@@ -384,11 +360,7 @@ snippet rcredux "React Class Component Redux"
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 
-type Props = {}
-
-type State = {}
-
-export class ${1:`!p snip.rv = snip.basename`} extends Component<Props, State> {
+export class ${1:`!p snip.rv = snip.basename`} extends Component {
   state = {}
 
   render() {
@@ -429,12 +401,10 @@ snippet rnf "React Native Arrow Function Component"
 import { View, Text } from 'react-native'
 import React from 'react'
 
-type Props = {}
-
-const ${1:`!p snip.rv = snip.basename`} = (props: Props) => {
+const ${1:`!p snip.rv = snip.basename`} = ({ $2 }) => {
   return (
     <View>
-      <Text>$2</Text>
+      <Text>$3</Text>
     </View>
   )
 }
@@ -446,12 +416,10 @@ snippet rnfs "React Native Arrow Function Component With Styles"
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-type Props = {}
-
-const ${1:`!p snip.rv = snip.basename`} = (props: Props) => {
+const ${1:`!p snip.rv = snip.basename`} = ({ $2 }) => {
   return (
     <View>
-      <Text>$2</Text>
+      <Text>$3</Text>
     </View>
   )
 }
@@ -527,7 +495,7 @@ snippet rnf "React Native Functional Component" b
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function $1}() {
+export default function $1 () {
   return (
     <View>
       <Text>$2</Text>
@@ -540,7 +508,7 @@ snippet rnfs "React Native Functional Component with Styles" b
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function $1}() {
+export default function $1 () {
   return (
     <View>
       <Text>$2</Text>
