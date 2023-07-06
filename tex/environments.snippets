@@ -53,15 +53,6 @@ snippet item "Itemize Environment" Abm
 endsnippet
 
 context "text()"
-snippet case "Cases Environment" Abm
-\begin{cases}
-	\label{case:$1}
-
-	${VISUAL}$2
-\end{cases}
-endsnippet
-
-context "text()"
 snippet prf "Proof Environment" Abm
 \begin{proof}
 	\label{prf:$1}
@@ -85,103 +76,35 @@ ${2:.}\end{align}
 endsnippet
 
 context "text()"
-snippet eqt "Equation Environment" Abm
-\begin{equation}
-	\label{eqt:$1}
-
+snippet ant* "Alignat* Environment" Abm
+\begin{alignat*}{${1:5}}
 	${VISUAL}$2
-${2:.}\end{equation}
+${3:.}\end{alignat*}
 endsnippet
 
 context "text()"
-snippet eqt "Equation Environment" Abm
-\begin{equation*}
-	\label{eqt:$1}
-
+snippet ant "Alignat Environment" Abm
+\begin{align}{${1:5}}
 	${VISUAL}$2
-${2:.}\end{equation*}
-endsnippet
-
-context "text()"
-snippet spt "Equation Split Environment" Abm
-\begin{equation}
-	\label{spt:$1}
-
-	\begin{split}
-		${VISUAL}$2
-	\end{split}
-${2:.}\end{equation}
-endsnippet
-
-context "env('equation')"
-snippet spt "Equation Split Environment" Abm
-\begin{split}
-	${VISUAL}$1
-\end{split}
-endsnippet
-
-context "text()"
-snippet edt "Equation Dat Environment" Abm
-\begin{equation}
-	\label{edt:$1}
-
-	\begin{alignedat}{$2}
-		${VISUAL}$3
-	\end{alignedat}
-${2:.}\end{equation}
-endsnippet
-
-context "env('equation')"
-snippet edt "Equation Dat Environment" Abm
-\begin{alignedat}{$1}
-	${VISUAL}$2
-\end{alignedat}
-endsnippet
-
-context "text()"
-snippet cse "Equation Case Environment" Abm
-\begin{equation}
-	\label{cse:$1}
-
-	\begin{cases}
-		${VISUAL}$2
-	\end{cases}
-${2:.}\end{equation}
-endsnippet
-
-context "env('equation')"
-snippet cse "Equation Case Environment" Abm
-\begin{cases}
-	${VISUAL}$1
-\end{cases}
+${3:.}\end{align}
 endsnippet
 
 context "text()"
 snippet minipage "Minipage equation" Abm
 \begin{minipage}{.${1:5}\linewidth}
-	\begin{${2:align*}}
-		${VISUAL}$3
-	${4:.}\end{$2}
+	${VISUAL}$2
 \end{minipage}
 endsnippet
 
 context "text()"
-snippet fig "Figure Environment (Image)" Abm
-\begin{figure}[${1:htpb}]
+snippet fig "Figure Environment" Abm
+\begin{figure}[${1:h}]
 	\centering
-	\includegraphics[width=1\textwidth]{$2}
+
+	$2
+
 	\caption{${3}}
 	\label{fig:${4:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
-\end{figure}
-endsnippet
-
-context "text()"
-snippet fig "Figure Environment (PDF)" Abm
-\begin{figure}[${1:htbp!H}]
-	\centering
-	\incfig{$2}
-	\caption{${3}}
-	\label{fig:${4:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 \end{figure}
 endsnippet
 
@@ -273,7 +196,7 @@ snippet detil "Inline determinant" i
 endsnippet
 
 context "inline_math()"
-snippet vecil "Inline vector" i 
+snippet vecil "Inline vector" i
 \left( \begin{smallmatrix} $1 \end{smallmatrix} \right)${2:.}
 endsnippet
 
