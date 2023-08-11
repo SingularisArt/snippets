@@ -1,93 +1,8 @@
-snippet exptp "export Type"
-export type $1 = {$2}
-endsnippet
-
-snippet expint "export Interface"
-export interface $1 {$2}
-endsnippet
-
-snippet cas "console Assert"
-console.assert($1, $2)
-endsnippet
-
-snippet ccl "console Clear"
-console.clear()
-endsnippet
-
-snippet cco "console Count"
-console.count($1)
-endsnippet
-
-snippet cdi "console Dir"
-console.dir($1)
-endsnippet
-
-snippet cer "console Error"
-console.error($1)
-endsnippet
-
-snippet cgr "console Group"
-console.group('$1')
-endsnippet
-
-snippet cge "console Group End"
-console.groupEnd()
-endsnippet
-
-snippet clg "console Log"
-console.log($1)
-endsnippet
-
-snippet ctr "console Trace"
-console.trace($1)
-endsnippet
-
-snippet clo "console Log Object"
-console.log('$1', $1)
-endsnippet
-
-snippet clj "console Log JSON"
-console.log('$1', JSON.stringify($1, null, 2))
-endsnippet
-
-snippet ctm "console Time"
-console.time('$1')
-endsnippet
-
-snippet cte "console Time End"
-console.timeEnd('$1')
-endsnippet
-
-snippet cwa "console Warn"
-console.warn($1)
-endsnippet
-
-snippet cin "console Info"
-console.info($1)
-endsnippet
-
-snippet ctl "console Table"
-console.table([$1])
-endsnippet
-
-snippet useCallbackSnippet "useCallback" b
-useCallback(
-  () => {
-    $1
-  },
-  [$2],
-)
-endsnippet
-
-snippet useImperativeHandleSnippet "useImperativeHandle" b
-useImperativeHandle(
-  $1,
-  () => {
-    $2
-  },
-  [$3],
-)
-endsnippet
+#######################################################################
+#                                                                     #
+#                               Imports                               #
+#                                                                     #
+#######################################################################
 
 snippet ima "import { } from ''" b
 import { $2 as $3 } from '$1'
@@ -109,99 +24,116 @@ snippet imp "import  from ''" b
 import $2 from '$1'
 endsnippet
 
-snippet desc "Describe Block" b
-describe('$1', () => { $2 })
+
+#######################################################################
+#                                                                     #
+#                           Console Output                            #
+#                                                                     #
+#######################################################################
+
+snippet cas "Console Assert"
+console.assert($1, $2)
 endsnippet
 
-snippet tita "Async It Block" b
-it('should $1', async () => { $2 })
+snippet ccl "Console Clear"
+console.clear()
 endsnippet
 
-snippet tit "It Block" b
-it('should $1', () => { $2 })
+snippet cco "Console Count"
+console.count($1)
 endsnippet
 
-snippet fin "forIn"
-for(let $1 in $2) {$3}
+snippet cdi "Console Dir"
+console.dir($1)
 endsnippet
 
-snippet anfn "anonymousFunction"
-($1) => { $2 }
+snippet cer "Console Error"
+console.error($1)
 endsnippet
 
-snippet nfn "namedFunction"
-const $1 = ($2) => { $3 }
+snippet cgr "Console Group"
+console.group('$1')
 endsnippet
 
-snippet dob "destructingObject"
-const {$2} = $1
+snippet cge "Console Group End"
+console.groupEnd()
 endsnippet
 
-snippet dar "destructingArray"
-const [$2] = $1
+snippet clog "Console Log"
+console.log($1)
 endsnippet
 
-snippet sti "setInterval"
-setInterval(() => { $1 }, $2)
+snippet ctr "Console Trace"
+console.trace($1)
 endsnippet
 
-snippet sto "setTimeOut"
-setTimeout(() => { $1 }, $2)
+snippet ctm "Console Time"
+console.time('$1')
 endsnippet
 
-snippet prom "promise"
-return new Promise((resolve, reject) => { $1 })
+snippet cte "Console Time End"
+console.timeEnd('$1')
 endsnippet
 
-snippet cp "destructProps"
-const { $1 } = this.props
+snippet cwa "Console Warn"
+console.warn($1)
 endsnippet
 
-snippet cs "destructState"
-const { $1 } = this.state
+snippet cin "Console Info"
+console.info($1)
 endsnippet
 
-snippet rconst "classConstructor"
-constructor(props) {
-  super(props)
-
-  this.state = {
-    $1
-  }
-}
+snippet ctl "Console Table"
+console.table([$1])
 endsnippet
 
-snippet est "emptyState"
-state = { $1 }
+
+#######################################################################
+#                                                                     #
+#                               Exports                               #
+#                                                                     #
+#######################################################################
+
+snippet exptp "export Type"
+export type $1 = {$2}
 endsnippet
 
-snippet cmmb "commentBigBlock"
-/**
- * $1
- */
+snippet expint "export Interface"
+export interface $1 {$2}
 endsnippet
 
-snippet tpf "typeofSnippet"
-typeof $1
-endsnippet
 
-snippet fun "function (named)" b
+#######################################################################
+#                                                                     #
+#                              Functions                              #
+#                                                                     #
+#######################################################################
+
+snippet fun "Function" b
 function ${1:function_name} (${2:argument}) {
 	$3
-}
+};
 endsnippet
 
-snippet vf "function (assigned to var)"
+snippet vfun "Function (assigned to var)"
 ${1:var} ${2:function_name} = function $2 ($3) {
 	$4
-}
+};
+endsnippet
+
+snippet anfun "Anonymous Function"
+($1) => { $2 };
+endsnippet
+
+snippet nfn "Named Function"
+const $1 = ($2) => { $3 };
 endsnippet
 
 priority -51
-snippet fun "function (anonymous)" w
+snippet fun "Function (anonymous)" w
 function ($1) {
 	$2
-}
+};
 endsnippet
 
 priority -50
@@ -275,4 +207,28 @@ endsnippet
 
 snippet ret "Return statement"
 return $1
+endsnippet
+
+
+#######################################################################
+#                                                                     #
+#                                Redux                                #
+#                                                                     #
+#######################################################################
+
+snippet rit "Redux Interface Type" b
+export default interface ${1:`!p snip.rv = snip.basename`} {
+	$2
+}
+endsnippet
+
+snippet rat "Redux Action Template" b
+import $1 from "$2";
+
+export const ${3:`!p snip.rv = snip.basename`} = ($4) => {
+	return {
+		type: "$5",
+		payload: ${6:data},
+	};
+};
 endsnippet

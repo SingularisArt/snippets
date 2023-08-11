@@ -8,82 +8,74 @@ extends "javascript"
 #######################################################################
 
 snippet impt "import PropTypes" b
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 endsnippet
 
 snippet imr "import React" b
-import React from 'react'
+import React from "react";
 endsnippet
 
 snippet imrd "import ReactDOM" b
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom";
 endsnippet
 
 snippet imrc "import React, { Component } from 'react'" b
-import React, { Component } from 'react'
+import React, { Component } from "react";
 endsnippet
 
 snippet imbr "import { BrowserRouter as Router } from 'react-router-dom'" b
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from "react-router-dom";
 endsnippet
 
 snippet imrr "import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'" b
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 endsnippet
 
 snippet imrcp "import React, { Component } from 'react' + PropTypes" b
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 endsnippet
 
 snippet imrm "import React, { memo } from 'react'" b
-import React, { memo } from 'react'
+import React, { memo } from "react";
 endsnippet
 
 snippet imrmp "import React, { memo } from 'react' + PropTypes" b
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
+import React, { memo } from "react";
+import PropTypes from "prop-types";
 endsnippet
 
 snippet imrpc "import React, { PureComponent } from 'react'" b
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from "react";
 endsnippet
 
 snippet imrpcp "import React, { PureComponent } from 'react' + PropTypes" b
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 endsnippet
 
 snippet imbrl "import { Link } from 'react-router-dom'" b
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 endsnippet
 
 snippet imbrnl "import { NavLink } from 'react-router-dom'" b
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 endsnippet
 
 snippet imbrc "import { Route, Switch, NavLink, Link } from 'react-router-dom'" b
-import { Route, Switch, NavLink, Link } from 'react-router-dom'
+import { Route, Switch, NavLink, Link } from "react-router-dom";
 endsnippet
 
 snippet imbrs "import { Switch } from 'react-router-dom'" b
-import { Switch } from 'react-router-dom'
+import { Switch } from "react-router-dom";
 endsnippet
 
 snippet redux "Import Redux Connect" b
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 endsnippet
 
 snippet reduxl "Import Redux Toolkit" b
-import { $1 } from 'react-toolkit'
-endsnippet
-
-snippet imrn "React Native Import" b
-import { $1 } from 'react-native'
-endsnippet
-
-snippet rnstyle "React Native Styles" b
-const styles = StyleSheet.create({$1})
+import { $1 } from "react-toolkit";
 endsnippet
 
 
@@ -93,35 +85,9 @@ endsnippet
 #                                                                     #
 #######################################################################
 
-snippet rcc "React Class Component"
-import React, { Component } from 'react'
-
-export default class ${1:`!p snip.rv = snip.basename`} extends Component {
-  render() {
-    return (
-      <div>$2</div>
-    )
-  }
-}
-endsnippet
-
-snippet rce "React Class Export Component"
-import React, { Component } from 'react'
-
-class ${1:`!p snip.rv = snip.basename`} extends Component {
-  render() {
-    return (
-      <div>$2</div>
-    )
-  }
-}
-
-export default $1
-endsnippet
-
 snippet rfcp "react Functional Component With PropTypes"
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
 function ${1:`!p snip.rv = snip.basename`}({ $2 }) {
   return (
@@ -129,9 +95,9 @@ function ${1:`!p snip.rv = snip.basename`}({ $2 }) {
   )
 }
 
-$1.propTypes = {}
+$1.propTypes = {};
 
-export default $1
+export default $1;
 endsnippet
 
 snippet rfcreduxp "react Functional Component Redux With PropTypes"
@@ -200,77 +166,6 @@ const ${1:`!p snip.rv = snip.basename`} = memo(() => {
 export default $1
 endsnippet
 
-snippet rpcp "react Class Pure Component With PropTypes"
-import PropTypes from 'prop-types'
-import React, { PureComponent } from 'react'
-
-export default class ${1:`!p snip.rv = snip.basename`} extends PureComponent {
-  static propTypes = {}
-
-  render() {
-    return (
-      <div>$2</div>
-    )
-  }
-}
-endsnippet
-
-snippet rcep "react Class Export Component With PropTypes"
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
-
-export class ${1:`!p snip.rv = snip.basename`} extends Component {
-  static propTypes = {}
-
-  render() {
-    return (
-      <div>$2</div>
-    )
-  }
-}
-
-export default $1
-endsnippet
-
-snippet rcreduxp "react Class Component Redux Prop Types"
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-
-export class ${1:`!p snip.rv = snip.basename`} extends Component {
-  static propTypes = {
-    $2: $3
-  }
-
-  render() {
-    return (
-      <div>$4</div>
-    )
-  }
-}
-
-const mapStateToProps = (state) => ({})
-
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps, mapDispatchToProps)($1)
-endsnippet
-
-snippet rccp "react Class Component Prop Types"
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
-
-export default class ${1:`!p snip.rv = snip.basename`} extends Component {
-  static propTypes = {$2: $3}
-
-  render() {
-    return (
-      <div>$4</div>
-    )
-  }
-}
-endsnippet
-
 snippet rafcp "react Arrow Function Component With Prop Types"
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -309,15 +204,19 @@ export default function ${1:`!p snip.rv = snip.basename`}({}) {
 endsnippet
 
 snippet rafce "React Arrow Function Export Component"
-import React from 'react'
+import React from "react";
 
-const ${1:`!p snip.rv = snip.basename`} = ({ $2 }) => {
+type $1Props = {};
+
+const ${1:`!p snip.rv = snip.basename`}: React.FC<$1Props> = ({ $2 }) => {
   return (
-    <div>$3</div>
+    <div>
+      $3
+    </div>
   )
 }
 
-export default $1
+export default $1;
 endsnippet
 
 snippet rafc "React Arrow Function Component"
@@ -328,105 +227,6 @@ const ${1:`!p snip.rv = snip.basename`} = ({ $2 }) => {
     <div>$3</div>
   )
 }
-endsnippet
-
-snippet rpc "React Class Pure Component"
-import React, { PureComponent } from 'react'
-
-export default class ${1:`!p snip.rv = snip.basename`} extends PureComponent {
-  render() {
-    return (
-      <div>$2</div>
-    )
-  }
-}
-endsnippet
-
-snippet rpce "React Class Export Pure Component"
-import React, { PureComponent } from 'react'
-
-class ${1:`!p snip.rv = snip.basename`} extends PureComponent {
-  render() {
-    return (
-      <div>$2</div>
-    )
-  }
-}
-
-export default $1
-endsnippet
-
-snippet rcredux "React Class Component Redux"
-import { connect } from 'react-redux'
-import React, { Component } from 'react'
-
-export class ${1:`!p snip.rv = snip.basename`} extends Component {
-  state = {}
-
-  render() {
-    return (
-      <div>$2</div>
-    )
-  }
-}
-
-const mapStateToProps = (state) => ({})
-
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps, mapDispatchToProps)($1)
-endsnippet
-
-snippet hocredux "hocComponentWithRedux"
-import React from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-
-export const mapStateToProps = state => ({})
-
-export const mapDispatchToProps = {}
-
-export const $1 = (WrappedComponent) => {
-  const hocComponent = ({ ...props }) => <WrappedComponent {...props} />
-
-  hocComponent.propTypes = {}
-
-  return hocComponent
-}
-
-export default WrapperComponent => connect(mapStateToProps, mapDispatchToProps)($1(WrapperComponent))
-endsnippet
-
-snippet rnf "React Native Arrow Function Component"
-import { View, Text } from 'react-native'
-import React from 'react'
-
-const ${1:`!p snip.rv = snip.basename`} = ({ $2 }) => {
-  return (
-    <View>
-      <Text>$3</Text>
-    </View>
-  )
-}
-
-export default $1
-endsnippet
-
-snippet rnfs "React Native Arrow Function Component With Styles"
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-
-const ${1:`!p snip.rv = snip.basename`} = ({ $2 }) => {
-  return (
-    <View>
-      <Text>$3</Text>
-    </View>
-  )
-}
-
-export default $1
-
-const styles = StyleSheet.create({})
 endsnippet
 
 snippet hoc "hocComponent"
@@ -440,147 +240,6 @@ export default (WrappedComponent) => {
 
   return hocComponent
 }
-endsnippet
-
-snippet rnc "React Native Component" b
-import { Text, View } from 'react-native'
-import React, { Component } from 'react'
-
-export default class ${1:`!p snip.rv = snip.basename`} extends Component {
-  render() {
-    return (
-      <View>
-        <Text>$2</Text>
-      </View>
-    )
-  }
-}
-endsnippet
-
-snippet rnce "React Native Component with Export" b
-import { Text, View } from 'react-native'
-import React, { Component } from 'react'
-
-export class ${1:`!p snip.rv = snip.basename`} extends Component {
-  render() {
-    return (
-      <View>
-        <Text>$2</Text>
-      </View>
-    )
-  }
-}
-
-export default $1
-endsnippet
-
-snippet rncs "React Native Component with Styles" b
-import { Text, StyleSheet, View } from 'react-native'
-import React, { Component } from 'react'
-
-export default class ${1:`!p snip.rv = snip.basename`} extends Component {
-  render() {
-    return (
-      <View>
-        <Text>$2</Text>
-      </View>
-    )
-  }
-}
-
-const styles = StyleSheet.create({})
-endsnippet
-
-snippet rnf "React Native Functional Component" b
-import { View, Text } from 'react-native'
-import React from 'react'
-
-export default function $1 () {
-  return (
-    <View>
-      <Text>$2</Text>
-    </View>
-  )
-}
-endsnippet
-
-snippet rnfs "React Native Functional Component with Styles" b
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-
-export default function $1 () {
-  return (
-    <View>
-      <Text>$2</Text>
-    </View>
-  )
-}
-
-const styles = StyleSheet.create({})
-endsnippet
-
-snippet rnfe "React Native Functional Export Component" b
-import { View, Text } from 'react-native'
-import React from 'react'
-
-const $1 = () => {
-  return (
-    <View>
-      <Text>$2</Text>
-    </View>
-  )
-}
-
-export default $1}
-endsnippet
-
-snippet rnfes "React Native Functional Export Component with Styles" b
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-
-const $1 = () => {
-  return (
-    <View>
-      <Text>$2</Text>
-    </View>
-  )
-}
-
-export default $1
-
-const styles = StyleSheet.create({})
-endsnippet
-
-snippet rnpc "React Native Pure Component" b
-import { Text, View } from 'react-native'
-import React, { PureComponent } from 'react'
-
-export default class $1 extends PureComponent {
-  render() {
-    return (
-      <View>
-        <Text>$2</Text>
-      </View>
-    )
-  }
-}
-endsnippet
-
-snippet rnpce "React Native Pure Component Export" b
-import { Text, View } from 'react-native'
-import React, { PureComponent } from 'react'
-
-export class $1 extends PureComponent {
-  render() {
-    return (
-      <View>
-        <Text>$2</Text>
-      </View>
-    )
-  }
-}
-
-export default $1
 endsnippet
 
 snippet cdm "componentDidMount"
@@ -613,6 +272,43 @@ endsnippet
 
 snippet state "componentState"
 this.state.$1
+endsnippet
+
+
+#######################################################################
+#                                                                     #
+#                                Hooks                                #
+#                                                                     #
+#######################################################################
+
+snippet useState "useState"
+const [$1, ${2:set${1/(.)(.*)/\U$1\E$2/ga}}] = useState($3);
+endsnippet
+
+snippet useEffect "useEffect"
+useEffect(() => {
+  $1
+}, [$2]);
+endsnippet
+
+snippet useMemo "useMemo"
+const [$1, $2] = useMemo($3);
+endsnippet
+
+snippet useRef "useRef"
+const $1 = useRef($2);
+endsnippet
+
+snippet useContext "useContext"
+const [$1, $2] = useContext($3);
+endsnippet
+
+snippet useReducer "useReducer"
+const [$1, $2] = useReducer($3);
+endsnippet
+
+snippet useCallback "useCallback"
+const [$1, $2] = useCallback($3);
 endsnippet
 
 
@@ -741,63 +437,6 @@ endsnippet
 
 #######################################################################
 #                                                                     #
-#                                Redux                                #
-#                                                                     #
-#######################################################################
-
-snippet rxaction "Redux Action" b
-export const $1 = (payload) => ({
-  type: $2,
-  payload
-})
-endsnippet
-
-snippet rxconst "Redux Const" b
-export const $1 = '$1'
-endsnippet
-
-snippet rxreducer "Redux Reducer" b
-const initialState = {}
-
-export default (state = initialState, { type, payload }) => {
-  switch (type) {
-
-  case $1:
-    return { ...state, ...payload }
-
-  default:
-    return state
-  }
-}
-endsnippet
-
-snippet rxselect "Redux Selector" b
-import { createSelector } from 'reselect'
-
-export const $1 = state => state.$2
-endsnippet
-
-snippet rxslice "Redux Slice" b
-import { createSlice } from '@reduxjs/toolkit'
-
-const initialState = {
-
-}
-
-const ${1:`!p snip.rv = snip.basename`} = createSlice({
-  name: $2,
-  initialState,
-  reducers: {}
-});
-
-export const {} = $1.actions
-
-export default $1.reducer
-endsnippet
-
-
-#######################################################################
-#                                                                     #
 #                                Other                                #
 #                                                                     #
 #######################################################################
@@ -810,74 +449,12 @@ snippet expint "export Interface"
 export interface $1 {$2}
 endsnippet
 
-snippet useEffectSnippet "useEffect" b
-useEffect(() => {
-  $1
-
-  return () => {
-    $2
-  }
-}, [$3])
-endsnippet
-
-snippet useImperativeHandleSnippet "useImperativeHandle" b
-useImperativeHandle(
-  $1,
-  () => {
-    $2
-  },
-  [$3],
-)
-endsnippet
-
-snippet useLayoutEffectSnippet "useLayoutEffect" b
-useLayoutEffect(() => {
-  $1
-
-  return () => {
-    $2
-  };
-}, [$3])
-endsnippet
-
-snippet useMemoSnippet "useMemo" b
-useMemo(() => $1, [$2])
-endsnippet
-
-snippet useReducerSnippet "useReducer" b
-const [state, dispatch] = useReducer($1, $2, $3)
-endsnippet
-
-snippet useRefSnippet "useRef" b
+snippet useRef "useRef" b
 const $1 = useRef($2)
 endsnippet
 
-snippet useStateSnippet "useState" b
+snippet useState "useState" b
 const [$1, set${1/(.*)/${1:/capitalize}/}] = useState($2)
 endsnippet
 
-snippet reduxmap "Mapping to Props" b
-const mapStateToProps = (state) => ({})
-
-const mapDispatchToProps = {}
-endsnippet
-
-snippet gdsfp "get Derived State From Props"
-static getDerivedStateFromProps(props, state) {$1}
-endsnippet
-
-snippet gsbu "get Snapshot Before Update"
-getSnapshotBeforeUpdate = (prevProps, prevState) => {$1}
-endsnippet
-
-snippet rcontext "create Context"
-const $1 = React.createContext()
-endsnippet
-
-snippet cref "create Ref"
-this.$1Ref = React.createRef()
-endsnippet
-
-snippet bnd "bind This"
-this.$1 = this.$1.bind(this)
-endsnippet
+# vim:ft=snippets:
