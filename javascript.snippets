@@ -4,24 +4,24 @@
 #                                                                     #
 #######################################################################
 
-snippet ima "import { } from ''" b
-import { $2 as $3 } from '$1'
+snippet ima "import { '' } from ''" b
+import { $2 as $3 } from "$1";
 endsnippet
 
-snippet imd "import { } from ''" b
-import { $2 } from '$1'
+snippet imd "import { '' } from ''" b
+import { $2 } from "$1";
 endsnippet
 
-snippet ime "import * as  from ''" b
-import * as $2 from '$1'
+snippet ime "import * as '' from ''" b
+import * as $2 from "$1";
 endsnippet
 
 snippet imn "import ''" b
-import '$1'
+import "$1";
 endsnippet
 
-snippet imp "import  from ''" b
-import $2 from '$1'
+snippet imp "import '' from ''" b
+import $2 from "$1";
 endsnippet
 
 
@@ -32,59 +32,59 @@ endsnippet
 #######################################################################
 
 snippet cas "Console Assert"
-console.assert($1, $2)
+console.assert($1, $2);
 endsnippet
 
 snippet ccl "Console Clear"
-console.clear()
+console.clear();
 endsnippet
 
 snippet cco "Console Count"
-console.count($1)
+console.count($1);
 endsnippet
 
 snippet cdi "Console Dir"
-console.dir($1)
+console.dir($1);
 endsnippet
 
 snippet cer "Console Error"
-console.error($1)
+console.error($1);
 endsnippet
 
 snippet cgr "Console Group"
-console.group('$1')
+console.group("$1");
 endsnippet
 
 snippet cge "Console Group End"
-console.groupEnd()
+console.groupEnd();
 endsnippet
 
 snippet clog "Console Log"
-console.log($1)
+console.log($1);
 endsnippet
 
 snippet ctr "Console Trace"
-console.trace($1)
+console.trace($1);
 endsnippet
 
 snippet ctm "Console Time"
-console.time('$1')
+console.time("$1");
 endsnippet
 
 snippet cte "Console Time End"
-console.timeEnd('$1')
+console.timeEnd("$1");
 endsnippet
 
 snippet cwa "Console Warn"
-console.warn($1)
+console.warn($1);
 endsnippet
 
 snippet cin "Console Info"
-console.info($1)
+console.info($1);
 endsnippet
 
 snippet ctl "Console Table"
-console.table([$1])
+console.table([$1]);
 endsnippet
 
 
@@ -95,7 +95,7 @@ endsnippet
 #######################################################################
 
 snippet exptp "export Type"
-export type $1 = {$2}
+export type $1 = {$2};
 endsnippet
 
 snippet expint "export Interface"
@@ -110,64 +110,85 @@ endsnippet
 #######################################################################
 
 snippet fun "Function" b
-function ${1:function_name} (${2:argument}) {
+function ${1:function_name}(${2:argument}) {
 	$3
-};
+}
 endsnippet
 
 snippet vfun "Function (assigned to var)"
-${1:var} ${2:function_name} = function $2 ($3) {
+${1:var} ${2:function_name} = function $2($3) {
 	$4
 };
 endsnippet
 
 snippet anfun "Anonymous Function"
-($1) => { $2 };
+($1) => {
+  $2
+};
 endsnippet
 
-snippet nfn "Named Function"
-const $1 = ($2) => { $3 };
+snippet nfun "Named Function"
+const $1 = ($2) => {
+  $3
+};
 endsnippet
 
-priority -51
-snippet fun "Function (anonymous)" w
+snippet afun "Function (anonymous)" w
 function ($1) {
 	$2
 };
 endsnippet
 
-priority -50
-snippet anf "function (anonymous)" i
-function ($1) {
-	$2
-}
-endsnippet
-
-snippet iife "Immediately-Invoked Function Expression (iife)"
-(function (${1:window}) {
-	$2
-}(${3:$1}))`!p snip.rv = semi(snip)`
-endsnippet
-
-snippet ;fe "Minify safe iife"
-;(function (${1}) {
-	$2
-}($3))
-endsnippet
-
 snippet timeout "setTimeout function"
-setTimeout(function () {
-	$1
-}${2:.bind(${3:this})}, ${4:10})
+setTimeout(
+  function () {
+    $1
+  }${2:.bind(${3:this})},
+  ${4:10},
+);
 endsnippet
 
-snippet fi "for prop in obj using hasOwnProperty" b
-for (${1:prop} in ${2:obj}){
-	if ($2.hasOwnProperty($1)) {
-		$3
-	}
+snippet ret "Return statement"
+return $1
+endsnippet
+
+
+#######################################################################
+#                                                                     #
+#                               Classes                               #
+#                                                                     #
+#######################################################################
+
+snippet class "Class Declaration" b
+class ${1:ClassName} {
+  constructor($2) {
+    $3
+  }
 }
 endsnippet
+
+snippet aclass "Anonymous Class" b
+const ${1:ClassName} = class {
+  constructor($2) {
+    $3
+  }
+};
+endsnippet
+
+snippet eclass "Expression Class" b
+const ${1:ClassName} = class $1 {
+  constructor($2) {
+    $3
+  }
+};
+endsnippet
+
+
+#######################################################################
+#                                                                     #
+#                             Conditions                              #
+#                                                                     #
+#######################################################################
 
 snippet if "if (condition) { ... }"
 if (${1:true}) {
@@ -183,30 +204,39 @@ if (${1:true}) {
 }
 endsnippet
 
-snippet switch
+snippet switch "switch statement"
 switch (${1:expression}) {
-	case '${2:case}':
+	case "${2:case}":
 		${3}
-		break
+		break;
 	default:
 		${4}
 }
 endsnippet
 
 snippet case "case 'xyz': ... break"
-case '${1:case}':
+case "${1:case}":
 	$2
-	break
+	break;
 endsnippet
 
-snippet do "do { ... } while (condition)"
+snippet do "do { ... } while (condition)" b
 do {
 	$1
-} while (${2:/* condition */})
+} while (${2:/* condition */});
 endsnippet
 
-snippet ret "Return statement"
-return $1
+snippet while "while (...) { ... }" b
+while (${1:i} < ${2:10}) {
+  $3
+  $1++;
+}
+endsnippet
+
+snippet for "for (...; ... < ...; ...++) { ... }" b
+for (let ${1:i} = ${2:0}; $1 < ${3:array.length}; $1++) {
+  $3
+}
 endsnippet
 
 
@@ -232,3 +262,5 @@ export const ${3:`!p snip.rv = snip.basename`} = ($4) => {
 	};
 };
 endsnippet
+
+# vim:ft=snippets:
