@@ -1,26 +1,6 @@
 global !p
 
-from builtin import choose_next
 from latex_.scopes import math
-
-greek_letters = {
-	"alp": "\\alpha",
-	"bet": "\\beta",
-	"del": "\\delta",
-	"Del": "\\Delta",
-	"lam": "\\lambda",
-	"Lam": "\\Lambda",
-	"pi": "\\pi",
-	"Pi": "\\Pi",
-	"sig": "\\sigma",
-	"Sig": "\\Sigma",
-	"phi": "\\varphi",
-	"Phi": "\\Phi",
-	"psi": "\\psi",
-	"Psi": "\\Psi",
-	"ome": "\\omega",
-	"Ome": "\\Omega",
-}
 
 endglobal
 
@@ -31,9 +11,121 @@ endglobal
 #                                                                              #
 ################################################################################
 
-# context "match[0] in greek_letters"
-# snippet "\b[a-zA-Z]+\b" "Greek Letter" ri
-# `!p snip.rv = greek_letters[match[0]]`
-# endsnippet
+context "math()"
+snippet ;a "Alpha" A
+\\alpha
+endsnippet
+
+snippet ;b "Beta" A
+\\beta
+endsnippet
+
+snippet ";(g|G)" "Gamma" Ar
+\\`!p snip.rv = match.group(1)`amma
+endsnippet
+
+snippet ";(d|D)" "Delta" Ar
+\\`!p snip.rv = match.group(1)`elta
+endsnippet
+
+snippet ;e "Epsilon" A
+\\epsilon
+endsnippet
+
+snippet ;E "Epsilon" A
+\\varepsilon
+endsnippet
+
+snippet ;z "Zeta" A
+\\zeta
+endsnippet
+
+snippet ;h "Eta" A
+\\eta
+endsnippet
+
+snippet ";(t|T)" "Theta" Ar
+\\`!p snip.rv = match.group(1)`heta
+endsnippet
+
+snippet ;vt "Theta" A
+\\vartheta
+endsnippet
+
+snippet ;i "Iota" A
+\\iota
+endsnippet
+
+snippet ;k "Kappa" A
+\\kappa
+endsnippet
+
+snippet ";(l|L)" "Lambda" Ar
+\\`!p snip.rv = match.group(1)`ambda
+endsnippet
+
+snippet ;m "Mu" A
+\\mu
+endsnippet
+
+snippet ;n "Nu" A
+\\nu
+endsnippet
+
+snippet ";(x|X)" "Xi" Ar
+\\`!p snip.rv = match.group(1)`i
+endsnippet
+
+snippet ";(p|P)" "Pi" Ar
+\\`!p snip.rv = match.group(1)`i
+endsnippet
+
+snippet ;r "Rho" A
+\\rho
+endsnippet
+
+snippet ";(s|S)" "Sigma" Ar
+\\`!p snip.rv = match.group(1)`igma
+endsnippet
+
+snippet ;q "Tau" A
+\\tau
+endsnippet
+
+snippet ";(u|U)" "Upsilon" Ar
+\\`!p snip.rv = match.group(1)`psilon
+endsnippet
+
+snippet ;f "Phi" A
+\\phi
+endsnippet
+
+snippet ;F "Phi" A
+\\Phi
+endsnippet
+
+snippet ;vf "Phi" A
+\\varphi
+endsnippet
+
+snippet ";(c|C)" "Chi" Ar
+\\`!p snip.rv = match.group(1)`hi
+endsnippet
+
+snippet ;j "Psi" A
+\\psi
+endsnippet
+
+snippet ;J "Psi" A
+\\Psi
+endsnippet
+
+snippet ;w "Omega" A
+\\omega
+endsnippet
+
+snippet ;W "Omega" A
+\\Omega
+endsnippet
 
 # vim:ft=snippets:
