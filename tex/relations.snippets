@@ -3,7 +3,7 @@ global !p
 from builtin import choose_next
 from latex_.scopes import math
 
-nornot = ['', 'n']
+nornot = ["", "n"]
 
 endglobal
 
@@ -72,7 +72,7 @@ endsnippet
 context "math()"
 snippet "\\(n?)sim(\s?)" "Similar Transformation" r
 \\`!p
-snip.rv = choose_next(match.group(1), nornot, 2) + 'sim' + match.group(2)
+snip.rv = choose_next(match.group(1), nornot, 2) + "sim" + match.group(2)
 `
 endsnippet
 

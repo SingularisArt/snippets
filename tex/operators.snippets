@@ -3,7 +3,7 @@ global !p
 from builtin import choose_next
 from latex_.scopes import math, not_unit
 
-plus_minus = ['\\pm', '\\mp']
+plus_minus = ["\\pm", "\\mp"]
 
 endglobal
 
@@ -49,7 +49,7 @@ endsnippet
 # oiiinty -> \oiiint_{0}^{\infty} \,\textrm{d} y
 context "math()"
 snippet "(o?i{1,3})nt([a-zA-Z]?)" "Definite Integral" r
-\\`!p snip.rv = match.group(1)`nt_{${1:0}}^{${2:\infty}} ${3:${VISUAL}} \\${4:,}\textrm{d}`!p snip.rv = match.group(2) or 'x'`
+\\`!p snip.rv = match.group(1)`nt_{${1:0}}^{${2:\infty}} ${3:${VISUAL}} \\${4:,}\textrm{d}`!p snip.rv = match.group(2) or "x"`
 endsnippet
 
 # nint     -> \int \,\textrm{d} x
@@ -66,7 +66,7 @@ endsnippet
 # noiiinty -> \oiiint \,\textrm{d} y
 context "math()"
 snippet "(o?I{1,3})nt([a-zA-Z]?)" "Indefinite Integral" r
-\\`!p snip.rv = match.group(1).lower()`nt ${1:${VISUAL}} \\${4:,}\textrm{d}`!p snip.rv = match.group(2) or 'x'`
+\\`!p snip.rv = match.group(1).lower()`nt ${1:${VISUAL}} \\${4:,}\textrm{d}`!p snip.rv = match.group(2) or "x"`
 endsnippet
 
 # ddx    -> \frac{\mathrm{d}}{\mathrm{d} x}
@@ -151,20 +151,20 @@ endsnippet
 
 # 4\pi/ -> \frac{4\pi}{}
 context "math()"
-snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wAr
+snippet "((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/" "Fraction" wAr
 \\frac{`!p snip.rv = match.group(1)`}{$1}
 endsnippet
 
 # (4\pi \times 1)/ -> \frac{4\pi \times 1}{}
 context "math()"
-snippet '^.*\)/' "() Fraction" wAr
+snippet "^.*\)/" "() Fraction" wAr
 `!p
 stripped = match.string[:-1]
 depth = 0
 i = len(stripped) - 1
 while True:
-	if stripped[i] == ')': depth += 1
-	if stripped[i] == '(': depth -= 1
+	if stripped[i] == ")": depth += 1
+	if stripped[i] == "(": depth -= 1
 	if depth == 0: break;
 	i -= 1
 snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
@@ -187,7 +187,6 @@ endsnippet
 # max    -> \max
 # min    -> \min
 # arg    -> \arg
-# det    -> \det
 # exp    -> \exp
 # csc    -> \csc
 # sec    -> \sec
@@ -201,21 +200,21 @@ endsnippet
 # coth   -> \coth
 # gcd    -> \gcd
 context "math()"
-snippet "\\?\b(sin|cos|tan|ln|lg|log|max|min|arg|det|exp|csc|sec|arcsin|arccos|arctan|sinh|cosh|tanh|cot|coth|gcd)" "Common Function" Ar
+snippet "\\?\b(sin|cos|tan|ln|lg|log|max|min|arg|exp|csc|sec|arcsin|arccos|arctan|sinh|cosh|tanh|cot|coth|gcd)" "Common Function" Ar
 `!p
-snip.rv = '\\' + match.group(1)
+snip.rv = "\\" + match.group(1)
 `
 endsnippet
 
 # fofx -> f(x) = x
 context "math()"
-snippet '([a-zA-Z])of([a-zA-Z])' "Create Function" rwA
+snippet "([a-zA-Z])of([a-zA-Z])" "Create Function" rwA
 `!p snip.rv = match.group(1)`(`!p snip.rv = match.group(2)`) = ${1:`!p snip.rv = match.group(2)`}
 endsnippet
 
 # fof<x,y,z> -> f(x,y,z) = x,y,z
 context "math()"
-snippet '(.)of\<(.*?)\>' "Create Function" rwA
+snippet "(.)of\<(.*?)\>" "Create Function" rwA
 `!p snip.rv = match.group(1)`(`!p snip.rv = match.group(2)`) = ${1:`!p snip.rv = match.group(2)`}
 endsnippet
 

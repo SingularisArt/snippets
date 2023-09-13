@@ -25,36 +25,4 @@ $1
 MATHEMATICA
 endsnippet
 
-# context "math()"
-# snippet "(MATHEMATICA|SYMPY)(.*)(MATHEMATICA|SYMPY)" "Evaluate Mathematica / Sympy" wr
-# `!p
-# match match.group(1):
-# 	case "math":
-# 		match match.group(2):
-# 			case "math":
-# 				import subprocess
-# 				code = 'ToString[' + match.group(2) + ', TeXForm]'
-# 				snip.rv = subprocess.check_output(['wolframscript', '-code', code])
-# `
-# endsnippet
-
-snippet "F(.|\n*)F" "" r
-`!p snip.rv=match.group(1)`
-endsnippet
-
-context "math()"
-snippet "SYMPY(.*)SYMPY" "Evaluate Sympy Block" wrm
-`!p
-from sympy import *
-x, y, z, t = symbols('x y z t')
-k, m, n = symbols('k m n', integer=True)
-f, g, h = symbols('f g h', cls=Function)
-init_printing()
-snip.rv = eval("latex(" + match.group(1).replace("\\", "") \
-    .replace("^", "**") \
-    .replace("{", "(") \
-    .replace("}", ")") + ")")
-`
-endsnippet
-
 # vim:ft=snippets:

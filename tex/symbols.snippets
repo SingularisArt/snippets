@@ -3,8 +3,8 @@ global !p
 from builtin import choose_next
 from latex_.scopes import math
 
-dots = ['', 'c', 'v', 'd']
-infties = ['', '-', '+']
+dots = ["", "c", "v", "d"]
+infties = ["", "-", "+"]
 
 endglobal
 
@@ -28,19 +28,19 @@ endsnippet
 context "math()"
 snippet "\\((?:c|v|d)?)dots(\s?)" "Ellipsis Transformation" r
 \\`!p
-snip.rv = choose_next(match.group(1), dots, 4) + 'dots' + match.group(2)
+snip.rv = choose_next(match.group(1), dots, 4) + "dots" + match.group(2)
 `
 endsnippet
 
 # ooo -> \infty
 context "math()"
-snippet ooo "Infinity" i
+snippet ooo "Infinity" Ai
 \infty
 endsnippet
 
 # nabla -> \nabla
 context "math()"
-snippet nabla "Nabla" i
+snippet nbl "Nabla" Ai
 \nabla
 endsnippet
 
@@ -50,7 +50,7 @@ endsnippet
 context "math()"
 snippet "((?:\+|-)?)\\infty(\s?)" "Infinity Transformation" r
 `!p
-snip.rv = choose_next(match.group(1), infties, 3) + '\\infty' + match.group(2)
+snip.rv = choose_next(match.group(1), infties, 3) + "\\infty" + match.group(2)
 `
 endsnippet
 
@@ -82,6 +82,65 @@ endsnippet
 context "math()"
 snippet CC "Set of Complex Numbers" wA
 \mathbb{C}
+endsnippet
+
+# mol -> \models
+context "math()"
+snippet mol "Models" A
+\models $0
+endsnippet
+
+# mod -> \vdash
+context "math()"
+snippet mod "Models" A
+\vdash $0
+endsnippet
+
+# suc -> \succ
+context "math()"
+snippet suc "Succeeds" Ai
+\succ $0
+endsnippet
+
+# seq -> \succeq
+context "math()"
+snippet seq "Succeeds or Equal to" Ai
+\succeq $0
+endsnippet
+
+# pec -> \prec
+context "math()"
+snippet pec "Precedes" Ai
+\prec $0
+endsnippet
+
+# peq  -> \preceq
+context "math()"
+snippet peq "Precedes or equal to" Ai
+\preceq $0
+endsnippet
+
+context "math()"
+snippet "(\d+)..([a-zA-Z])([a-zA-Z])" "Sequence" r
+`!p
+text = ""
+
+sequenceNumber = int(match.group(1))
+setLetter = match.group(2)
+numLetter = match.group(3)
+
+for i in range(sequenceNumber):
+	text += setLetter + "_{" + str(i + 1) + "}, "
+
+text += "\\ldots, "
+
+for i in range(sequenceNumber-1):
+	text += setLetter + "_{" + numLetter + "-" + str(sequenceNumber - i) + "}, "
+
+text += setLetter + "_{" + numLetter + "-1}, " + setLetter + "_{" + numLetter + "}"
+
+snip.rv = text
+`$0
 endsnippet
 
 # vim:ft=snippets:
