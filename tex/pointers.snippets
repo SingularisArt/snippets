@@ -16,10 +16,16 @@ endglobal
 #                                                                              #
 ################################################################################
 
-# => -> \Rightarrow
+# => -> \implies
 context "math()"
 snippet => "Imply" Ai
 \implies
+endsnippet
+
+# =< -> \impliedby
+context "math()"
+snippet =< "Implied by" Ai
+\impliedby
 endsnippet
 
 # <> -> \iff
@@ -78,9 +84,9 @@ endsnippet
 # \Longleftrightarrow  -> \iff
 # \iff                 -> \leftrightarrow
 context "math()"
-snippet "(\\leftrightarrow|\\longleftrightarrow|\\Leftrightarrow|\\Longleftrightarrow|\\iff)" "LeftRightArrow Transformation" r
+snippet "(\\longleftrightarrow|\\Leftrightarrow|\\Longleftrightarrow|\\iff)" "LeftRightArrow Transformation" r
 `!p
-snip.rv = choose_next(match.group(1), leftright_arrows, 5)
+snip.rv = choose_next(match.group(1), leftright_arrows, 4)
 `
 endsnippet
 
