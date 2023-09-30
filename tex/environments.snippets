@@ -119,14 +119,13 @@ endsnippet
 
 # mat -> matrix environment
 # pmat -> pmatrix environment
-# Pmat -> pmatrix* environment
 # bmat -> bmatrix environment
 # Bmat -> Bmatrix environment
 # vmat -> vmatrix environment
 # Vmat -> Vmatrix environment
 context "math()"
 pre_expand "create_matrix(snip, match)"
-snippet "(p|P|b|B|v|V)?mat\(([1-9]+) ([1-9]+)\)" "Matrix" rbm
+snippet "(a)?(d|p|b|B|v|V)?mat\(([1-9]+) ([1-9]+)\)" "Matrix" rbm
 endsnippet
 
 # vim:ft=snippets:
