@@ -1,60 +1,8 @@
 global !p
 
 from latex_.scopes import text
-
-units = {
-	"mm": r"\millimeter",
-	"cm": r"\centimeter",
-	"dm": r"\decimeter",
-	"in": r"\inch",
-	"ft": r"\foot",
-	"yd": r"\yard",
-	"m": r"\meter",
-	"km": r"\kilometer",
-	"mi": r"\mile",
-	"mph": r"\mile\per\hour",
-	"kph": r"\kilometer\per\hour",
-	"n": r"\newton",
-	"rad": r"\radian",
-	"deg": r"\degree",
-	"l": r"\liter",
-	"ml": r"\milliliter",
-	"gal": r"\gallon",
-	"ms": r"\millisecond",
-	"s": r"\second",
-	"min": r"\minute",
-	"hr": r"\hour",
-	"d": r"\day",
-	"wk": r"\week",
-	"mos": r"\month",
-	"yr": r"\year",
-	"mg": r"\milligram",
-	"g": r"\gram",
-	"oz": r"\ounce",
-	"lb": r"\pound",
-	"kg": r"\kilogram",
-	"t": r"\ton",
-	"sq": r"\squared",
-	"cb": r"\cubed",
-	"g": r"\meter\per\second\squared",
-	"per": r"\per",
-}
-
-
-def expand_unit(string):
-	new_string = []
-
-	string_split = string.replace("  ", r" per ").split()
-
-	for str in string_split:
-		if str not in units:
-			new_string.append(f"\\{str}")
-		else:
-			for unit in units:
-				if str == unit:
-					new_string.append(units[unit])
-
-	return "".join(new_string)
+from latex_.cmdsub import expand_unit
+from latex._variables import units
 
 endglobal
 

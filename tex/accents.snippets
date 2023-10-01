@@ -2,18 +2,8 @@ global !p
 
 from builtin import choose_next
 from latex_.scopes import math
-
-def bar_hat_vec(target, word, subscript = ""):
-    return "\\" + target + "{" + ("\\" + word + "math" if word in special_bar_hat_vec else word) + "}" + (subscript or "")
-
-def long_bar_hat_vec(target, word, subscript = ""):
-    return map_bar_hat_vec[target] + "{" + word + "}" + (subscript or "")
-
-special_bar_hat_vec = ["i", "j"]
-map_bar_hat_vec = {"bar": "\\overline", "hat": "\\widehat", "vec": "\\overrightarrow"}
-bars = ["\\bar", "\\overline"]
-hats = ["\\hat", "\\widehat"]
-vecs = ["\\vec", "\\overrightarrow"]
+from latex_.cmdsub import bar_hat_vec, long_bar_hat_vec
+from latex_.variables import bars, hats, vecs
 
 endglobal
 

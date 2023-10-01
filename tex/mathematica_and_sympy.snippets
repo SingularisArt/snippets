@@ -1,6 +1,7 @@
 global !p
 
 from latex_.scopes import text, math
+from latex_.cmdsub import have_block, get_block, calculate_sympy
 
 endglobal
 
@@ -12,17 +13,22 @@ endglobal
 ################################################################################
 
 context "math()"
-snippet "sympy" "sympy block" rw
+snippet sympy "sympy block"
 SYMPY
-$1
+$0
 SYMPY
 endsnippet
 
 context "math()"
-snippet "math" "mathematica block" rw
+snippet math "mathematica block"
 MATHEMATICA
 $1
 MATHEMATICA
+endsnippet
+
+context "have_block('SYMPY', snip)"
+pre_expand "calculate_sympy(snip)"
+snippet SYMPY "Description" i
 endsnippet
 
 # vim:ft=snippets:
