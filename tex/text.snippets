@@ -13,32 +13,26 @@ endglobal
 
 # bf -> \textbf{}
 context "text()"
-snippet bf "Bold"
+snippet bf "Bold" iw
 \textbf{${VISUAL}$1}$0
 endsnippet
 
 # it -> \textit{}
 context "text()"
-snippet it "Italic"
+snippet it "Italic" iw
 \textit{${VISUAL}$1}$0
 endsnippet
 
 # un -> \underline{}
 context "text()"
-snippet un "Underline"
+snippet un "Underline" iw
 \underline{${VISUAL}$1}$0
 endsnippet
 
 # sc -> \textsc{}
 context "text()"
-snippet sc "Smallcaps"
+snippet sc "Smallcaps" iw
 \textsc{${VISUAL}$1}$0
-endsnippet
-
-# txt -> \textrm{}
-context "math()"
-snippet txt "Text" w
-\textrm{$1}$0
 endsnippet
 
 # vim:ft=snippets:

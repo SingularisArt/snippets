@@ -17,4 +17,15 @@ snippet dis "Display Style" i
 \displaystyle
 endsnippet
 
+context "math()"
+snippet "(bf|bb|tt|sf|cal)" "Style" ir
+\math`!p snip.rv = match.group(1)`{${1:${VISUAL}}}$0
+endsnippet
+
+# txt -> \textrm{}
+context "math()"
+snippet txt "Text" i
+\textrm{$1}$0
+endsnippet
+
 # vim:ft=snippets:
