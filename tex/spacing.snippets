@@ -1,6 +1,8 @@
 global !p
 
+from builtin import choose_next
 from latex_.scopes import math
+from latex_.variables import spaces
 
 endglobal
 
@@ -11,10 +13,58 @@ endglobal
 #                                                                              #
 ################################################################################
 
+# qq -> \qquad
+context "math()"
+snippet qq "Space" Ai
+\qquad
+endsnippet
+
 # qd -> \qquad
 context "math()"
 snippet qd "Space" Ai
-\qquad
+\quad
+endsnippet
+
+# q, -> \,
+context "math()"
+snippet q, "Space" Ai
+\,
+endsnippet
+
+# q: -> \:
+context "math()"
+snippet q: "Space" Ai
+\:
+endsnippet
+
+# q; -> \;
+context "math()"
+snippet q; "Space" Ai
+\;
+endsnippet
+
+# q! -> \!
+context "math()"
+snippet q! "Space" Ai
+\!
+endsnippet
+
+# qs -> \ 
+context "math()"
+snippet qs "Space" Ai
+\ 
+endsnippet
+
+# \qquad -> \quad
+# \quad -> \,
+# \, -> \:
+# \: -> \;
+# \; -> \!
+# \! -> \ 
+# \  -> \qquad
+context "math()"
+snippet "(\\qquad|\\quad|\\,|\\:|\\;|\\!|\\ )" "Space" ir
+`!p snip.rv = choose_next(match.group(1), spaces, 7)`
 endsnippet
 
 # vim:ft=snippets:
