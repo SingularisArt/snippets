@@ -1,7 +1,7 @@
 global !p
 
-from latex_.scopes import text, math
-from latex_.cmdsub import have_block, get_block, calculate_sympy
+from latex_.scopes import inline_math, display_math
+from latex_.extcal import *
 
 endglobal
 
@@ -12,23 +12,139 @@ endglobal
 #                                                                              #
 ################################################################################
 
-context "math()"
-snippet sympy "sympy block"
-SYMPY
-$0
-SYMPY
+context "inline_math()"
+snippet sym "SymPy Block" w
+sympy ${1:${VISUAL}} sympy$0
 endsnippet
 
-context "math()"
-snippet math "mathematica block"
-MATHEMATICA
-$1
-MATHEMATICA
+context "display_math()"
+snippet sym "SymPy Block" b
+sympy
+${1:${VISUAL}}
+sympy$0
 endsnippet
 
-context "have_block('SYMPY', snip)"
+context "inline_math()"
+snippet wlf "WolframScript Block" w
+wolfram ${1:${VISUAL}} wolfram$0
+endsnippet
+
+context "display_math()"
+snippet wlf "WolframScript Block" b
+wolfram
+${1:${VISUAL}}
+wolfram$0
+endsnippet
+
+priority 1
+context "inline_math()"
+snippet \sym "SymPy Block" w
+\\sympy ${1:${VISUAL}} \\sympy$0
+endsnippet
+
+context "display_math()"
+snippet \sym "SymPy Block" b
+\\sympy
+${1:${VISUAL}}
+\\sympy$0
+endsnippet
+
+context "inline_math()"
+snippet \wlf "WolframScript Block" w
+\\wolfram ${1:${VISUAL}} \\wolfram$0
+endsnippet
+
+context "display_math()"
+snippet \wlf "WolframScript Block" b
+\\wolfram
+${1:${VISUAL}}
+\\wolfram$0
+endsnippet
+
+context "inline_math()"
+snippet "sympy (.*?) sympy" "Evaluate SymPy" wr
+`!p
+from sympy import *
+x, y, z, t = symbols("x y z t")
+i, j, k = symbols("i j k", integer=True)
+f, g, h = symbols("f g h", cls=Function)
+result = latex(eval(pre_process_text(match.group(1))))
+snip.rv = process_latex(result)
+`
+endsnippet
+
+context "get_block('sympy', snip)"
 pre_expand "calculate_sympy(snip)"
-snippet SYMPY "Description" i
+snippet sympy "Evaluate Sympy" b
+endsnippet
+
+context "inline_math()"
+snippet "\\sympy (.*?) \\sympy" "Evaluate SymPy" wr
+`!p
+x, y, z, t = symbols("x y z t")
+i, j, k = symbols("i j k", integer=True)
+f, g, h = symbols("f g h", cls=Function)
+result = latex(
+    eval(
+        process_sympy(
+            match.group(1).replace("\\e ", "e ") \
+                          .replace("\\d ", "\, d")
+        ).replace("\\", "") \
+         .replace("^", "**") \
+         .replace("{", "(") \
+         .replace("}", ")")
+    )
+)
+result = sub(r"(\s|\W?)e(?=\W)", r"\g<1>\\e", result)
+result = result.replace(r"\, d", r"\d ")
+snip.rv = result
+`
+endsnippet
+
+context "get_block('sympy', snip)"
+pre_expand "calculate_sympy(snip, True)"
+snippet \\sympy "Evaluate Sympy" b
+endsnippet
+
+context "inline_math()"
+snippet "wolfram (.*?) wolfram:?(\d{,2})" "Evaluate WolframScript" wr
+`!p
+code = "ToString[" + match.group(1) + ", TeXForm]"
+try:
+    result = check_output(["wolframscript", "-code", code], \
+                          encoding = "utf-8", \
+                          creationflags = 0x08000000,\
+                          timeout  = int(match.group(2) or wolframscript_timeout_default)).strip()
+except TimeoutExpired:
+    result = ""
+snip.rv = process_latex(result)
+`
+endsnippet
+
+context "get_block('wolfram', snip)"
+pre_expand "calculate_wolfram(snip, False, match.group(1))"
+snippet "^wolfram:?(\d{,2})" "Evaluate WolframScript" r
+endsnippet
+
+context "inline_math()"
+snippet "\\wolfram (.*?) \\wolfram:?(\d{,2})" "Evaluate WolframScript" wr
+`!p
+tex = pre_process_latex(match.group(1))
+code = "ToString[ToExpression[\"" + tex + "\", TeXForm], TeXForm]"
+try:
+    result = check_output(["wolframscript", "-code", code], \
+                          encoding      = "utf-8", \
+                          creationflags = 0x08000000,\
+                          timeout       = int(match.group(2) or wolframscript_timeout_default)).strip()
+except TimeoutExpired:
+    result = ""
+snip.rv = process_latex(result)
+`
+endsnippet
+
+context "get_block('\\wolfram', snip)"
+pre_expand "calculate_wolfram(snip, True, match.group(1))"
+snippet "^\\wolfram:?(\d{,2})" "Evaluate WolframScript" r
 endsnippet
 
 # vim:ft=snippets:
