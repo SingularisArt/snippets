@@ -1,0 +1,85 @@
+global !p
+
+from latex_.scopes import math
+from latex_.extcal import *
+
+wolframscript_timeout_default = 10
+
+endglobal
+
+
+################################################################################
+#                                                                              #
+#                            Mathematica and Sympy                             #
+#                                                                              #
+################################################################################
+
+priority 0
+context "math()"
+snippet "sym" "SymPy Block" wr
+sympy ${1:${VISUAL}} sympy$0
+endsnippet
+
+snippet "sympy (.*?) sympy" "Evaluate SymPy" wr
+`!p
+from sympy import *
+x, y, z, t = symbols('x y z t')
+i, j, k = symbols('i j k', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+result = latex(eval(pre_process_text(match.group(1))))
+snip.rv = process_latex(result)
+`
+endsnippet
+
+priority 1
+context "math()"
+snippet "\\sym" "SymPy Block" wr
+\\sympy ${1:${VISUAL}} \\sympy$0
+endsnippet
+
+snippet '\\sympy (.*?) \\sympy' "Evaluate SymPy" wr
+`!p
+from sympy import *
+from latex2sympy2 import *
+x, y, z, t = symbols("x y z t")
+i, j, k = symbols("i j k", integer=True)
+f, g, h = symbols("f g h", cls=Function)
+string = match.group(1)
+sympyString = latex2sympy(pre_process_latex(string))
+snip.rv = latex(sympyString.doit())
+`
+endsnippet
+
+priority 1
+context "math()"
+snippet "\\SYM" "SymPy Block" wr
+\\SYMPY ${1:${VISUAL}} \\SYMPY$0
+endsnippet
+
+snippet '\\SYMPY (.*?) \\SYMPY' "Evaluate SymPy" wr
+`!p
+from sympy import *
+from latex2sympy2 import *
+x, y, z, t = symbols("x y z t")
+i, j, k = symbols("i j k", integer=True)
+f, g, h = symbols("f g h", cls=Function)
+string = match.group(1)
+sympyString = latex2sympy(pre_process_latex(string))
+snip.rv = f"{match.group(1)} = {latex(sympyString.doit())}"
+`
+endsnippet
+
+priority 0
+context "math()"
+snippet "Sym" "SymPy Block" wr
+Sympy
+${1:${VISUAL}}
+Sympy$0
+endsnippet
+
+context "get_block('Sympy', snip)"
+pre_expand "calculate_sympy(snip, False)"
+snippet "Sympy" "Evaluate Sympy" wr
+endsnippet
+
+# vim:ft=snippets:
