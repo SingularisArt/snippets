@@ -1,7 +1,7 @@
 global !p
 
-from builtin import choose_next
-from latex_.scopes import display_math, math
+from builtin import chooseNext
+from latex_.scopes import displayMath, math
 from latex_.variables import opening, closing, vert
 
 endglobal
@@ -14,19 +14,19 @@ endglobal
 ################################################################################
 
 # () -> \left(\right)
-context "display_math()"
+context "displayMath()"
 snippet "\(\)" "Parenthesis" r
 \left($1\right)
 endsnippet
 
 # {} -> \left\{\right\}
-context "display_math()"
+context "displayMath()"
 snippet "{}" "Curly Brackets" r
 \left\\{$1\right\\}
 endsnippet
 
 # [] -> \left[\right]
-context "display_math()"
+context "displayMath()"
 snippet "\[\]" "Square Brackets" r
 \left[$1\right]
 endsnippet
@@ -37,10 +37,10 @@ endsnippet
 context "math()"
 snippet "\\left(\(|\[|\\\{)(.+)?\\right(\)|\]|\\\})" "Cycle Parenthesis" r
 `!p
-next_open = choose_next(match.group(1), opening, 3)
-next_close = choose_next(match.group(3), closing, 3)
+nextOpen = chooseNext(match.group(1), opening, 3)
+nextClose = chooseNext(match.group(3), closing, 3)
 content = "" if match.group(2) is None else match.group(2)
-snip.rv = "\\left" + next_open + content + "\\right" + next_close
+snip.rv = "\\left" + nextOpen + content + "\\right" + nextClose
 `
 endsnippet
 
@@ -61,9 +61,9 @@ endsnippet
 context "math()"
 snippet "(\\vert|\\Vert)(.+)?(\\vert|\\Vert)" "Cycle Parenthesis" r
 `!p
-next_vert = choose_next(match.group(1), vert, 2)
+nextVert = chooseNext(match.group(1), vert, 2)
 content = "" if match.group(2) is None else match.group(2)
-snip.rv = next_vert + content + next_vert
+snip.rv = nextVert + content + nextVert
 `
 endsnippet
 

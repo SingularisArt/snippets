@@ -1,6 +1,6 @@
 global !p
 
-from builtin import choose_next
+from builtin import chooseNext
 from latex_.scopes import math
 from latex_.variables import spaces
 
@@ -64,7 +64,7 @@ endsnippet
 # \  -> \qquad
 context "math()"
 snippet "(\\qquad|\\quad|\\,|\\:|\\;|\\!|\\ )" "Space" ir
-`!p snip.rv = choose_next(match.group(1), spaces, 7)`
+`!p snip.rv = chooseNext(match.group(1), spaces, 7)`
 endsnippet
 
 # vim:ft=snippets:

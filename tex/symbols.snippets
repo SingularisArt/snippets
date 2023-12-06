@@ -1,6 +1,6 @@
 global !p
 
-from builtin import choose_next
+from builtin import chooseNext
 from latex_.scopes import math
 from latex_.variables import dots, infties
 
@@ -26,7 +26,7 @@ endsnippet
 context "math()"
 snippet "\\((?:c|v|d)?)dots(\s?)" "Ellipsis Transformation" r
 \\`!p
-snip.rv = choose_next(match.group(1), dots, 4) + "dots" + match.group(2)
+snip.rv = chooseNext(match.group(1), dots, 4) + "dots" + match.group(2)
 `
 endsnippet
 
@@ -48,7 +48,7 @@ endsnippet
 context "math()"
 snippet "((?:\+|-)?)\\infty(\s?)" "Infinity Transformation" r
 `!p
-snip.rv = choose_next(match.group(1), infties, 3) + "\\infty" + match.group(2)
+snip.rv = chooseNext(match.group(1), infties, 3) + "\\infty" + match.group(2)
 `
 endsnippet
 

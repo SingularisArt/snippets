@@ -1,7 +1,7 @@
 global !p
 
 from latex_.scopes import text
-from latex_.cmdsub import expand_unit
+from latex_.cmdsub import expandUnit
 from latex_.variables import units
 
 endglobal
@@ -27,7 +27,7 @@ endsnippet
 # un(km sq  hr)     -> \unit{\kilometer\squared\per\hour}
 # un(km sq  hr  ft) -> \unit{\kilometer\squared\per\hour\per\feet}
 snippet "un\(([a-z ]+)\)" "Unit" ir
-\unit{`!p snip.rv = expand_unit(match.group(1))`}
+\unit{`!p snip.rv = expandUnit(match.group(1))`}
 endsnippet
 
 ########################
@@ -67,7 +67,7 @@ endsnippet
 # SI(5 km sq  hr)     -> \SI{5}{\kilometer\squared\per\hour}
 # SI(5 km sq  hr  ft) -> \SI{5}{\kilometer\squared\per\hour\per\feet}
 snippet "SI\(([0-9.]+) ([a-z ]+)\)" "Number with Unit Per Unit" ir
-\SI{`!p snip.rv = match.group(1)`}{`!p snip.rv = expand_unit(match.group(2))`}$0
+\SI{`!p snip.rv = match.group(1)`}{`!p snip.rv = expandUnit(match.group(2))`}$0
 endsnippet
 
 # vim:ft=snippets:

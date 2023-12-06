@@ -1,6 +1,6 @@
 global !p
 
-from latex_.scopes import math, inline_math, display_math, pure_math
+from latex_.scopes import math, inlineMath, displayMath, pureMath
 
 endglobal
 
@@ -24,7 +24,7 @@ _{\textrm{${1:${VISUAL}}}}
 endsnippet
 
 # x3 -> x_3
-context "pure_math()"
+context "pureMath()"
 snippet "([a-zA-Z])(\d)" "Auto Number Subscript" Ar
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet

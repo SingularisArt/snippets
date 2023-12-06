@@ -1,8 +1,8 @@
 global !p
 
-from builtin import choose_next
+from builtin import chooseNext
 from latex_.scopes import math
-from latex_.variables import left_arrows, right_arrows, leftright_arrows
+from latex_.variables import leftArrows, rightArrows, leftrightArrows
 
 endglobal
 
@@ -58,7 +58,7 @@ endsnippet
 context "math()"
 snippet "(\\leftarrow|\\gets|\\longleftarrow|\\Leftarrow|\\Longleftarrow|\\impliedby)" "LeftArrow Transformation" r
 `!p
-snip.rv = choose_next(match.group(1), left_arrows, 6)
+snip.rv = chooseNext(match.group(1), leftArrows, 6)
 `
 endsnippet
 
@@ -71,7 +71,7 @@ endsnippet
 context "math()"
 snippet "(\\rightarrow|\\to|\\longrightarrow|\\Rightarrow|\\Longrightarrow|\\implies)" "RightArrow Transformation" r
 `!p
-snip.rv = choose_next(match.group(1), right_arrows, 6)
+snip.rv = chooseNext(match.group(1), rightArrows, 6)
 `
 endsnippet
 
@@ -83,7 +83,7 @@ endsnippet
 context "math()"
 snippet "(\\longleftrightarrow|\\Leftrightarrow|\\Longleftrightarrow|\\iff)" "LeftRightArrow Transformation" r
 `!p
-snip.rv = choose_next(match.group(1), leftright_arrows, 4)
+snip.rv = chooseNext(match.group(1), leftrightArrows, 4)
 `
 endsnippet
 

@@ -1,7 +1,8 @@
 global !p
 
-from latex_.cmdsub import create_table, add_row, create_matrix
-from latex_.scopes import math, display_math, inline_math, chem, not_chem, unit, not_unit, text, env
+from latex_.cmdsub import createTable, addRow
+from latex_.matrix import createMatrix
+from latex_.scopes import math, displayMath, inlineMath, chem, notChem, unit, notUnit, text, env
 
 endglobal
 
@@ -97,11 +98,11 @@ snippet minipage "Minipage equation" Abm
 \end{minipage}
 endsnippet
 
-pre_expand "create_table(snip, match)"
+pre_expand "createTable(snip, match)"
 snippet "([a-z])?table\((\d+) (\d+)\)" "Generate table of *width* by *height*" r
 endsnippet
 
-pre_expand "add_row(snip, match)"
+pre_expand "addRow(snip, match)"
 snippet "tr\((\d+)\)" "Add table row of dimension" r
 endsnippet
 
@@ -123,8 +124,9 @@ endsnippet
 # Bmat -> Bmatrix environment
 # vmat -> vmatrix environment
 # Vmat -> Vmatrix environment
+priority 0
 context "math()"
-pre_expand "create_matrix(snip, match)"
+pre_expand "createMatrix(snip, match)"
 snippet "(a)?(d|p|b|B|v|V)?mat\(([1-9]+) ([1-9]+)\)" "Matrix" rbm
 endsnippet
 

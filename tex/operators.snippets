@@ -1,8 +1,8 @@
 global !p
 
-from builtin import choose_next
-from latex_.scopes import math, not_unit
-from latex_.variables import plus_minus
+from builtin import chooseNext
+from latex_.scopes import math
+from latex_.variables import plusMinus
 
 endglobal
 
@@ -131,7 +131,7 @@ endsnippet
 context "math()"
 snippet "(\\(pm|mp))" "Plus Minus Transformation" ir
 `!p
-snip.rv = choose_next(match.group(1), plus_minus, 2)
+snip.rv = chooseNext(match.group(1), plusMinus, 2)
 `
 endsnippet
 

@@ -2,7 +2,7 @@ global !p
 
 from builtin import choose_next
 from latex_.scopes import math
-from latex_.cmdsub import bar_hat_vec, long_bar_hat_vec
+from latex_.cmdsub import barHatVec, longBarHatVec
 from latex_.variables import bars, hats, vecs
 
 endglobal
@@ -19,7 +19,7 @@ endglobal
 # xvec -> \vec{x}
 context "math()"
 snippet "(\b[\da-zA-Z0-9]|\\[\da-zA-Z]+)((?:\{\S+\s?\}|[\da-zA-Z]))?(bar|hat|vec)" "Bar/Hat/Vector" Ar
-`!p snip.rv = bar_hat_vec(match.group(3) or match.group(2), match.group(1), match.group(2) if match.group(3) else "")`
+`!p snip.rv = barHatVec(match.group(3) or match.group(2), match.group(1), match.group(2) if match.group(3) else "")`
 endsnippet
 
 # xxbar -> \overline{xx}
@@ -27,7 +27,7 @@ endsnippet
 # xxvec -> \overrightarrow{xx}
 context "math()"
 snippet "(?<!\\)\b([\\0-9a-zA-Z_\{\}]{2,})([_^](?:\{\S+\s?\}|[\\0-9a-zA-Z_\{\}]))?(bar|hat|vec)" "Long Bar/Hat/Vector" Ar
-`!p snip.rv = long_bar_hat_vec(match.group(3) or match.group(2), match.group(1), match.group(2) if match.group(3) else "")`
+`!p snip.rv = longBarHatVec(match.group(3) or match.group(2), match.group(1), match.group(2) if match.group(3) else "")`
 endsnippet
 
 # \bar{xx}      -> \overline{xx}

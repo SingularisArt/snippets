@@ -3,8 +3,6 @@ global !p
 from latex_.scopes import math
 from latex_.extcal import *
 
-wolframscript_timeout_default = 10
-
 endglobal
 
 
@@ -26,8 +24,10 @@ from sympy import *
 x, y, z, t = symbols('x y z t')
 i, j, k = symbols('i j k', integer=True)
 f, g, h = symbols('f g h', cls=Function)
-result = latex(eval(pre_process_text(match.group(1))))
-snip.rv = process_latex(result)
+string = preProcessText(match.group(1))
+latexString = latex(eval(string))
+latexString = expandBrackets(latexString)
+snip.rv = processLatex(latexString)
 `
 endsnippet
 
@@ -44,9 +44,11 @@ from latex2sympy2 import *
 x, y, z, t = symbols("x y z t")
 i, j, k = symbols("i j k", integer=True)
 f, g, h = symbols("f g h", cls=Function)
-string = match.group(1)
-sympyString = latex2sympy(pre_process_latex(string))
-snip.rv = latex(sympyString.doit())
+string = preProcessLatex(match.group(1))
+sympyString = latex2sympy(string)
+latexString = latex(sympyString.doit())
+latexString = expandBrackets(latexString)
+snip.rv = latexString
 `
 endsnippet
 
@@ -63,9 +65,11 @@ from latex2sympy2 import *
 x, y, z, t = symbols("x y z t")
 i, j, k = symbols("i j k", integer=True)
 f, g, h = symbols("f g h", cls=Function)
-string = match.group(1)
-sympyString = latex2sympy(pre_process_latex(string))
-snip.rv = f"{match.group(1)} = {latex(sympyString.doit())}"
+string = preProcessLatex(match.group(1))
+sympyString = latex2sympy(string)
+latexString = latex(sympyString.doit())
+latexString = expandBrackets(latexString)
+snip.rv = f"{match.group(1)} = {latexString}"
 `
 endsnippet
 
@@ -77,8 +81,8 @@ ${1:${VISUAL}}
 Sympy$0
 endsnippet
 
-context "get_block('Sympy', snip)"
-pre_expand "calculate_sympy(snip, False)"
+context "getBlock('Sympy', snip)"
+pre_expand "calculateSympy(snip, False)"
 snippet "Sympy" "Evaluate Sympy" wr
 endsnippet
 

@@ -2,7 +2,7 @@ global !p
 
 from builtin import choose_next
 from latex_.scopes import math
-from latex_.variables import exists_terms_cycle, ands, ors
+from latex_.variables import existsTermsCycle, ands, ors
 
 endglobal
 
@@ -32,7 +32,7 @@ endsnippet
 context "math()"
 snippet "\\(exists|nexists)" "Exists Transformation" r
 \\`!p
-snip.rv = choose_next(match.group(1), exists_terms_cycle, 2)
+snip.rv = choose_next(match.group(1), existsTermsCycle, 2)
 `
 endsnippet
 
