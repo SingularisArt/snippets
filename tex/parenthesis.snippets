@@ -44,22 +44,24 @@ snip.rv = "\\left" + nextOpen + content + "\\right" + nextClose
 `
 endsnippet
 
-# | -> \vert  \vert
+# | -> \lvert  \rvert
+priority 0
 context "math()"
-snippet | "One Verticals"
-\vert $1 \vert
+snippet | "One Verticals" i
+\lvert $1 \rvert
 endsnippet
 
-# || -> \Vert  \Vert
+# || -> \lVert  \rVert
+priority 1
 context "math()"
-snippet || "Two Verticals"
-\Vert $1 \Vert
+snippet || "Two Verticals" i
+\lVert $1 \rVert
 endsnippet
 
-# \vert x \vert -> \Vert x \Vert
-# \Vert x \Vert -> \vert x \vert
+# \lvert x \rvert -> \lVert x \rVert
+# \lVert x \rVert -> \lvert x \rvert
 context "math()"
-snippet "(\\vert|\\Vert)(.+)?(\\vert|\\Vert)" "Cycle Parenthesis" r
+snippet "(\\lvert|\\lVert)(.+)?(\\rvert|\\rVert)" "Cycle Parenthesis" r
 `!p
 nextVert = chooseNext(match.group(1), vert, 2)
 content = "" if match.group(2) is None else match.group(2)

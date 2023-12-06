@@ -1,6 +1,6 @@
 global !p
 
-from builtin import choose_next
+from builtin import chooseNext
 from latex_.scopes import math
 from latex_.variables import existsTermsCycle, ands, ors
 
@@ -32,7 +32,7 @@ endsnippet
 context "math()"
 snippet "\\(exists|nexists)" "Exists Transformation" r
 \\`!p
-snip.rv = choose_next(match.group(1), existsTermsCycle, 2)
+snip.rv = chooseNext(match.group(1), existsTermsCycle, 2)
 `
 endsnippet
 

@@ -1,6 +1,6 @@
 global !p
 
-from builtin import choose_next
+from builtin import chooseNext
 from latex_.scopes import math
 from latex_.cmdsub import barHatVec, longBarHatVec
 from latex_.variables import bars, hats, vecs
@@ -35,7 +35,7 @@ endsnippet
 context "math()"
 snippet "(\\bar|\\overline)(\{[\\0-9a-zA-Z_\{\}]+\s?\})((?:[_^](?:[\\0-9a-zA-Z_\{\}]|\{[\\\w\d\s]+\}))?)" "Bar" r
 `!p
-snip.rv = choose_next(match.group(1), bars, 2) + match.group(2) + match.group(3)
+snip.rv = chooseNext(match.group(1), bars, 2) + match.group(2) + match.group(3)
 `
 endsnippet
 
@@ -44,7 +44,7 @@ endsnippet
 context "math()"
 snippet "(\\hat|\\widehat)(\{[\\0-9a-zA-Z_\{\}]+\s?\})((?:[_^](?:[\\0-9a-zA-Z_\{\}]|\{[\\\w\d\s]+\}))?)" "Hat" r
 `!p
-snip.rv = choose_next(match.group(1), hats, 2) + match.group(2) + match.group(3)
+snip.rv = chooseNext(match.group(1), hats, 2) + match.group(2) + match.group(3)
 `
 endsnippet
 
@@ -53,7 +53,7 @@ endsnippet
 context "math()"
 snippet "(\\vec|\\overrightarrow)(\{[\\0-9a-zA-Z_\{\}]+\s?\})((?:[_^](?:[\\0-9a-zA-Z_\{\}]|\{[\\\w\d\s]+\}))?)" "Vector" r
 `!p
-snip.rv = choose_next(match.group(1), vecs, 2) + match.group(2) + match.group(3)
+snip.rv = chooseNext(match.group(1), vecs, 2) + match.group(2) + match.group(3)
 `
 endsnippet
 
