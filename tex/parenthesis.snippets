@@ -51,6 +51,18 @@ snippet | "One Verticals" i
 \lvert $1 \rvert
 endsnippet
 
+# ,. -> \langle  \rangle
+context "math()"
+snippet ,. "Right and Left Angle Brackets" i
+\langle $1 \rangle
+endsnippet
+
+# ., -> \left\langle  \right\rangle
+context "math()"
+snippet .. "Right and Left Angle Brackets" i
+\left\langle $1 \right\rangle
+endsnippet
+
 # || -> \lVert  \rVert
 priority 1
 context "math()"
