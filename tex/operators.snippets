@@ -200,20 +200,20 @@ endsnippet
 # gcd    -> \gcd
 context "math()"
 snippet "\\?\b(sin|cos|tan|ln|lg|log|max|min|arg|exp|csc|sec|arcsin|arccos|arctan|sinh|cosh|tanh|cot|coth|gcd)" "Common Function" Ar
-`!p
-snip.rv = "\\" + match.group(1)
-`
+\\`!p
+snip.rv = match.group(1)
+`(${0:${VISUAL}})
 endsnippet
 
-# fofx -> f(x) = x
+# f.x -> f(x) = x
 context "math()"
-snippet "([a-zA-Z])of([a-zA-Z])" "Create Function" rwA
+snippet "([a-zA-Z])\.([a-zA-Z])" "Create Function" rwA
 `!p snip.rv = match.group(1)`(`!p snip.rv = match.group(2)`) = ${1:`!p snip.rv = match.group(2)`}
 endsnippet
 
-# fof<x,y,z> -> f(x,y,z) = x,y,z
+# f.x,y,z. -> f(x,y,z) = x,y,z
 context "math()"
-snippet "(.)of\<(.*?)\>" "Create Function" rwA
+snippet "(.)\.(.*?)\." "Create Function" rwA
 `!p snip.rv = match.group(1)`(`!p snip.rv = match.group(2)`) = ${1:`!p snip.rv = match.group(2)`}
 endsnippet
 

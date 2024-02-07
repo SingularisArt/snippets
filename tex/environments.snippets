@@ -92,10 +92,17 @@ ${3:.}\end{alignat}
 endsnippet
 
 context "text()"
-snippet minipage "Minipage equation" Abm
+snippet minipage "Minipage" Abm
 \begin{minipage}{.${1:5}\linewidth}
 	${VISUAL}$2
 \end{minipage}
+endsnippet
+
+context "text()"
+snippet multicols "Multicols" Abm
+\begin{multicols}{${1:2}}
+	${VISUAL}$2
+\end{multicols}
 endsnippet
 
 pre_expand "createTable(snip, match)"
@@ -106,6 +113,7 @@ pre_expand "addRow(snip, match)"
 snippet "tr\((\d+)\)" "Add table row of dimension" r
 endsnippet
 
+# fig -> figure environment
 context "text()"
 snippet fig "Figure Environment" Abm
 \begin{figure}[${1:h}]
@@ -116,6 +124,19 @@ snippet fig "Figure Environment" Abm
 	\caption{${3}}
 	\label{fig:${4:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 \end{figure}
+endsnippet
+
+# subfig -> subfigure environment
+context "env('figure')"
+snippet subfig "Figure Environment" Abm
+\begin{subfigure}[${1:b}]{${2:0.45}\textwidth}
+	\centering
+
+	$4
+
+	\caption{${5}}
+	\label{fig:${6:${5/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\end{subfigure}
 endsnippet
 
 # mat -> matrix environment
