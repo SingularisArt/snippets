@@ -34,38 +34,38 @@ snippet lim "Limit" Ai
 \lim_{${1:x} \to ${2:\infty}} ${3:f(x)}
 endsnippet
 
-# int     -> \int_{0}^{\infty} \,\textrm{d} x
-# iint    -> \iint_{0}^{\infty} \,\textrm{d} x
-# iiint   -> \iiint_{0}^{\infty} \,\textrm{d} x
-# oint    -> \oint_{0}^{\infty} \,\textrm{d} x
-# oiint   -> \oiint_{0}^{\infty} \,\textrm{d} x
-# oiiint  -> \oiiint_{0}^{\infty} \,\textrm{d} x
-# inty    -> \int_{0}^{\infty} \,\textrm{d} y
-# iinty   -> \iint_{0}^{\infty} \,\textrm{d} y
-# iiinty  -> \iiint_{0}^{\infty} \,\textrm{d} y
-# ointy   -> \oint_{0}^{\infty} \,\textrm{d} y
-# oiinty  -> \oiint_{0}^{\infty} \,\textrm{d} y
-# oiiinty -> \oiiint_{0}^{\infty} \,\textrm{d} y
+# int     -> \int_{0}^{\infty} \,\dx
+# iint    -> \iint_{0}^{\infty} \,\dx
+# iiint   -> \iiint_{0}^{\infty} \,\dx
+# oint    -> \oint_{0}^{\infty} \,\dx
+# inty    -> \int_{0}^{\infty} \,\dy
+# iinty   -> \iint_{0}^{\infty} \,\dy
+# iiinty  -> \iiint_{0}^{\infty} \,\dy
+# ointy   -> \oint_{0}^{\infty} \,\dy
+# lint     -> \int\limits_{0}^{\infty} \,\dx
+# liint    -> \iint\limits_{0}^{\infty} \,\dx
+# liiint   -> \iiint\limits_{0}^{\infty} \,\dx
+# loint    -> \oint\limits_{0}^{\infty} \,\dx
+# linty    -> \int\limits_{0}^{\infty} \,\dy
+# liinty   -> \iint\limits_{0}^{\infty} \,\dy
+# liiinty  -> \iiint\limits_{0}^{\infty} \,\dy
+# lointy   -> \oint\limits_{0}^{\infty} \,\dy
 context "math()"
-snippet "(o?i{1,3})nt([a-zA-Z]?)" "Definite Integral" r
-\\`!p snip.rv = match.group(1)`nt_{${1:0}}^{${2:\infty}} ${3:${VISUAL}} \\${4:,}\textrm{d}`!p snip.rv = match.group(2) or "x"`
+snippet "(l)?(o?i{1,3})nt([a-zA-Z]?)" "Definite Integral" r
+\\`!p snip.rv = match.group(2)`nt`!p snip.rv = "\\limits" if match.group(1) else ""`_{${1:0}}^{${2:\infty}} ${3:${VISUAL}} \\${4:,}\d`!p snip.rv = match.group(3) or "x"`
 endsnippet
 
-# nint     -> \int \,\textrm{d} x
-# niint    -> \iint \,\textrm{d} x
-# niiint   -> \iiint \,\textrm{d} x
-# noint    -> \oint \,\textrm{d} x
-# noiint   -> \oiint \,\textrm{d} x
-# noiiint  -> \oiiint \,\textrm{d} x
-# ninty    -> \int \,\textrm{d} y
-# niinty   -> \iint \,\textrm{d} y
-# niiinty  -> \iiint \,\textrm{d} y
-# nointy   -> \oint \,\textrm{d} y
-# noiinty  -> \oiint \,\textrm{d} y
-# noiiinty -> \oiiint \,\textrm{d} y
+# nint     -> \int \,\dx
+# niint    -> \iint \,\dx
+# niiint   -> \iiint \,\dx
+# noint    -> \oint \,\dx
+# ninty    -> \int \,\dy
+# niinty   -> \iint \,\dy
+# niiinty  -> \iiint \,\dy
+# nointy   -> \oint \,\dy
 context "math()"
 snippet "(o?I{1,3})nt([a-zA-Z]?)" "Indefinite Integral" r
-\\`!p snip.rv = match.group(1).lower()`nt ${1:${VISUAL}} \\${4:,}\textrm{d}`!p snip.rv = match.group(2) or "x"`
+\\`!p snip.rv = match.group(1).lower()`nt ${1:${VISUAL}} \\${4:,}\d`!p snip.rv = match.group(2) or "x"`
 endsnippet
 
 # ddx    -> \frac{\mathrm{d}}{\mathrm{d} x}
@@ -108,9 +108,9 @@ snippet cxx "Dot Product" Aw
 \cdot
 endsnippet
 
-# div -> \div
+# -- -> \div
 context "math()"
-snippet div "Divide" Aw
+snippet -- "Divide" Aw
 \div
 endsnippet
 
@@ -203,18 +203,6 @@ snippet "\\?\b(sin|cos|tan|ln|lg|log|max|min|arg|exp|csc|sec|arcsin|arccos|arcta
 \\`!p
 snip.rv = match.group(1)
 `(${1:${VISUAL}})$0
-endsnippet
-
-# f.x -> f(x) = x
-context "math()"
-snippet "([a-zA-Z])\.([a-zA-Z])" "Create Function" rwA
-`!p snip.rv = match.group(1)`(`!p snip.rv = match.group(2)`) = ${1:`!p snip.rv = match.group(2)`}
-endsnippet
-
-# f.x,y,z. -> f(x,y,z) = x,y,z
-context "math()"
-snippet "(.)\.(.*?)\." "Create Function" rwA
-`!p snip.rv = match.group(1)`(`!p snip.rv = match.group(2)`) = ${1:`!p snip.rv = match.group(2)`}
 endsnippet
 
 # map -> f : A \to B
