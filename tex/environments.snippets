@@ -23,6 +23,13 @@ snippet beg "begin{} / end{}" Abm
 endsnippet
 
 context "text()"
+snippet mbeg "begin{} / end{}" Abm
+\begin{$1}
+  ${VISUAL}$2
+\end{$1}
+endsnippet
+
+context "text()"
 snippet doc "Document Environment" Abm
 \begin{document}
 	${VISUAL}$1
@@ -39,27 +46,21 @@ endsnippet
 context "text()"
 snippet enum "Enumerate Environment" Abm
 \begin{enumerate}
-	\label{enum:$1}
-
-	\item ${VISUAL}$2
+	\item ${VISUAL}$1
 \end{enumerate}
 endsnippet
 
 context "text()"
 snippet item "Itemize Environment" Abm
 \begin{itemize}
-	\label{item:$1}
-
-	\item ${VISUAL}$2
+	\item ${VISUAL}$1
 \end{itemize}
 endsnippet
 
 context "text()"
 snippet prf "Proof Environment" Abm
 \begin{proof}
-	\label{prf:$1}
-
-	${VISUAL}$2
+	${VISUAL}$1
 \end{proof}
 endsnippet
 
