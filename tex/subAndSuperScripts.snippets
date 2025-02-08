@@ -1,6 +1,6 @@
 global !p
 
-from latex_.scopes import math, inlineMath, displayMath, pureMath
+from latex_.scopes import math
 
 endglobal
 
@@ -24,7 +24,7 @@ _{\textrm{${1:${VISUAL}}}}
 endsnippet
 
 # x3 -> x_3
-context "pureMath()"
+context "math()"
 snippet "([a-zA-Z])(\d)" "Auto Number Subscript" Ar
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
@@ -42,13 +42,14 @@ snippet "([a-zA-Z])_\{(\d+)\}(\d)" "Auto Number Subscript" Ar
 endsnippet
 
 # x,i -> x_i
+# x,j -> x_j
 # x,k -> x_k
 # x,p -> x_p
 # x,q -> x_q
 # x,m -> x_m
 # x,n -> x_n
 context "math()"
-snippet "([a-zA-Z]),(i|k|p|q|m|n)" "Auto Variable Subscript" Ar
+snippet "([a-zA-Z]),(i|j|k|p|q|m|n)" "Auto Variable Subscript" Ar
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
 
@@ -56,36 +57,6 @@ endsnippet
 context "math()"
 snippet "([a-zA-Z\d])'([a-zA-Z\d-])" "Superscript" Ar
 `!p snip.rv = match.group(1)`^`!p snip.rv = match.group(2)`
-endsnippet
-
-# 10x^xx -> 10x^{xx}
-context "math()"
-snippet "([a-zA-Z\d])\^([a-zA-Z\d-]+)" "Superscript" Ar
-`!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2)`}
-endsnippet
-
-# 10x^{xx}x -> 10x^{xxx}
-context "math()"
-snippet "([a-zA-Z\d])\^{([a-zA-Z\d-]+)}([a-zA-Z\d-]+)" "Superscript" Ar
-`!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2) + match.group(3)`}
-endsnippet
-
-# sq -> ^{2}
-context "math()"
-snippet sq "Square" iA
-^{2}
-endsnippet
-
-# cb -> ^{3}
-context "math()"
-snippet cb "Cube" iA
-^{3}
-endsnippet
-
-# fr -> ^{4}
-context "math()"
-snippet fr "Forth" iA
-^{4}
 endsnippet
 
 # inv -> ^{-}
@@ -98,6 +69,12 @@ endsnippet
 context "math()"
 snippet ss "Superscript" iA
 ^{$1}
+endsnippet
+
+# soo -> ^{}
+context "math()"
+snippet soo "To infinity" iA
+^\infity
 endsnippet
 
 # sr -> \sqrt{}

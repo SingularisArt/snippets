@@ -11,6 +11,12 @@ endglobal
 #                                                                              #
 ################################################################################
 
+# bf em -> \emph{}
+context "text()"
+snippet em "Emphasize" iw
+\emph{${VISUAL}$1}$0
+endsnippet
+
 # bf -> \textbf{}
 context "text()"
 snippet bf "Bold" iw

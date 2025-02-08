@@ -2,7 +2,7 @@ global !p
 
 from builtin import chooseNext
 from latex_.scopes import math
-from latex_.variables import plusMinus
+from latex_.variables import plusMinus, times
 
 endglobal
 
@@ -108,6 +108,15 @@ snippet cxx "Dot Product" Aw
 \cdot
 endsnippet
 
+# \cdot -> \times
+# \times -> \cdot
+context "math()"
+snippet "(\\(times|cdot))" "Dot Product Transformation" ir
+`!p
+snip.rv = chooseNext(match.group(1), times, 2)
+`
+endsnippet
+
 # -- -> \div
 context "math()"
 snippet -- "Divide" Aw
@@ -148,13 +157,13 @@ snippet // "Fraction" iA
 \\frac{${VISUAL}$1}{$2}
 endsnippet
 
-# 4\pi/ -> \frac{4\pi}{}
+# 4\pi^2/ -> \frac{4\pi^2}{}
 context "math()"
 snippet "((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/" "Fraction" wAr
 \\frac{`!p snip.rv = match.group(1)`}{$1}
 endsnippet
 
-# (4\pi \times 1)/ -> \frac{4\pi \times 1}{}
+# (4\pi \times 2)/ -> \frac{4\pi \times 2}{}
 context "math()"
 snippet "^.*\)/" "() Fraction" wAr
 `!p
